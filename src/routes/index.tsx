@@ -1,6 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Zap, Timer, Trophy, Volume2, VolumeX, Flame, RotateCcw, Target, BookOpen, Check, X, Lightbulb, Layers } from "lucide-react";
+import { Zap, Timer, Trophy, Volume2, VolumeX, Flame, RotateCcw, Target, BookOpen, Check, X, Lightbulb, Layers, Github } from "lucide-react";
 import { VOCAB, sentenceBlank, type Word } from "@/lib/vocab";
 import { WordDetails } from "@/components/WordDetails";
 import { StudyMode } from "@/components/StudyMode";
@@ -131,6 +131,7 @@ function Game() {
             {high > 0 && <p className="mt-5 flex items-center justify-center gap-2 font-bold text-secondary"><Trophy className="h-5 w-5" /> השיא שלך: {high}</p>}
             <button onClick={start} className="mt-6 w-full rounded-2xl bg-primary py-4 text-xl font-black text-primary-foreground shadow-[var(--shadow-pop)] transition hover:scale-[1.02] active:scale-95"><span className="flex items-center justify-center gap-2"><Timer className="h-6 w-6" />אתגר 60 שניות</span></button>
             <button onClick={() => setPhase("study")} className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-secondary bg-card py-4 text-xl font-black text-secondary transition hover:scale-[1.02] active:scale-95"><Layers className="h-6 w-6" />מצב לימוד / כרטיסיות</button>
+            <Link to="/guide" className="mt-4 flex items-center justify-center gap-2 text-sm font-bold text-muted-foreground transition hover:text-primary"><Github className="h-4 w-4" /> איך מחברים את הפרויקט ל-GitHub?</Link>
           </section>
         )}
 
