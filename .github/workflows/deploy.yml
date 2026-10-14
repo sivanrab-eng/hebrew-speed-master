@@ -44,10 +44,23 @@ jobs:
 
       - name: Prepare static output
         run: |
-          # TanStack Start writes client/static assets to dist/client
-          # and the prerendered page to dist/client/index.html
-          cp dist/client/index.html dist/client/404.html
-          touch dist/client/.nojekyll
+          # The build output location differs between environments:
+          # some runtimes write dist/client, others .output/public.
+          # Detect whichever contains the prerendered index.html.
+          CLIENT_DIR=""
+          for d in dist/client .output/public; do
+            if [ -f "$d/index.html" ]; then CLIENT_DIR="$d"; break; fi
+          done
+          if [ -z "$CLIENT_DIR" ]; then
+            echo "Could not find a prerendered index.html in dist/client or .output/public"
+            find dist .output -name '*.html' 2>/dev/null || true
+            exit 1
+          fi
+          echo "Using client output: $CLIENT_DIR"
+          # SPA fallback so refreshing any path does not 404 on GitHub Pages
+          cp "$CLIENT_DIR/index.html" "$CLIENT_DIR/404.html"
+          touch "$CLIENT_DIR/.nojekyll"
+          echo "CLIENT_DIR=$CLIENT_DIR" >> "$GITHUB_ENV"
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -55,7 +68,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/client
+          path: ${{ env.CLIENT_DIR }}
 
   deploy:
     environment:
