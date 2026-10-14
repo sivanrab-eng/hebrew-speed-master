@@ -8,4 +8,4 @@
 - [x] בניית בדיקה עם ה-base path — עברה, build OK
 - [ ] חיבור הפרויקט לריפו En_to_He_Speedvocabs ב-GitHub (נעשה רק בלחצן ב-Lovable, לא מצ'א)
 - [ ] הגדרת Settings → Pages → Source: GitHub Actions בריפו
-- [x] עמוד מדריך חיבור ל-GitHub (/guide) + קישור ממסך הפתיחה + prerender
+- [x] מדריך חיבור ל-GitHub בתוך האפליקציה (מסך במשחק, נפתח ממסך הפתיחה) — נבדק בדפדפן, כולל בנייה סטטית ל-GitHub Pages
