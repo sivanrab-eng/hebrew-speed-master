@@ -23,5 +23,7 @@ export default defineConfig({
     // build time and served as a static file.
     pages: [{ path: "/" }],
     prerender: { enabled: true, autoStaticPathsDiscovery: false },
+    // Declared so the route manifest matches the router's runtime basepath.
+    router: { basepath: base === "/" ? "/" : base.replace(/\/$/, "") },
   },
 });
