@@ -24,7 +24,7 @@ const BASE = 10;
 type Phase = "start" | "play" | "end";
 type Q = { word: Word; options: Word[] };
 
-const shuffle = <T,>(a: T[]) => { const b = [...a]; for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; };
+const shuffle = <T,>(a: T[]) => { const b = [...a]; for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j]!, b[i]!]; } return b; };
 const multFor = (s: number) => (s >= 10 ? 4 : s >= 6 ? 3 : s >= 3 ? 2 : 1);
 
 function makeQ(prev?: Word): Q {
