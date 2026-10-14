@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Zap, Timer, Trophy, Volume2, VolumeX, Flame, RotateCcw, Target, BookOpen, Check, X } from "lucide-react";
-import { VOCAB, type Word } from "@/lib/vocab";
+import { Zap, Timer, Trophy, Volume2, VolumeX, Flame, RotateCcw, Target, BookOpen, Check, X, Lightbulb, Layers } from "lucide-react";
+import { VOCAB, sentenceBlank, type Word } from "@/lib/vocab";
+import { WordDetails } from "@/components/WordDetails";
+import { StudyMode } from "@/components/StudyMode";
 import { sfx } from "@/lib/sfx";
 import { cn } from "@/lib/utils";
 
@@ -21,7 +23,7 @@ export const Route = createFileRoute("/")({
 
 const DURATION = 60;
 const BASE = 10;
-type Phase = "start" | "play" | "end";
+type Phase = "start" | "play" | "end" | "study";
 type Q = { word: Word; options: Word[] };
 
 const shuffle = <T,>(a: T[]) => { const b = [...a]; for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j]!, b[i]!]; } return b; };
@@ -50,6 +52,7 @@ function Game() {
   const [pop, setPop] = useState<string | null>(null);
   const [high, setHigh] = useState(0);
   const [newHigh, setNewHigh] = useState(false);
+  const [hint, setHint] = useState(false);
   const mutedRef = useRef(muted);
   mutedRef.current = muted;
   const play = (k: keyof typeof sfx) => { if (!mutedRef.current) sfx[k](); };
@@ -60,7 +63,7 @@ function Game() {
   const start = () => {
     sfx.unlock();
     setScore(0); setStreak(0); setBestStreak(0); setCorrect(0); setAnswered(0); setMistakes([]);
-    setTime(DURATION); setPicked(null); setNewHigh(false); setQ(makeQ()); setPhase("play");
+    setTime(DURATION); setPicked(null); setHint(false); setNewHigh(false); setQ(makeQ()); setPhase("play");
   };
 
   useEffect(() => {
@@ -91,13 +94,13 @@ function Game() {
     } else {
       setStreak(0); setMistakes((ms) => [...ms, { word: q.word, picked: opt }]); setPop(null); play("wrong");
     }
-    setTimeout(() => { setPicked(null); setQ((cur) => makeQ(cur?.word)); }, opt === q.word ? 350 : 750);
+    setTimeout(() => { setPicked(null); setHint(false); setQ((cur) => makeQ(cur?.word)); }, opt === q.word ? 350 : 750);
   }, [q, picked, phase, streak]);
 
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => { const n = Number(e.key); if (q && n >= 1 && n <= 4) answer(q.options[n - 1]!); };
+    const onKey = (e: KeyboardEvent) => { if (phase !== "play") return; if (e.key === "h" || e.key === "ח") { setHint(true); return; } const n = Number(e.key); if (q && n >= 1 && n <= 4) answer(q.options[n - 1]!); };
     window.addEventListener("keydown", onKey); return () => window.removeEventListener("keydown", onKey);
-  }, [q, answer]);
+  }, [q, answer, phase]);
 
   const mult = multFor(streak);
   const accuracy = answered ? Math.round((correct / answered) * 100) : 0;
@@ -126,7 +129,8 @@ function Game() {
               <li className="rounded-2xl bg-muted p-3"><BookOpen className="mx-auto mb-1 h-5 w-5 text-primary" />{VOCAB.length} מילים</li>
             </ul>
             {high > 0 && <p className="mt-5 flex items-center justify-center gap-2 font-bold text-secondary"><Trophy className="h-5 w-5" /> השיא שלך: {high}</p>}
-            <button onClick={start} className="mt-6 w-full rounded-2xl bg-primary py-4 text-xl font-black text-primary-foreground shadow-[var(--shadow-pop)] transition hover:scale-[1.02] active:scale-95">התחל משחק</button>
+            <button onClick={start} className="mt-6 w-full rounded-2xl bg-primary py-4 text-xl font-black text-primary-foreground shadow-[var(--shadow-pop)] transition hover:scale-[1.02] active:scale-95"><span className="flex items-center justify-center gap-2"><Timer className="h-6 w-6" />אתגר 60 שניות</span></button>
+            <button onClick={() => setPhase("study")} className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-secondary bg-card py-4 text-xl font-black text-secondary transition hover:scale-[1.02] active:scale-95"><Layers className="h-6 w-6" />מצב לימוד / כרטיסיות</button>
           </section>
         )}
 
@@ -143,6 +147,14 @@ function Game() {
             <div key={q.word.hebrew + answered} className="relative animate-in fade-in slide-in-from-bottom-2 rounded-3xl border border-border bg-card px-5 py-8 text-center shadow-[var(--shadow-card)]">
               <p className="text-sm font-semibold text-muted-foreground">איזו מילה בעברית מתאימה ל־</p>
               <p dir="ltr" className="mt-3 font-display text-3xl font-black text-primary sm:text-4xl">{q.word.english}</p>
+              {hint ? (
+                <div className="mt-4 rounded-2xl bg-muted p-3 text-right">
+                  <p className="font-hebrew text-xl leading-relaxed">{sentenceBlank(q.word)}</p>
+                  <p dir="ltr" className="mt-1 text-left text-sm italic text-muted-foreground">{q.word.exampleSentenceEnglish}</p>
+                </div>
+              ) : (
+                <button onClick={() => setHint(true)} disabled={!!picked} className="mx-auto mt-4 flex items-center gap-1 rounded-full border border-border bg-muted px-4 py-1.5 text-sm font-bold transition hover:border-primary"><Lightbulb className="h-4 w-4 text-primary" /> רמז <span className="hidden text-xs text-muted-foreground sm:inline">(H)</span></button>
+              )}
               {pop && picked && <span className="absolute left-4 top-3 animate-in fade-in slide-in-from-bottom-3 rounded-full bg-success px-3 py-1 text-sm font-black text-success-foreground">{pop}</span>}
             </div>
             <div className="grid grid-cols-2 gap-3">
@@ -164,6 +176,8 @@ function Game() {
           </section>
         )}
 
+        {phase === "study" && <StudyMode onExit={() => setPhase("start")} />}
+
         {phase === "end" && (
           <section className="animate-in fade-in zoom-in-95 flex flex-col gap-4">
             <div className="rounded-3xl border border-border bg-card p-7 text-center shadow-[var(--shadow-card)]">
@@ -179,18 +193,16 @@ function Game() {
                 <Mini label="שיא אישי" value={`${high}`} />
               </div>
               <button onClick={start} className="mt-6 flex w-full items-center justify-center gap-2 rounded-2xl bg-primary py-4 text-xl font-black text-primary-foreground shadow-[var(--shadow-pop)] transition hover:scale-[1.02] active:scale-95"><RotateCcw className="h-5 w-5" /> שחק שוב</button>
+              <button onClick={() => setPhase("study")} className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-secondary py-3 font-black text-secondary"><Layers className="h-5 w-5" /> למצב לימוד</button>
             </div>
             <div className="rounded-3xl border border-border bg-card p-5 shadow-[var(--shadow-card)]">
               <h3 className="mb-3 flex items-center gap-2 text-lg font-black"><BookOpen className="h-5 w-5 text-secondary" /> סקירת טעויות ({mistakes.length})</h3>
               {mistakes.length === 0 ? <p className="text-muted-foreground">אין טעויות — מושלם! 🌟</p> : (
-                <ul className="flex flex-col gap-2">
+                <ul className="flex flex-col gap-3">
                   {mistakes.map((m, i) => (
-                    <li key={i} className="rounded-2xl bg-muted p-3">
-                      <p dir="ltr" className="text-right text-sm font-semibold text-muted-foreground">{m.word.english}</p>
-                      <div className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 font-hebrew text-2xl">
-                        <span className="flex items-center gap-1 font-bold text-success"><Check className="h-5 w-5" />{m.word.hebrew}</span>
-                        <span className="flex items-center gap-1 text-destructive line-through"><X className="h-4 w-4" />{m.picked.hebrew}</span>
-                      </div>
+                    <li key={i} className="rounded-2xl bg-muted p-4">
+                      <WordDetails w={m.word} />
+                      <p className="mt-2 flex items-center gap-1 font-hebrew text-lg text-destructive"><X className="h-4 w-4" /><span className="line-through">{m.picked.hebrew}</span><span className="font-sans text-xs text-muted-foreground">(הבחירה שלך)</span></p>
                     </li>
                   ))}
                 </ul>
