@@ -29,7 +29,7 @@ const multFor = (s: number) => (s >= 10 ? 4 : s >= 6 ? 3 : s >= 3 ? 2 : 1);
 
 function makeQ(prev?: Word): Q {
   const pool = VOCAB.filter((w) => w !== prev);
-  const word = pool[Math.floor(Math.random() * pool.length)];
+  const word = pool[Math.floor(Math.random() * pool.length)]!;
   const distractors = shuffle(VOCAB.filter((w) => w !== word)).slice(0, 3);
   return { word, options: shuffle([word, ...distractors]) };
 }
@@ -95,7 +95,7 @@ function Game() {
   }, [q, picked, phase, streak]);
 
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => { const n = Number(e.key); if (q && n >= 1 && n <= 4) answer(q.options[n - 1]); };
+    const onKey = (e: KeyboardEvent) => { const n = Number(e.key); if (q && n >= 1 && n <= 4) answer(q.options[n - 1]!); };
     window.addEventListener("keydown", onKey); return () => window.removeEventListener("keydown", onKey);
   }, [q, answer]);
 
