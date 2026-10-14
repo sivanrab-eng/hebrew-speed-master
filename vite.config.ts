@@ -21,7 +21,7 @@ export default defineConfig({
     // Static prerender for GitHub Pages: the whole app is client-side
     // (vocabulary and game logic are bundled), so "/" is rendered once at
     // build time and served as a static file.
-    pages: [{ path: "/" }, { path: "/guide" }],
+    pages: [{ path: "/" }],
     prerender: { enabled: true, autoStaticPathsDiscovery: false },
     // Declared so the route manifest matches the router's runtime basepath.
     router: { basepath: base === "/" ? "/" : base.replace(/\/$/, "") },

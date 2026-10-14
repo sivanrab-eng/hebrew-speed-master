@@ -48,6 +48,10 @@ jobs:
           # and the prerendered page to dist/client/index.html
           cp dist/client/index.html dist/client/404.html
           touch dist/client/.nojekyll
+          # The guide page is client-rendered: serve the app shell at /guide/
+          # so GitHub Pages answers 200 and the router renders the guide.
+          mkdir -p dist/client/guide
+          cp dist/client/index.html dist/client/guide/index.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
