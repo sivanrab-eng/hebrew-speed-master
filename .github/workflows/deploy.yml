@@ -19,7 +19,7 @@ concurrency:
 env:
   # GitHub Pages hosts project sites under https://<user>.github.io/<repo>/
   # Change this if the repository name differs.
-  VITE_BASE_PATH: /En_to_He_Speedvocabs/
+  VITE_BASE_PATH: /hebrew-speed-master/
 
 jobs:
   build:
