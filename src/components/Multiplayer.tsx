@@ -120,7 +120,7 @@ export function Multiplayer({ onExit, muted }: { onExit: () => void; muted: bool
             {Array.from({ length: 4 - players.length }).map((_, i) => <li key={i} className="rounded-2xl border-2 border-dashed border-border px-4 py-3 text-muted-foreground">ממתין לשחקן...</li>)}
           </ul>
           {isHost ? (
-            <button onClick={() => supabase.rpc("mp_start_game", { p_room: room.id, p_client: me, p_questions: makeQuestions() })} disabled={players.length < 2}
+            <button onClick={() => supabase.rpc("mp_start_game", { p_room: room.id, p_client: me, p_questions: makeQuestions() }).then()} disabled={players.length < 2}
               className="mt-5 flex w-full items-center justify-center gap-2 rounded-2xl bg-primary py-4 text-xl font-black text-primary-foreground shadow-[var(--shadow-pop)] transition active:scale-95 disabled:opacity-50"><Play className="h-6 w-6" /> {players.length < 2 ? "ממתינים לעוד שחקן..." : "התחל משחק"}</button>
           ) : <p className="mt-5 font-bold text-muted-foreground">ממתינים שיוצר החדר יתחיל את המשחק...</p>}
         </div>
@@ -136,7 +136,7 @@ export function Multiplayer({ onExit, muted }: { onExit: () => void; muted: bool
           <Trophy className="mx-auto h-12 w-12 text-primary" />
           <h2 className="mt-2 font-display text-3xl font-black">{top ? `${top.nickname} ניצח/ה!` : "סיום!"}</h2>
           <Board players={sorted} me={me} />
-          {isHost && <button onClick={() => supabase.rpc("mp_start_game", { p_room: room.id, p_client: me, p_questions: makeQuestions() })} className="mt-5 w-full rounded-2xl bg-primary py-4 text-xl font-black text-primary-foreground shadow-[var(--shadow-pop)]">משחק נוסף</button>}
+          {isHost && <button onClick={() => supabase.rpc("mp_start_game", { p_room: room.id, p_client: me, p_questions: makeQuestions() }).then()} className="mt-5 w-full rounded-2xl bg-primary py-4 text-xl font-black text-primary-foreground shadow-[var(--shadow-pop)]">משחק נוסף</button>}
           {!isHost && <p className="mt-4 text-sm text-muted-foreground">יוצר החדר יכול להתחיל משחק נוסף</p>}
           <button onClick={() => { setRoomId(null); setRoom(null); onExit(); }} className="mt-3 w-full rounded-2xl border-2 border-secondary py-3 font-black text-secondary">חזרה למסך הראשי</button>
         </div>
@@ -172,7 +172,7 @@ function PlayView({ room, players, me, play }: { room: Room; players: Player[]; 
       const l = Math.max(0, QTIME - Math.floor((Date.now() - startRef.current) / 1000));
       setLeft(l);
       if (l <= 3 && l > 0) play("tick");
-      if (Date.now() - startRef.current > QTIME * 1000 + 500) supabase.rpc("mp_timeout", { p_room: room.id, p_q: room.current_q });
+      if (Date.now() - startRef.current > QTIME * 1000 + 500) supabase.rpc("mp_timeout", { p_room: room.id, p_q: room.current_q }).then();
     }, 1000);
     return () => clearInterval(id);
   }, [phase, room.current_q]);
