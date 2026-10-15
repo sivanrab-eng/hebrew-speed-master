@@ -14,13 +14,114 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      room_players: {
+        Row: {
+          client_id: string
+          id: string
+          joined_at: string
+          locked_q: number
+          nickname: string
+          room_id: string
+          score: number
+        }
+        Insert: {
+          client_id: string
+          id?: string
+          joined_at?: string
+          locked_q?: number
+          nickname: string
+          room_id: string
+          score?: number
+        }
+        Update: {
+          client_id?: string
+          id?: string
+          joined_at?: string
+          locked_q?: number
+          nickname?: string
+          room_id?: string
+          score?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "room_players_room_id_fkey"
+            columns: ["room_id"]
+            isOneToOne: false
+            referencedRelation: "rooms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      rooms: {
+        Row: {
+          code: string
+          created_at: string
+          current_q: number
+          host_client: string
+          id: string
+          last_q: number
+          last_winner: string | null
+          q_started_at: string | null
+          questions: Json
+          status: string
+        }
+        Insert: {
+          code: string
+          created_at?: string
+          current_q?: number
+          host_client: string
+          id?: string
+          last_q?: number
+          last_winner?: string | null
+          q_started_at?: string | null
+          questions?: Json
+          status?: string
+        }
+        Update: {
+          code?: string
+          created_at?: string
+          current_q?: number
+          host_client?: string
+          id?: string
+          last_q?: number
+          last_winner?: string | null
+          q_started_at?: string | null
+          questions?: Json
+          status?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      mp_answer: {
+        Args: {
+          p_choice: number
+          p_client: string
+          p_q: number
+          p_room: string
+        }
+        Returns: boolean
+      }
+      mp_create_room: {
+        Args: { p_client: string; p_nick: string }
+        Returns: string
+      }
+      mp_join_room: {
+        Args: { p_client: string; p_code: string; p_nick: string }
+        Returns: string
+      }
+      mp_leave_room: {
+        Args: { p_client: string; p_room: string }
+        Returns: undefined
+      }
+      mp_start_game: {
+        Args: { p_client: string; p_questions: Json; p_room: string }
+        Returns: undefined
+      }
+      mp_timeout: { Args: { p_q: number; p_room: string }; Returns: undefined }
     }
     Enums: {
       [_ in never]: never
