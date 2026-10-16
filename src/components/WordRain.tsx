@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ArrowRight, Heart, RotateCcw } from "lucide-react";
+import { ArrowRight, CloudRain, Heart, RotateCcw } from "lucide-react";
 import { VOCAB, speak, type Word } from "@/lib/vocab";
 import { sfx } from "@/lib/sfx";
 import { cn } from "@/lib/utils";
@@ -100,7 +100,7 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
         </>
       ) : done ? (
         <div className="animate-in fade-in zoom-in-95 rounded-3xl border border-border bg-card p-8 text-center shadow-[var(--shadow-card)]">
-          <p className="text-6xl">🌧️✨</p>
+          {standalone ? <CloudRain className="mx-auto h-16 w-16 text-secondary" /> : <p className="text-6xl">🌧️✨</p>}
           <h2 className="mt-2 font-display text-3xl font-black">כל הכבוד!</h2>
           <p className="mt-1 text-muted-foreground">תפסת {score} מתוך {ROUNDS} מילים</p>
           <div className="mt-3 flex justify-center gap-1">
