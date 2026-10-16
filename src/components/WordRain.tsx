@@ -103,14 +103,15 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
             <p className="text-sm font-semibold text-muted-foreground">{standalone ? "לתפוס את" : "תפסי את המילה בעברית שמתאימה ל־"}</p>
             <p dir="ltr" className="mt-1 font-display text-3xl font-black text-primary">{target.english}</p>
           </div>
-          <div className="relative h-80 overflow-hidden rounded-3xl border border-border bg-muted/50">
+          {/* reserved strip so the speed-up banner never covers a falling word */}
+          <div className="relative flex h-12 items-center justify-center">
             {speedFlash > 0 && (
-              <div key={speedFlash} aria-live="polite" className="pointer-events-none absolute inset-x-0 top-1/2 z-10 flex -translate-y-1/2 justify-center">
-                <span className="animate-speed-up inline-flex items-center gap-2 rounded-full border-2 border-accent bg-card/90 px-5 py-2 font-display text-2xl font-black text-accent shadow-[var(--shadow-pop)]">
-                  <Zap className="h-6 w-6 fill-accent" /> מגבירים קצב!
-                </span>
-              </div>
+              <span key={speedFlash} aria-live="polite" className="animate-speed-up pointer-events-none inline-flex items-center gap-2 rounded-full border-2 border-accent-foreground bg-card px-4 py-1.5 font-display text-lg font-black text-accent-foreground shadow-[var(--shadow-pop)]">
+                <Zap className="h-5 w-5 fill-accent-foreground" /> מגבירים קצב!
+              </span>
             )}
+          </div>
+          <div className="relative h-80 overflow-hidden rounded-3xl border border-border bg-muted/50">
             {drops.map((d, i) => (
               <Button
                 key={d.key}
