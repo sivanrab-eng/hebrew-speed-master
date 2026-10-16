@@ -8,3 +8,7 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Select the standalone GitHub game with the build-time VITE_WORDFALL_ONLY flag; keep the default Lovable entry unchanged so deployments can share source without replacing the arcade.
+- Keep home-screen installation manifest-only and scoped to the GitHub base path; offline caching is not requested and must not affect previews.
+- Wordfall analytics are browser-only, optional when no measurement ID is configured, and contain aggregate gameplay events without player identifiers.

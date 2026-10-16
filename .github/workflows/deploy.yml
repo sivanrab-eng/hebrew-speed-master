@@ -20,6 +20,8 @@ env:
   # GitHub Pages hosts project sites under https://<user>.github.io/<repo>/
   # Change this if the repository name differs.
   VITE_BASE_PATH: /hebrew-speed-master/
+  VITE_WORDFALL_ONLY: "true"
+  VITE_LOVABLE_CONNECTOR_GOOGLE_ANALYTICS_API_KEY: ${{ vars.WORDFALL_GA_MEASUREMENT_ID }}
 
 jobs:
   build:

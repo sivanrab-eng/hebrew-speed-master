@@ -9,10 +9,12 @@ import { Multiplayer } from "@/components/Multiplayer";
 import { Arcade } from "@/components/Arcade";
 import { sfx } from "@/lib/sfx";
 import { cn } from "@/lib/utils";
+import { Wordfall } from "@/components/Wordfall";
+import { WORDFALL_ONLY, wordfallMeta } from "@/lib/wordfall-config";
 
 export const Route = createFileRoute("/")({
   head: () => ({
-    meta: [
+    meta: WORDFALL_ONLY ? wordfallMeta : [
       { title: "ניאונית | ארקייד המשחקים" },
       { name: "description", content: "ארקייד לילדים: אתגר 60 שניות, ממורי, גשם מילים ומשחק סינכרוני עם עד 4 חברים." },
       { property: "og:title", content: "ניאונית — ארקייד המשחקים" },
@@ -40,6 +42,10 @@ function makeQ(prev?: Word): Q {
 }
 
 function Game() {
+  return WORDFALL_ONLY ? <Wordfall /> : <NeonitGame />;
+}
+
+function NeonitGame() {
   const [phase, setPhase] = useState<Phase>("start");
   const [muted, setMuted] = useState(false);
   const [time, setTime] = useState(DURATION);
