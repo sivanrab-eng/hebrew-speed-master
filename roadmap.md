@@ -9,7 +9,7 @@
 - [x] Google Analytics event code and GitHub measurement-ID variable.
 - [ ] Activate Google Analytics — blocked: user declined the connection; measurement ID not configured.
 - [x] Tests and local end-to-end verification.
-- [ ] Verify latest Wordfall on GitHub — waiting for managed Git sync and automatic deployment.
+- [x] Verify latest Wordfall on GitHub — commit 1548964 reached main, deploy run #14 green, banner confirmed live in a real browser.
 
 - [x] GitHub Actions workflow ל-GitHub Pages (.github/workflows/deploy.yml)
 - [x] Prerender סטטי של עמוד המשחק (vite.config.ts)
