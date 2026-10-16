@@ -32,7 +32,8 @@ export function MemoryMatch({ onExit, muted }: { onExit: () => void; muted: bool
     if (c.kind === "he") speak(c.word.hebrew);
     if (next.length === 2) {
       setMoves((m) => m + 1);
-      const [a, b] = next.map((id) => cards.find((x) => x.id === id)!);
+      const a = cards.find((x) => x.id === next[0])!;
+      const b = cards.find((x) => x.id === next[1])!;
       if (a.word === b.word) {
         play("correct");
         setJustMatched(a.word.hebrew);
