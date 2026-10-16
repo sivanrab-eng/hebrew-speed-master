@@ -3,7 +3,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { WordRain } from "@/components/WordRain";
 import { VOCAB } from "@/lib/vocab";
 
-vi.mock("@/lib/sfx", () => ({ sfx: { correct: vi.fn(), tick: vi.fn(), end: vi.fn() } }));
+vi.mock("@/lib/sfx", () => ({ sfx: { correct: vi.fn(), tick: vi.fn(), end: vi.fn(), speedUp: vi.fn() } }));
 vi.mock("@/components/Confetti", () => ({ Confetti: () => null }));
 
 afterEach(() => vi.useRealTimers());
@@ -32,6 +32,25 @@ describe("Wordfall", () => {
     act(() => vi.advanceTimersByTime(650));
     for (let i = 0; i < 9; i++) act(() => vi.advanceTimersByTime(6000));
     expect(complete).toHaveBeenCalledExactlyOnceWith(1);
+    view.unmount();
+  });
+
+  it("flashes a speed-up banner after three catches without pausing the round", () => {
+    vi.useFakeTimers();
+    const view = render(<WordRain standalone muted onExit={() => {}} />);
+    for (let i = 0; i < 3; i++) {
+      const target = VOCAB.find(word => screen.queryByText(word.english));
+      if (!target) throw new Error("No target rendered");
+      fireEvent.click(screen.getByRole("button", { name: target.hebrew }));
+      act(() => vi.advanceTimersByTime(650));
+    }
+    expect(screen.queryByText("מגבירים קצב!")).not.toBeNull();
+    expect(screen.queryByText(/סיבוב 4\/10/)).not.toBeNull();
+    act(() => vi.advanceTimersByTime(1400));
+    expect(screen.queryByText("מגבירים קצב!")).toBeNull();
+    // the round itself ran shorter than the initial 6s: the game never stopped
+    act(() => vi.advanceTimersByTime(5460));
+    expect(screen.queryByText(/סיבוב 5\/10/)).not.toBeNull();
     view.unmount();
   });
 });
