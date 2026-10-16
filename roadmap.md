@@ -1,6 +1,7 @@
 # Roadmap
 
 ## Wordfall
+- [ ] Remove learning/exam references from ניאונית opening; replace with short playful copy.
 - [ ] Standalone GitHub entry; preserve ניאונית.
 - [ ] Sharing and home-screen install support.
 - [ ] Google Analytics connection and game events.

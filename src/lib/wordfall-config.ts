@@ -1,4 +1,4 @@
-export const WORDFALL_ONLY = import.meta.env.VITE_WORDFALL_ONLY === "true";
+export const WORDFALL_ONLY = import.meta.env['VITE_WORDFALL_ONLY'] === "true";
 export const WORDFALL_URL = "https://sivanrab-eng.github.io/hebrew-speed-master/";
 export const wordfallMeta = [
   { title: "Wordfall | Neon word rain" },

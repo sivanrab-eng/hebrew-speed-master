@@ -2,7 +2,7 @@ type AnalyticsWindow = Window & { dataLayer?: unknown[]; gtag?: (...args: unknow
 let initialized = false;
 
 export function initWordfallAnalytics() {
-  const measurementId = import.meta.env.VITE_LOVABLE_CONNECTOR_GOOGLE_ANALYTICS_API_KEY;
+  const measurementId = import.meta.env['VITE_LOVABLE_CONNECTOR_GOOGLE_ANALYTICS_API_KEY'];
   if (typeof window === "undefined" || !measurementId || initialized) return;
   initialized = true;
   const analytics = window as AnalyticsWindow;
