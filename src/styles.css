@@ -27,6 +27,7 @@
   --animate-shake: shake 0.35s ease;
   --animate-confetti-fall: confetti-fall 2.5s ease-in forwards;
   --animate-word-fall: word-fall 5s linear forwards;
+  --animate-speed-up: speed-up 1.25s ease-out forwards;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
