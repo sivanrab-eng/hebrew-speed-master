@@ -169,3 +169,11 @@
   button:not(:disabled):hover { filter: brightness(1.15); }
   button:not(:disabled):active { transform: scale(0.96); }
 }
+
+.wordfall h1 { letter-spacing: 0; }
+.wordfall-game > div { border-radius: 8px; }
+.wordfall-game button { border-radius: 8px; }
+@media (prefers-reduced-motion: reduce) {
+  .wordfall .animate-word-fall { animation: none; transform: translateY(110px); opacity: 1; }
+  .wordfall .animate-confetti-fall { display: none; }
+}

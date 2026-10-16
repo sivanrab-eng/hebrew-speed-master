@@ -1,0 +1,16 @@
+{
+  "id": "./",
+  "name": "Wordfall",
+  "short_name": "Wordfall",
+  "description": "Neon word rain arcade",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#210c38",
+  "background_color": "#210c38",
+  "icons": [
+    { "src": "wordfall-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "wordfall-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}
