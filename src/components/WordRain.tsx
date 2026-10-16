@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight, CloudRain, Heart, RotateCcw } from "lucide-react";
+import { ArrowRight, CloudRain, Heart, RotateCcw, Zap } from "lucide-react";
 import { VOCAB, speak, type Word } from "@/lib/vocab";
 import { sfx } from "@/lib/sfx";
 import { cn } from "@/lib/utils";
@@ -27,11 +27,21 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
   const lockedRef = useRef(false);
   const progressRef = useRef(initialRainProgress());
   const [roundSpeed, setRoundSpeed] = useState(1);
+  const [speedFlash, setSpeedFlash] = useState(0);
+  const speedTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const startCallback = useRef(onGameStart);
   const completeCallback = useRef(onGameComplete);
   startCallback.current = onGameStart;
   completeCallback.current = onGameComplete;
   const play = (k: keyof typeof sfx) => { if (!muted) sfx[k](); };
+
+  // short banner on a speed jump — never blocks the round or the falling words
+  const flashSpeedUp = () => {
+    setSpeedFlash((k) => k + 1);
+    play("speedUp");
+    if (speedTimerRef.current) clearTimeout(speedTimerRef.current);
+    speedTimerRef.current = setTimeout(() => setSpeedFlash(0), 1300);
+  };
 
   const nextRound = (r: number) => {
     setRound(r);
@@ -54,14 +64,16 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
     }, rainTiming(speed).roundMs);
   };
 
-  useEffect(() => { startCallback.current?.(); nextRound(0); return () => { if (timerRef.current) clearTimeout(timerRef.current); }; }, []);
+  useEffect(() => { startCallback.current?.(); nextRound(0); return () => { if (timerRef.current) clearTimeout(timerRef.current); if (speedTimerRef.current) clearTimeout(speedTimerRef.current); }; }, []);
 
   const pick = (d: Drop) => {
     if (!target || lockedRef.current || done) return;
     if (d.word === target) {
       lockedRef.current = true;
+      const speedBefore = progressRef.current.speed;
       progressRef.current = advanceRainProgress(progressRef.current, true);
       play("correct");
+      if (progressRef.current.speed > speedBefore) flashSpeedUp();
       if (!muted) speak(d.word.hebrew);
       scoreRef.current += 1;
       setScore(scoreRef.current);
@@ -75,7 +87,7 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
     }
   };
 
-  const restart = () => { progressRef.current = initialRainProgress(); scoreRef.current = 0; setScore(0); setRound(0); setDone(false); startCallback.current?.(); nextRound(0); };
+  const restart = () => { progressRef.current = initialRainProgress(); scoreRef.current = 0; setScore(0); setRound(0); setDone(false); if (speedTimerRef.current) clearTimeout(speedTimerRef.current); setSpeedFlash(0); startCallback.current?.(); nextRound(0); };
 
   return (
     <section className={cn("flex flex-col gap-4", standalone && "wordfall-game")}>
@@ -90,6 +102,14 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
           <div className="rounded-3xl border border-border bg-card p-5 text-center shadow-[var(--shadow-card)]">
             <p className="text-sm font-semibold text-muted-foreground">{standalone ? "לתפוס את" : "תפסי את המילה בעברית שמתאימה ל־"}</p>
             <p dir="ltr" className="mt-1 font-display text-3xl font-black text-primary">{target.english}</p>
+          </div>
+          {/* reserved strip so the speed-up banner never covers a falling word */}
+          <div className="relative flex h-12 items-center justify-center">
+            {speedFlash > 0 && (
+              <span key={speedFlash} aria-live="polite" className="animate-speed-up pointer-events-none inline-flex items-center gap-2 rounded-full border-2 border-accent-foreground bg-card px-4 py-1.5 font-display text-lg font-black text-accent-foreground shadow-[var(--shadow-pop)]">
+                <Zap className="h-5 w-5 fill-accent-foreground" /> מגבירים קצב!
+              </span>
+            )}
           </div>
           <div className="relative h-80 overflow-hidden rounded-3xl border border-border bg-muted/50">
             {drops.map((d, i) => (

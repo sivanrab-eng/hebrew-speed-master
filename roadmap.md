@@ -2,6 +2,7 @@
 
 ## Wordfall
 - [x] Gradual word-rain speed: +10% per three consecutive catches; streak reset only; retain ten rounds; tests and full browser game verified.
+- [x] Short "מגבירים קצב!" banner on every speed increase — non-blocking, never covers a falling word; verified in tests and browser.
 - [x] Remove learning/exam references from ניאונית opening; replace with short playful copy.
 - [x] Standalone GitHub entry; preserve ניאונית.
 - [x] Sharing and home-screen install support.
