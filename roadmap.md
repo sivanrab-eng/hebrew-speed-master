@@ -1,7 +1,7 @@
 # Roadmap
 
 ## Wordfall
-- [ ] Gradual word-rain speed: +10% per three consecutive catches; streak reset only; retain ten rounds; verify updated threshold.
+- [x] Gradual word-rain speed: +10% per three consecutive catches; streak reset only; retain ten rounds; tests and full browser game verified.
 - [x] Remove learning/exam references from ניאונית opening; replace with short playful copy.
 - [x] Standalone GitHub entry; preserve ניאונית.
 - [x] Sharing and home-screen install support.
