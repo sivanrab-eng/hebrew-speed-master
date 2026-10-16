@@ -109,7 +109,7 @@ function Game() {
   const accuracy = answered ? Math.round((correct / answered) * 100) : 0;
 
   return (
-    <main dir="rtl" className="min-h-screen bg-background bg-[image:var(--gradient-bg)] px-4 py-6 font-sans text-foreground">
+    <main dir="rtl" className="min-h-screen px-4 py-6 font-sans text-foreground">
       <div className="mx-auto flex max-w-xl flex-col gap-5">
         <header className="flex items-center justify-between">
           <div className="flex items-center gap-2 font-display text-xl font-black">
