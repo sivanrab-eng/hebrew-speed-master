@@ -13,10 +13,10 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Speed Vocab – מחוננים ז' | משחק אוצר מילים" },
-      { name: "description", content: "משחק מהירות של 60 שניות לתרגול אוצר מילים עברי מנוקד למבחני מחוננים כיתה ז'." },
-      { property: "og:title", content: "Speed Vocab – מחוננים ז'" },
-      { property: "og:description", content: "60 שניות, 4 אפשרויות, רצפים ומכפילים – תרגול אוצר מילים למחוננים." },
+      { title: "ניאונית | ארקייד המשחקים" },
+      { name: "description", content: "ארקייד לילדים: אתגר 60 שניות, ממורי, גשם מילים ומשחק סינכרוני עם עד 4 חברים." },
+      { property: "og:title", content: "ניאונית — ארקייד המשחקים" },
+      { property: "og:description", content: "60 שניות, רצפים ומכפילים, ממורי, גשם מילים ומשחק עם חברים בזמן אמת." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -114,7 +114,7 @@ function Game() {
         <header className="flex items-center justify-between">
           <div className="flex items-center gap-2 font-display text-xl font-black">
             <span className="grid h-9 w-9 place-items-center rounded-xl bg-primary text-primary-foreground shadow-[var(--shadow-pop)]"><Zap className="h-5 w-5" /></span>
-            Speed Vocab
+            ניאונית
           </div>
           <button onClick={() => setMuted((m) => !m)} aria-label={muted ? "הפעל סאונד" : "השתק סאונד"} className="grid h-10 w-10 place-items-center rounded-full border border-border bg-card transition hover:border-primary">
             {muted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5 text-secondary" />}
@@ -124,7 +124,7 @@ function Game() {
         {phase === "start" && (
           <section className="animate-in fade-in zoom-in-95 rounded-3xl border border-border bg-card p-7 text-center shadow-[var(--shadow-card)]">
             <div className="mx-auto mb-4 grid h-20 w-20 place-items-center rounded-3xl bg-primary text-primary-foreground shadow-[var(--shadow-pop)]"><Zap className="h-10 w-10" /></div>
-            <h1 className="font-display text-4xl font-black sm:text-5xl">מחוננים ז'</h1>
+            <h1 className="font-display text-4xl font-black sm:text-5xl">ניאונית</h1>
             <p className="mt-3 text-lg text-muted-foreground">מופיעה הגדרה באנגלית — בחרו את המילה העברית המתאימה. כמה שיותר, תוך 60 שניות!</p>
             <ul className="mt-6 grid grid-cols-3 gap-3 text-sm">
               <li className="rounded-2xl bg-muted p-3"><Timer className="mx-auto mb-1 h-5 w-5 text-primary" />60 שניות</li>
