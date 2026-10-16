@@ -1,10 +1,11 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowRight, CloudRain, Heart, RotateCcw } from "lucide-react";
 import { VOCAB, speak, type Word } from "@/lib/vocab";
 import { sfx } from "@/lib/sfx";
 import { cn } from "@/lib/utils";
 import { Confetti } from "./Confetti";
 import { Button } from "@/components/ui/button";
+import { advanceRainProgress, initialRainProgress, rainTiming } from "@/lib/word-rain-speed";
 
 const ROUNDS = 10;
 const LANES = 3;
@@ -24,6 +25,8 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const scoreRef = useRef(0);
   const lockedRef = useRef(false);
+  const progressRef = useRef(initialRainProgress());
+  const [roundSpeed, setRoundSpeed] = useState(1);
   const startCallback = useRef(onGameStart);
   const completeCallback = useRef(onGameComplete);
   startCallback.current = onGameStart;
@@ -34,6 +37,8 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
     setRound(r);
     lockedRef.current = false;
     if (r >= ROUNDS) { setDone(true); play("end"); completeCallback.current?.(scoreRef.current); return; }
+    const speed = progressRef.current.speed;
+    setRoundSpeed(speed);
     const word = VOCAB[Math.floor(Math.random() * VOCAB.length)];
     if (!word) return;
     const others = shuffle(VOCAB.filter((w) => w !== word)).slice(0, LANES - 1);
@@ -43,7 +48,10 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
     setDrops(lanes.map((w, i) => ({ word: w, lane: i, key: `${r}-${w.hebrew}` })));
     if (timerRef.current) clearTimeout(timerRef.current);
     // no penalty: if time runs out, just move on
-    timerRef.current = setTimeout(() => nextRound(r + 1), 6000);
+    timerRef.current = setTimeout(() => {
+      progressRef.current = advanceRainProgress(progressRef.current, false);
+      nextRound(r + 1);
+    }, rainTiming(speed).roundMs);
   };
 
   useEffect(() => { startCallback.current?.(); nextRound(0); return () => { if (timerRef.current) clearTimeout(timerRef.current); }; }, []);
@@ -52,6 +60,7 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
     if (!target || lockedRef.current || done) return;
     if (d.word === target) {
       lockedRef.current = true;
+      progressRef.current = advanceRainProgress(progressRef.current, true);
       play("correct");
       if (!muted) speak(d.word.hebrew);
       scoreRef.current += 1;
@@ -60,12 +69,13 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
       if (timerRef.current) clearTimeout(timerRef.current);
       timerRef.current = setTimeout(() => nextRound(round + 1), 650);
     } else {
+      progressRef.current = advanceRainProgress(progressRef.current, false);
       play("tick"); // gentle sound only, no penalty
       setMisses((m) => new Set(m).add(d.key));
     }
   };
 
-  const restart = () => { scoreRef.current = 0; setScore(0); setRound(0); setDone(false); startCallback.current?.(); nextRound(0); };
+  const restart = () => { progressRef.current = initialRainProgress(); scoreRef.current = 0; setScore(0); setRound(0); setDone(false); startCallback.current?.(); nextRound(0); };
 
   return (
     <section className={cn("flex flex-col gap-4", standalone && "wordfall-game")}>
@@ -90,7 +100,7 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
                 className={cn("absolute top-0 h-auto min-h-16 w-[31%] animate-word-fall whitespace-normal break-words rounded-2xl border-2 border-border bg-card px-1 py-3 font-hebrew text-2xl font-bold text-foreground shadow-sm transition active:scale-90",
                   hits.has(d.key) && "border-success bg-success text-success-foreground",
                   misses.has(d.key) && (standalone ? "border-secondary opacity-70" : "animate-shake border-destructive/50 opacity-60"))}
-                style={{ right: `${d.lane * 34 + 1.5}%`, animationDelay: `${i * 0.9}s`, animationDuration: "5s" }}
+                style={{ right: `${d.lane * 34 + 1.5}%`, animationDelay: `${i * rainTiming(roundSpeed).delaySeconds}s`, animationDuration: `${rainTiming(roundSpeed).fallSeconds}s` }}
               >
                 {d.word.hebrew}
               </Button>
