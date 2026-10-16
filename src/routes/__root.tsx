@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { WORDFALL_ONLY } from "@/lib/wordfall-config";
 
 function NotFoundComponent() {
   return (
@@ -86,6 +87,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
+      ...(WORDFALL_ONLY ? [{ name: "theme-color", content: "#210c38" }, { name: "apple-mobile-web-app-title", content: "Wordfall" }] : []),
     ],
     links: [
       {
@@ -94,7 +96,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700&family=Heebo:wght@400;600;800;900&family=Secular+One&display=swap" },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: WORDFALL_ONLY ? `${import.meta.env.BASE_URL}wordfall-favicon.png` : "/favicon.ico", type: WORDFALL_ONLY ? "image/png" : "image/x-icon" },
+      ...(WORDFALL_ONLY ? [
+        { rel: "manifest", href: `${import.meta.env.BASE_URL}manifest.webmanifest` },
+        { rel: "apple-touch-icon", href: `${import.meta.env.BASE_URL}wordfall-180.png` },
+      ] : []),
     ],
   }),
   shellComponent: RootShell,
