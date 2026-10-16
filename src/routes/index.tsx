@@ -131,15 +131,15 @@ function NeonitGame() {
           <section className="animate-in fade-in zoom-in-95 rounded-3xl border border-border bg-card p-7 text-center shadow-[var(--shadow-card)]">
             <div className="mx-auto mb-4 grid h-20 w-20 place-items-center rounded-3xl bg-primary text-primary-foreground shadow-[var(--shadow-pop)]"><Zap className="h-10 w-10" /></div>
             <h1 className="font-display text-4xl font-black sm:text-5xl">ניאונית</h1>
-            <p className="mt-3 text-lg text-muted-foreground">מופיעה הגדרה באנגלית — בחרו את המילה העברית המתאימה. כמה שיותר, תוך 60 שניות!</p>
+            <p className="mt-3 text-lg text-muted-foreground">נדלקים. משחקים. שוברים שיאים.</p>
             <ul className="mt-6 grid grid-cols-3 gap-3 text-sm">
               <li className="rounded-2xl bg-muted p-3"><Timer className="mx-auto mb-1 h-5 w-5 text-primary" />60 שניות</li>
               <li className="rounded-2xl bg-muted p-3"><Flame className="mx-auto mb-1 h-5 w-5 text-primary" />רצף = מכפיל עד ×4</li>
-              <li className="rounded-2xl bg-muted p-3"><BookOpen className="mx-auto mb-1 h-5 w-5 text-primary" />{VOCAB.length} מילים</li>
+              <li className="rounded-2xl bg-muted p-3"><Gamepad2 className="mx-auto mb-1 h-5 w-5 text-primary" />בלי סוף כיף</li>
             </ul>
             {high > 0 && <p className="mt-5 flex items-center justify-center gap-2 font-bold text-secondary"><Trophy className="h-5 w-5" /> השיא שלך: {high}</p>}
             <button onClick={start} className="mt-6 w-full rounded-2xl bg-primary py-4 text-xl font-black text-primary-foreground shadow-[var(--shadow-pop)] transition hover:scale-[1.02] active:scale-95"><span className="flex items-center justify-center gap-2"><Timer className="h-6 w-6" />אתגר 60 שניות</span></button>
-            <button onClick={() => setPhase("study")} className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-secondary bg-card py-4 text-xl font-black text-secondary transition hover:scale-[1.02] active:scale-95"><Layers className="h-6 w-6" />מצב לימוד / כרטיסיות</button>
+            <button onClick={() => setPhase("study")} className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-secondary bg-card py-4 text-xl font-black text-secondary transition hover:scale-[1.02] active:scale-95"><Layers className="h-6 w-6" />קלפי ניאון</button>
             <button onClick={() => setPhase("arcade")} className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl bg-secondary py-4 text-xl font-black text-secondary-foreground shadow-[var(--shadow-card)] transition hover:scale-[1.02] active:scale-95"><Gamepad2 className="h-6 w-6" />ארקייד מיני-משחקים 🎮</button>
             <button onClick={() => setPhase("multi")} className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-primary bg-card py-4 text-xl font-black text-primary transition hover:scale-[1.02] active:scale-95"><Users className="h-6 w-6" />משחק עם חברים (עד 4)</button>
             <button onClick={() => setPhase("guide")} className="mt-4 flex w-full items-center justify-center gap-2 rounded-2xl py-2 text-sm font-bold text-muted-foreground transition hover:text-primary"><Github className="h-4 w-4" /> איך מחברים את הפרויקט ל-GitHub?</button>
