@@ -1,11 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Zap, Timer, Trophy, Volume2, VolumeX, Flame, RotateCcw, Target, BookOpen, Check, X, Lightbulb, Layers, Github, Users } from "lucide-react";
+import { Zap, Timer, Trophy, Volume2, VolumeX, Flame, RotateCcw, Target, BookOpen, Check, X, Lightbulb, Layers, Github, Users, Gamepad2 } from "lucide-react";
 import { VOCAB, sentenceBlank, type Word } from "@/lib/vocab";
 import { WordDetails } from "@/components/WordDetails";
 import { StudyMode } from "@/components/StudyMode";
 import { GithubGuide } from "@/components/GithubGuide";
 import { Multiplayer } from "@/components/Multiplayer";
+import { Arcade } from "@/components/Arcade";
 import { sfx } from "@/lib/sfx";
 import { cn } from "@/lib/utils";
 
@@ -25,7 +26,7 @@ export const Route = createFileRoute("/")({
 
 const DURATION = 60;
 const BASE = 10;
-type Phase = "start" | "play" | "end" | "study" | "guide" | "multi";
+type Phase = "start" | "play" | "end" | "study" | "guide" | "multi" | "arcade";
 type Q = { word: Word; options: Word[] };
 
 const shuffle = <T,>(a: T[]) => { const b = [...a]; for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j]!, b[i]!]; } return b; };
