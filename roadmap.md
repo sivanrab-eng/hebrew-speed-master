@@ -1,10 +1,10 @@
 # Roadmap
 
 ## Wordfall rich Hebrew, simple English
-- [ ] Restore only rich source Hebrew in graded tiers, simplify every English meaning to everyday words or short phrases; test and update separate Wordfall site without changing other games.
+- [x] Restore all 387 rich source Hebrew labels across five graded tiers, simplifying every English meaning to everyday words or short phrases; other games retain original vocabulary. Fifteen tests pass, local build OK, separate Wordfall deployment succeeded; two full games, tier unlock, persistence and mobile verified live without browser errors.
 
 ## Wordfall easy start
-- [x] Add 110 everyday words across three starter tiers and success-based difficulty between games (two games with 8+ catches unlock one tier), preserving other games. Fourteen tests pass; two complete games, unlock, saved progress and mobile fit verified locally and live at the separate Wordfall site; GitHub deployment succeeded.
+- [x] Success-based difficulty between games (two games with 8+ catches unlock one tier), preserving other games. The everyday Hebrew starter vocabulary has been superseded by rich Hebrew with simple English as requested above.
 
 ## Separate Wordfall repository
 - [x] Upload only the standalone falling-word game to sivanrab-eng/Wordfall, retaining the original application; GitHub deployment succeeded and the live game completed with 10/10 catches, speed banner and restart, with no browser errors.
