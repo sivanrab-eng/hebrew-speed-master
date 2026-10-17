@@ -14,13 +14,14 @@ export function WordDetails({ w, showHeader = true }: { w: Word; showHeader?: bo
           <SpeakBtn text={w.hebrew} />
         </div>
       )}
-      <div className="rounded-2xl bg-background/60 p-3">
+      {w.definition && <p className="font-hebrew text-xl leading-relaxed">{w.definition}</p>}
+      {w.exampleSentenceHebrew && <div className="rounded-2xl bg-background/60 p-3">
         <p className="font-hebrew text-xl leading-relaxed">{s.before}<mark className="rounded bg-primary/20 px-1 font-bold text-foreground">{s.word}</mark>{s.after}</p>
         <p dir="ltr" className="mt-1 text-left text-sm italic text-muted-foreground">{w.exampleSentenceEnglish}</p>
-      </div>
-      <div className="flex flex-wrap gap-2 text-sm">
+      </div>}
+      {w.root && <div className="flex flex-wrap gap-2 text-sm">
         <span className="rounded-full bg-secondary/15 px-3 py-1 font-bold text-secondary">שורש: {w.root}</span>
-      </div>
+      </div>}
       <Chips label="נרדפות" items={w.synonyms} cls="bg-success/15 text-success" />
       <Chips label="הפכים" items={w.antonyms} cls="bg-destructive/10 text-destructive" />
     </div>
