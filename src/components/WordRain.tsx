@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight, CloudRain, Heart, RotateCcw, Zap } from "lucide-react";
-import { VOCAB, speak, type Word } from "@/lib/vocab";
+import { ArrowRight, CloudRain, Heart, RotateCcw, Volume2, Zap } from "lucide-react";
+import { VOCAB, speak, speakPair, type Word } from "@/lib/vocab";
 import { sfx } from "@/lib/sfx";
 import { cn } from "@/lib/utils";
 import { Confetti } from "./Confetti";
@@ -92,6 +92,8 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
       lockedRef.current = true;
       setIntroducing(true);
       setDrops([]);
+      // Read the new word aloud: Hebrew first, then the simple English meaning.
+      if (!muted) speakPair(word.hebrew, word.english);
       timerRef.current = setTimeout(beginFall, INTRODUCTION_MS);
     } else beginFall();
   };
@@ -180,6 +182,9 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
                 <p className="font-display text-lg text-secondary">טיפה חדשה!</p>
                 <p className="break-words font-hebrew text-4xl font-bold text-foreground">{target.hebrew}</p>
                 <p dir="ltr" className="text-xl text-primary">{target.english}</p>
+                <Button variant="ghost" onClick={() => !muted && speakPair(target.hebrew, target.english)} className="gap-2 text-sm text-muted-foreground">
+                  <Volume2 className="h-4 w-4" /> שמיעה חוזרת
+                </Button>
               </div>
             )}
             {drops.map((d, i) => (
