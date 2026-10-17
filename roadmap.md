@@ -1,7 +1,7 @@
 # Roadmap
 
 ## Publish complete approved Wordfall trial
-- [ ] Upload the standalone dependency subset to sivanrab-eng/Wordfall, configure the supplied analytics ID, confirm successful GitHub Pages deployment and verify the live game; preserve ניאונית.
+- [x] Uploaded the standalone dependency subset to sivanrab-eng/Wordfall (1d93a211); configured WORDFALL_GA_MEASUREMENT_ID = G-8W3MVMWVQW. GitHub tests, build and Pages deployment run 39057344984 succeeded. Three full live games confirmed seven everyday targets, three six-second introductions, identical targets across three games, optional tier advancement and fresh-visit reset; speech engine calls confirmed 150ms sequencing, analytics script loaded, manifest scope resolves to /Wordfall/, no runtime errors. No arcade application code changed.
 
 ## Wordfall speech timing
 - [x] Sequence English 150ms after Hebrew end/error, with a two-second fallback and cancellation of stale timers. All 43 tests pass; browser instrumentation confirmed automatic sequencing, no stale English on repeat, and resumed falling after the introduction. Headless speech was checked through engine calls, not audible playback. Build OK; preview only, not uploaded.
@@ -42,7 +42,7 @@
 - [x] Standalone GitHub entry; preserve ניאונית.
 - [x] Sharing and home-screen install support.
 - [x] Google Analytics event code and GitHub measurement-ID variable.
-- [ ] Activate Google Analytics — blocked: user declined the connection; measurement ID not configured.
+- [x] Configure Google Analytics for standalone Wordfall through the supplied repository measurement ID; confirmed the matching analytics script loads on the live site. Analytics reporting dashboard receipt was not checked.
 - [x] Tests and local end-to-end verification.
 - [x] Verify latest Wordfall on GitHub — commit 1548964 reached main, deploy run #14 green, banner confirmed live in a real browser.
 - [x] Wordfall falls slower (7s instead of 5s, ten-second rounds) and keeps one steady pace — the speed jump and its banner are off there for now; the arcade word rain keeps 5s falls, the +10% jump and the banner. Twenty-seven tests pass; full games verified in the browser for both games. Not uploaded to the separate Wordfall repository.
