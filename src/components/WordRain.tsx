@@ -5,7 +5,7 @@ import { sfx } from "@/lib/sfx";
 import { cn } from "@/lib/utils";
 import { Confetti } from "./Confetti";
 import { Button } from "@/components/ui/button";
-import { advanceRainProgress, initialRainProgress, rainTiming } from "@/lib/word-rain-speed";
+import { advanceRainProgress, ARCADE_PACE, ARCADE_RULES, initialRainProgress, rainTiming, STANDALONE_PACE, STANDALONE_RULES } from "@/lib/word-rain-speed";
 import { completeDifficulty, DIFFICULTY_STORAGE_KEY, difficultyPool, initialDifficulty, mixedGameWords, normalizeDifficulty } from "@/lib/wordfall-difficulty";
 
 const ROUNDS = 10;
@@ -40,6 +40,9 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
   startCallback.current = onGameStart;
   completeCallback.current = onGameComplete;
   const play = (k: keyof typeof sfx) => { if (!muted) sfx[k](); };
+  // Wordfall falls slower and keeps one steady pace; the arcade game keeps its own
+  const pace = standalone ? STANDALONE_PACE : ARCADE_PACE;
+  const rules = standalone ? STANDALONE_RULES : ARCADE_RULES;
 
   // short banner on a speed jump — never blocks the round or the falling words
   const flashSpeedUp = () => {
@@ -73,9 +76,9 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
     if (timerRef.current) clearTimeout(timerRef.current);
     // no penalty: if time runs out, just move on
     timerRef.current = setTimeout(() => {
-      progressRef.current = advanceRainProgress(progressRef.current, false);
+      progressRef.current = advanceRainProgress(progressRef.current, false, rules);
       nextRound(r + 1);
-    }, rainTiming(speed).roundMs);
+    }, rainTiming(speed, pace).roundMs);
   };
 
   const startGame = () => {
@@ -104,7 +107,7 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
     if (d.word === target) {
       lockedRef.current = true;
       const speedBefore = progressRef.current.speed;
-      progressRef.current = advanceRainProgress(progressRef.current, true);
+      progressRef.current = advanceRainProgress(progressRef.current, true, rules);
       play("correct");
       if (progressRef.current.speed > speedBefore) flashSpeedUp();
       if (!muted) speak(d.word.hebrew);
@@ -114,7 +117,7 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
       if (timerRef.current) clearTimeout(timerRef.current);
       timerRef.current = setTimeout(() => nextRound(round + 1), 650);
     } else {
-      progressRef.current = advanceRainProgress(progressRef.current, false);
+      progressRef.current = advanceRainProgress(progressRef.current, false, rules);
       play("tick"); // gentle sound only, no penalty
       setMisses((m) => new Set(m).add(d.key));
     }
@@ -153,7 +156,7 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
                 className={cn("absolute top-0 h-auto min-h-16 w-[31%] animate-word-fall whitespace-normal break-words rounded-2xl border-2 border-border bg-card px-1 py-3 font-hebrew text-2xl font-bold text-foreground shadow-sm transition active:scale-90",
                   hits.has(d.key) && "border-success bg-success text-success-foreground",
                   misses.has(d.key) && (standalone ? "border-secondary opacity-70" : "animate-shake border-destructive/50 opacity-60"))}
-                style={{ right: `${d.lane * 34 + 1.5}%`, animationDelay: `${i * rainTiming(roundSpeed).delaySeconds}s`, animationDuration: `${rainTiming(roundSpeed).fallSeconds}s` }}
+                style={{ right: `${d.lane * 34 + 1.5}%`, animationDelay: `${i * rainTiming(roundSpeed, pace).delaySeconds}s`, animationDuration: `${rainTiming(roundSpeed, pace).fallSeconds}s` }}
               >
                 {d.word.hebrew}
               </Button>
