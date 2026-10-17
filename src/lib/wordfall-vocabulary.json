@@ -1,0 +1,1550 @@
+{
+  "אגד": {
+    "english": "a bandage",
+    "level": 4
+  },
+  "אדווה": {
+    "english": "a small wave",
+    "level": 0
+  },
+  "אוושה": {
+    "english": "a soft rustling sound",
+    "level": 2
+  },
+  "אוזן ערלה": {
+    "english": "refusing to listen",
+    "level": 3
+  },
+  "איחה": {
+    "english": "joined torn pieces together",
+    "level": 2
+  },
+  "אלומה": {
+    "english": "a bundle of grain stalks",
+    "level": 2
+  },
+  "אמודאי": {
+    "english": "a diver",
+    "level": 4
+  },
+  "אמיר": {
+    "english": "the top of a tree",
+    "level": 4
+  },
+  "אמת מים": {
+    "english": "a channel that carries water",
+    "level": 2
+  },
+  "אמתלה": {
+    "english": "an excuse",
+    "level": 0
+  },
+  "אצר": {
+    "english": "collected and kept",
+    "level": 2
+  },
+  "אקרן": {
+    "english": "a screen for showing movies",
+    "level": 4
+  },
+  "ארך אפיים": {
+    "english": "slow to get angry",
+    "level": 2
+  },
+  "ארכני": {
+    "english": "too long and wordy",
+    "level": 2
+  },
+  "ברא": {
+    "english": "cleared land by removing trees",
+    "level": 3
+  },
+  "בור": {
+    "english": "an uneducated person",
+    "level": 1
+  },
+  "בא בימים": {
+    "english": "old",
+    "level": 2
+  },
+  "באו בדברים": {
+    "english": "held talks",
+    "level": 2
+  },
+  "בגפו": {
+    "english": "by himself",
+    "level": 0
+  },
+  "בדימוס": {
+    "english": "retired from a job",
+    "level": 1
+  },
+  "בושש": {
+    "english": "was late",
+    "level": 2
+  },
+  "בזעיר אנפין": {
+    "english": "on a smaller scale",
+    "level": 3
+  },
+  "ביאור": {
+    "english": "an explanation",
+    "level": 0
+  },
+  "בין המצרים": {
+    "english": "in trouble",
+    "level": 3
+  },
+  "ביעף": {
+    "english": "quickly",
+    "level": 2
+  },
+  "בירוא": {
+    "english": "clearing land by removing trees",
+    "level": 3
+  },
+  "בית בד": {
+    "english": "a place where olive oil is made",
+    "level": 1
+  },
+  "בית מרזח": {
+    "english": "a bar serving alcohol",
+    "level": 2
+  },
+  "בכליון עיניים": {
+    "english": "eagerly waiting for something",
+    "level": 3
+  },
+  "בכר": {
+    "english": "a young camel",
+    "level": 4
+  },
+  "במפגיע": {
+    "english": "firmly and forcefully",
+    "level": 3
+  },
+  "בן בליעל": {
+    "english": "an evil person",
+    "level": 2
+  },
+  "בן לוויה": {
+    "english": "someone who keeps you company",
+    "level": 0
+  },
+  "בן תשחורת": {
+    "english": "a young person",
+    "level": 3
+  },
+  "בעיניים כלות": {
+    "english": "waiting eagerly but feeling disappointed",
+    "level": 3
+  },
+  "בעליל": {
+    "english": "clearly",
+    "level": 0
+  },
+  "בר-כיבוש": {
+    "english": "able to be kept under control",
+    "level": 3
+  },
+  "בר-מינן": {
+    "english": "a dead person",
+    "level": 3
+  },
+  "בריש גלי": {
+    "english": "openly for everyone to see",
+    "level": 2
+  },
+  "ברם": {
+    "english": "but",
+    "level": 2
+  },
+  "גאה": {
+    "english": "rose like water in a river",
+    "level": 2
+  },
+  "גדד": {
+    "english": "picked dates from a palm tree",
+    "level": 4
+  },
+  "גהר": {
+    "english": "bent over",
+    "level": 2
+  },
+  "גולה": {
+    "english": "someone forced to leave their country",
+    "level": 1
+  },
+  "גיבב": {
+    "english": "piled things up without order",
+    "level": 2
+  },
+  "גילה את אוזנו": {
+    "english": "told him a secret",
+    "level": 2
+  },
+  "גילופין": {
+    "english": "being slightly drunk",
+    "level": 2
+  },
+  "גלב": {
+    "english": "a barber",
+    "level": 4
+  },
+  "גמר אומר": {
+    "english": "made up his mind",
+    "level": 2
+  },
+  "גנזך": {
+    "english": "a place for old records",
+    "level": 3
+  },
+  "גרגרן": {
+    "english": "someone who eats too much",
+    "level": 0
+  },
+  "דלק": {
+    "english": "chased",
+    "level": 2
+  },
+  "דובב": {
+    "english": "got someone to talk",
+    "level": 0
+  },
+  "דידה": {
+    "english": "walked with small unsteady steps",
+    "level": 2
+  },
+  "דמעות תנין": {
+    "english": "fake sadness",
+    "level": 0
+  },
+  "דרך חתחתים": {
+    "english": "a path full of things blocking the way",
+    "level": 2
+  },
+  "המרה": {
+    "english": "disobeyed an order",
+    "level": 2
+  },
+  "התרה": {
+    "english": "warned",
+    "level": 2
+  },
+  "העלה חרס בידו": {
+    "english": "tried but failed",
+    "level": 2
+  },
+  "השגה": {
+    "english": "an objection",
+    "level": 1
+  },
+  "האמיר": {
+    "english": "rose higher",
+    "level": 2
+  },
+  "הבליח": {
+    "english": "flashed briefly",
+    "level": 2
+  },
+  "הגיף": {
+    "english": "shut a window",
+    "level": 2
+  },
+  "הדום": {
+    "english": "a low stool for resting your feet",
+    "level": 2
+  },
+  "הדיוט": {
+    "english": "someone who is not an expert",
+    "level": 2
+  },
+  "הדיח": {
+    "english": "tried to make someone commit a crime",
+    "level": 2
+  },
+  "הדיף": {
+    "english": "gave off a smell",
+    "level": 0
+  },
+  "הוכיח": {
+    "english": "showed that something was true",
+    "level": 0
+  },
+  "הולאם": {
+    "english": "became government property",
+    "level": 3
+  },
+  "הזים": {
+    "english": "showed that a claim was false",
+    "level": 3
+  },
+  "היה לו לרועץ": {
+    "english": "caused him to fail",
+    "level": 2
+  },
+  "היסה": {
+    "english": "made someone be quiet",
+    "level": 2
+  },
+  "היקוות": {
+    "english": "liquid gathering in one place",
+    "level": 3
+  },
+  "הכביר": {
+    "english": "used too many words",
+    "level": 2
+  },
+  "הכמין": {
+    "english": "hid",
+    "level": 3
+  },
+  "הלבין את פניו": {
+    "english": "made him feel ashamed",
+    "level": 2
+  },
+  "הלעיט": {
+    "english": "fed someone too much",
+    "level": 2
+  },
+  "המיר": {
+    "english": "exchanged one thing for another",
+    "level": 0
+  },
+  "הניא": {
+    "english": "talked someone out of doing something",
+    "level": 2
+  },
+  "הנץ": {
+    "english": "sunrise",
+    "level": 3
+  },
+  "הס": {
+    "english": "be quiet",
+    "level": 2
+  },
+  "הסכית": {
+    "english": "listened carefully",
+    "level": 3
+  },
+  "הסלים": {
+    "english": "made things worse",
+    "level": 0
+  },
+  "הסתגף": {
+    "english": "made himself suffer",
+    "level": 3
+  },
+  "העלה ארוכה": {
+    "english": "healed",
+    "level": 3
+  },
+  "הפליא מכותיו": {
+    "english": "beat someone badly",
+    "level": 3
+  },
+  "הפציר": {
+    "english": "kept asking again and again",
+    "level": 0
+  },
+  "הצטדק": {
+    "english": "gave reasons why he was not guilty",
+    "level": 0
+  },
+  "הצטהל": {
+    "english": "was very happy",
+    "level": 2
+  },
+  "הצטווה": {
+    "english": "was given an order",
+    "level": 1
+  },
+  "הצטרד": {
+    "english": "his voice became rough and weak",
+    "level": 2
+  },
+  "הצר את צעדיו": {
+    "english": "held back his progress",
+    "level": 2
+  },
+  "הקשה (שאלה)": {
+    "english": "asked a difficult question",
+    "level": 2
+  },
+  "הקשה עורפו": {
+    "english": "stubbornly refused to listen",
+    "level": 2
+  },
+  "הרהיב בנפשו": {
+    "english": "acted bravely",
+    "level": 3
+  },
+  "השתופף": {
+    "english": "bent down",
+    "level": 2
+  },
+  "התאווה": {
+    "english": "wanted something very much",
+    "level": 0
+  },
+  "התאונן": {
+    "english": "complained",
+    "level": 2
+  },
+  "התבדה": {
+    "english": "found out he was wrong",
+    "level": 0
+  },
+  "התבסם": {
+    "english": "got drunk",
+    "level": 2
+  },
+  "התגעש": {
+    "english": "became very upset",
+    "level": 2
+  },
+  "התחבט": {
+    "english": "struggled to decide",
+    "level": 0
+  },
+  "התחוור": {
+    "english": "became clear",
+    "level": 2
+  },
+  "התחלה": {
+    "english": "pretended to be sick",
+    "level": 3
+  },
+  "התחסד": {
+    "english": "pretended to be good and innocent",
+    "level": 2
+  },
+  "התחקה": {
+    "english": "followed how something developed",
+    "level": 2
+  },
+  "התיירא": {
+    "english": "was afraid",
+    "level": 2
+  },
+  "התנכר": {
+    "english": "acted as if he had no connection",
+    "level": 1
+  },
+  "התנצח": {
+    "english": "argued stubbornly",
+    "level": 2
+  },
+  "התעלה": {
+    "english": "gave something up for a greater goal",
+    "level": 1
+  },
+  "התערטל": {
+    "english": "took off his clothes",
+    "level": 2
+  },
+  "התפכח": {
+    "english": "stopped believing something that was not true",
+    "level": 1
+  },
+  "התקרש": {
+    "english": "became solid",
+    "level": 0
+  },
+  "התרוממות נפש": {
+    "english": "a feeling of great joy",
+    "level": 2
+  },
+  "ויטלי": {
+    "english": "full of life and energy",
+    "level": 3
+  },
+  "זבן": {
+    "english": "a shop worker who sells things",
+    "level": 2
+  },
+  "זחוח": {
+    "english": "too pleased with himself",
+    "level": 2
+  },
+  "זמר": {
+    "english": "cut back branches",
+    "level": 3
+  },
+  "חבוט": {
+    "english": "used so often it feels unoriginal",
+    "level": 2
+  },
+  "חבורה": {
+    "english": "a bruise",
+    "level": 2
+  },
+  "חוסה": {
+    "english": "under someone's protection",
+    "level": 2
+  },
+  "חזר לסורו": {
+    "english": "went back to his bad habits",
+    "level": 2
+  },
+  "חירף את נפשו": {
+    "english": "risked his life",
+    "level": 2
+  },
+  "חכך בדעתו": {
+    "english": "hesitated over a decision",
+    "level": 2
+  },
+  "חלחלה": {
+    "english": "a feeling of shock and fear",
+    "level": 1
+  },
+  "חלט": {
+    "english": "cooked in boiling water",
+    "level": 3
+  },
+  "חלץ": {
+    "english": "pulled something off or out",
+    "level": 0
+  },
+  "חמד": {
+    "english": "wanted something belonging to someone else",
+    "level": 0
+  },
+  "חמד לצון": {
+    "english": "joked",
+    "level": 2
+  },
+  "חסר תקנה": {
+    "english": "cannot be fixed",
+    "level": 0
+  },
+  "חרטום": {
+    "english": "the front of a ship",
+    "level": 1
+  },
+  "חריט": {
+    "english": "a small money bag",
+    "level": 4
+  },
+  "חרך": {
+    "english": "a narrow opening",
+    "level": 1
+  },
+  "חשק": {
+    "english": "wanted very much",
+    "level": 0
+  },
+  "חשק שפתיו": {
+    "english": "kept his lips shut",
+    "level": 3
+  },
+  "חתה": {
+    "english": "moved hot coals",
+    "level": 4
+  },
+  "טחן מים": {
+    "english": "repeated things without saying anything useful",
+    "level": 2
+  },
+  "טרוניה": {
+    "english": "a complaint",
+    "level": 1
+  },
+  "טרחן": {
+    "english": "an annoying person",
+    "level": 0
+  },
+  "טרף": {
+    "english": "mixed",
+    "level": 1
+  },
+  "טרשי": {
+    "english": "rocky",
+    "level": 2
+  },
+  "יגע": {
+    "english": "tired",
+    "level": 1
+  },
+  "יד רוחצת יד": {
+    "english": "helping each other to get something back",
+    "level": 2
+  },
+  "יוגב": {
+    "english": "a farmer",
+    "level": 4
+  },
+  "יוצא מכליו": {
+    "english": "loses his temper",
+    "level": 1
+  },
+  "יצוע": {
+    "english": "a bed",
+    "level": 4
+  },
+  "יקר המציאות": {
+    "english": "very rare",
+    "level": 2
+  },
+  "ירד מנכסיו": {
+    "english": "lost all his wealth",
+    "level": 1
+  },
+  "יש בדעתו": {
+    "english": "plans to",
+    "level": 1
+  },
+  "יש בלבו עליו": {
+    "english": "is still angry with him",
+    "level": 3
+  },
+  "ישים": {
+    "english": "possible to carry out",
+    "level": 1
+  },
+  "כרך": {
+    "english": "a big city",
+    "level": 1
+  },
+  "כברה": {
+    "english": "a fairly long distance",
+    "level": 2
+  },
+  "כיתר": {
+    "english": "surrounded on all sides",
+    "level": 1
+  },
+  "כבישה": {
+    "english": "keeping food in vinegar or salt",
+    "level": 1
+  },
+  "כבש את יצרו": {
+    "english": "held himself back",
+    "level": 2
+  },
+  "כונן": {
+    "english": "set up",
+    "level": 2
+  },
+  "כיול": {
+    "english": "adjusting a measuring tool to be accurate",
+    "level": 4
+  },
+  "כיחד": {
+    "english": "hid the truth",
+    "level": 3
+  },
+  "כילה": {
+    "english": "used up completely",
+    "level": 2
+  },
+  "כילי": {
+    "english": "someone who hates spending money",
+    "level": 4
+  },
+  "כיליון": {
+    "english": "complete destruction",
+    "level": 2
+  },
+  "כיסופים": {
+    "english": "missing someone or something very much",
+    "level": 2
+  },
+  "כיתור": {
+    "english": "surrounding on all sides",
+    "level": 1
+  },
+  "כיתת רגליו": {
+    "english": "walked a long way",
+    "level": 2
+  },
+  "כמוסה": {
+    "english": "a pill with medicine inside",
+    "level": 1
+  },
+  "כמיהה": {
+    "english": "a strong wish",
+    "level": 0
+  },
+  "כמש": {
+    "english": "dried up and shrank",
+    "level": 4
+  },
+  "כן": {
+    "english": "a supporting base",
+    "level": 4
+  },
+  "כסיה": {
+    "english": "a glove reaching the elbow",
+    "level": 4
+  },
+  "כפות": {
+    "english": "tied up tightly",
+    "level": 1
+  },
+  "כפר": {
+    "english": "denied",
+    "level": 1
+  },
+  "לא חסך שבטו": {
+    "english": "spoke very harshly about someone",
+    "level": 3
+  },
+  "לא כל שכן": {
+    "english": "even more so",
+    "level": 3
+  },
+  "לאה": {
+    "english": "very tired",
+    "level": 2
+  },
+  "לבה (אש)": {
+    "english": "made the fire stronger",
+    "level": 2
+  },
+  "להגן": {
+    "english": "someone who talks a lot",
+    "level": 3
+  },
+  "לוקה": {
+    "english": "suffers from a problem",
+    "level": 1
+  },
+  "ליבה": {
+    "english": "the center",
+    "level": 0
+  },
+  "למכביר": {
+    "english": "in large amounts",
+    "level": 2
+  },
+  "למצער": {
+    "english": "at least",
+    "level": 3
+  },
+  "למשעי": {
+    "english": "perfectly",
+    "level": 3
+  },
+  "לערך": {
+    "english": "about",
+    "level": 0
+  },
+  "לקוני": {
+    "english": "using very few words",
+    "level": 2
+  },
+  "מסבאה": {
+    "english": "a place serving alcoholic drinks",
+    "level": 2
+  },
+  "מאכלת": {
+    "english": "a knife for killing animals",
+    "level": 2
+  },
+  "מבכר": {
+    "english": "likes better",
+    "level": 2
+  },
+  "מגבעת": {
+    "english": "a man's hat with a wide edge",
+    "level": 1
+  },
+  "מגדף": {
+    "english": "says hateful insults",
+    "level": 2
+  },
+  "מגיה": {
+    "english": "checks and fixes mistakes in writing",
+    "level": 2
+  },
+  "מגנת לב": {
+    "english": "deep sadness",
+    "level": 3
+  },
+  "מדווה": {
+    "english": "pain",
+    "level": 3
+  },
+  "מהביל": {
+    "english": "giving off steam",
+    "level": 2
+  },
+  "מהוה": {
+    "english": "worn out",
+    "level": 3
+  },
+  "מהסה": {
+    "english": "makes someone be quiet",
+    "level": 2
+  },
+  "מהל": {
+    "english": "mixed one liquid into another",
+    "level": 2
+  },
+  "מהתלה": {
+    "english": "a joke",
+    "level": 2
+  },
+  "מוסר כליות": {
+    "english": "feeling guilty",
+    "level": 2
+  },
+  "מורת רוח": {
+    "english": "feeling unhappy about something",
+    "level": 1
+  },
+  "מזוכך": {
+    "english": "made pure",
+    "level": 2
+  },
+  "מזקקה": {
+    "english": "a factory making strong alcoholic drinks",
+    "level": 3
+  },
+  "מחושים": {
+    "english": "aches and pains",
+    "level": 2
+  },
+  "מחושל": {
+    "english": "made stronger by hard experiences",
+    "level": 1
+  },
+  "מחלצות": {
+    "english": "fancy clothes",
+    "level": 2
+  },
+  "מט לנפול": {
+    "english": "about to fall down",
+    "level": 2
+  },
+  "מיאן": {
+    "english": "refused",
+    "level": 2
+  },
+  "מייגע": {
+    "english": "tiring",
+    "level": 0
+  },
+  "מכורה": {
+    "english": "the country you come from",
+    "level": 3
+  },
+  "מכמורת": {
+    "english": "a fishing net",
+    "level": 3
+  },
+  "מכשור": {
+    "english": "equipment",
+    "level": 1
+  },
+  "מליץ יושר": {
+    "english": "someone who speaks in another person's favor",
+    "level": 2
+  },
+  "מן הנמנע": {
+    "english": "impossible",
+    "level": 2
+  },
+  "מנץ": {
+    "english": "grows flower buds",
+    "level": 3
+  },
+  "מסוקס": {
+    "english": "rough",
+    "level": 2
+  },
+  "מסמר שער": {
+    "english": "very frightening",
+    "level": 2
+  },
+  "מסעד": {
+    "english": "a support on a piece of furniture",
+    "level": 3
+  },
+  "מסק": {
+    "english": "picked olives",
+    "level": 2
+  },
+  "מעל": {
+    "english": "broke someone's trust",
+    "level": 2
+  },
+  "מעפיל": {
+    "english": "climbs up high",
+    "level": 1
+  },
+  "מפח נפש": {
+    "english": "disappointment",
+    "level": 2
+  },
+  "מצועצע": {
+    "english": "too heavily decorated",
+    "level": 1
+  },
+  "מצר": {
+    "english": "feels sorry",
+    "level": 2
+  },
+  "מקומם": {
+    "english": "makes people want to fight back",
+    "level": 2
+  },
+  "מקטורן": {
+    "english": "a jacket",
+    "level": 2
+  },
+  "מקים שאון": {
+    "english": "someone making a lot of noise",
+    "level": 2
+  },
+  "מקשה": {
+    "english": "a field of melons or squash",
+    "level": 3
+  },
+  "מרובב": {
+    "english": "covered in stains",
+    "level": 3
+  },
+  "מרשה": {
+    "english": "a lawyer's customer",
+    "level": 4
+  },
+  "מש (mash)": {
+    "english": "moved",
+    "level": 2
+  },
+  "משוא פנים": {
+    "english": "unfairly treating someone better than others",
+    "level": 2
+  },
+  "משובב נפש": {
+    "english": "makes you feel happy and refreshed",
+    "level": 2
+  },
+  "משח": {
+    "english": "spread on a surface",
+    "level": 2
+  },
+  "משכון": {
+    "english": "an item kept until borrowed money is paid back",
+    "level": 2
+  },
+  "משמים": {
+    "english": "boring",
+    "level": 2
+  },
+  "משעול": {
+    "english": "a path",
+    "level": 2
+  },
+  "מתבדר": {
+    "english": "has fun",
+    "level": 2
+  },
+  "מתוודע": {
+    "english": "gets to know someone",
+    "level": 1
+  },
+  "מתחסד": {
+    "english": "pretends to be a good person",
+    "level": 2
+  },
+  "מתחצף": {
+    "english": "acts rudely",
+    "level": 0
+  },
+  "מתיימר": {
+    "english": "claims skills without proving them",
+    "level": 1
+  },
+  "מתקער": {
+    "english": "curves inward",
+    "level": 3
+  },
+  "מתרס": {
+    "english": "a barrier blocking the way",
+    "level": 2
+  },
+  "נרפה": {
+    "english": "weak and lacking energy",
+    "level": 2
+  },
+  "נכר": {
+    "english": "a foreign country",
+    "level": 2
+  },
+  "נא": {
+    "english": "partly cooked",
+    "level": 1
+  },
+  "נאקה": {
+    "english": "a female camel",
+    "level": 2
+  },
+  "נביא זעם": {
+    "english": "someone warning that terrible things will happen",
+    "level": 2
+  },
+  "נבצר": {
+    "english": "unable to do something",
+    "level": 2
+  },
+  "נוגה": {
+    "english": "a bright glow",
+    "level": 1
+  },
+  "נדם": {
+    "english": "fell silent",
+    "level": 1
+  },
+  "נדן": {
+    "english": "a cover for a sword",
+    "level": 4
+  },
+  "נהיר": {
+    "english": "easy to understand",
+    "level": 0
+  },
+  "נהנתן": {
+    "english": "someone who loves pleasure",
+    "level": 1
+  },
+  "נודה": {
+    "english": "was shut out by others",
+    "level": 2
+  },
+  "נוח לכעוס": {
+    "english": "gets angry easily",
+    "level": 2
+  },
+  "נוטר": {
+    "english": "a guard",
+    "level": 2
+  },
+  "נוטר טינה": {
+    "english": "stays angry about a past wrong",
+    "level": 1
+  },
+  "נול": {
+    "english": "a machine for weaving cloth",
+    "level": 4
+  },
+  "נועץ": {
+    "english": "asks for advice",
+    "level": 2
+  },
+  "נושה": {
+    "english": "someone you owe money to",
+    "level": 1
+  },
+  "נושע": {
+    "english": "was saved",
+    "level": 1
+  },
+  "נחמה פורתא": {
+    "english": "a small comfort",
+    "level": 3
+  },
+  "נחשול": {
+    "english": "a huge wave",
+    "level": 0
+  },
+  "נחתום": {
+    "english": "a baker",
+    "level": 4
+  },
+  "נטה חסד": {
+    "english": "treated kindly",
+    "level": 2
+  },
+  "נטע": {
+    "english": "planted",
+    "level": 0
+  },
+  "ניאות": {
+    "english": "agreed",
+    "level": 2
+  },
+  "ניבים": {
+    "english": "pointed teeth",
+    "level": 1
+  },
+  "ניגף": {
+    "english": "was defeated",
+    "level": 2
+  },
+  "נידה": {
+    "english": "shut someone out of a group",
+    "level": 2
+  },
+  "ניואנס": {
+    "english": "a slight difference",
+    "level": 1
+  },
+  "ניחא": {
+    "english": "oh well",
+    "level": 2
+  },
+  "ניחם": {
+    "english": "felt sorry about what he did",
+    "level": 3
+  },
+  "ניחן": {
+    "english": "was born with a special ability",
+    "level": 2
+  },
+  "ניחר": {
+    "english": "was very dry",
+    "level": 2
+  },
+  "ניכש": {
+    "english": "pulled out weeds",
+    "level": 2
+  },
+  "נים ולא נים": {
+    "english": "half asleep",
+    "level": 3
+  },
+  "נישא": {
+    "english": "got married",
+    "level": 0
+  },
+  "ניתך": {
+    "english": "melted",
+    "level": 2
+  },
+  "נעתר": {
+    "english": "agreed to a request",
+    "level": 2
+  },
+  "נפתל": {
+    "english": "struggled",
+    "level": 2
+  },
+  "נצר את לשונו / נצר את שפתיו": {
+    "english": "kept quiet",
+    "level": 3
+  },
+  "נקלה": {
+    "english": "deserving no respect",
+    "level": 2
+  },
+  "נקפו ליבו": {
+    "english": "felt guilty",
+    "level": 3
+  },
+  "נרגן": {
+    "english": "always complaining",
+    "level": 0
+  },
+  "נשגב מבינתו": {
+    "english": "too hard for him to understand",
+    "level": 2
+  },
+  "סבא": {
+    "english": "got drunk",
+    "level": 4
+  },
+  "סגלגל": {
+    "english": "oval shaped",
+    "level": 1
+  },
+  "סורר": {
+    "english": "refusing to obey",
+    "level": 1
+  },
+  "סילף": {
+    "english": "twisted the truth",
+    "level": 1
+  },
+  "סיקל": {
+    "english": "cleared away stones",
+    "level": 2
+  },
+  "סיתת": {
+    "english": "shaped stone for building",
+    "level": 2
+  },
+  "סכך": {
+    "english": "covered with branches",
+    "level": 2
+  },
+  "סכר את פיו": {
+    "english": "kept his mouth shut",
+    "level": 3
+  },
+  "סנגר": {
+    "english": "defended someone in court",
+    "level": 1
+  },
+  "סתום": {
+    "english": "unclear",
+    "level": 1
+  },
+  "עדי": {
+    "english": "a piece of jewelry",
+    "level": 4
+  },
+  "עול ימים": {
+    "english": "young",
+    "level": 3
+  },
+  "עומד במריו": {
+    "english": "keeps refusing to give in",
+    "level": 3
+  },
+  "עומד בעינו": {
+    "english": "stays unchanged",
+    "level": 2
+  },
+  "עורר את חמתו": {
+    "english": "made him angry",
+    "level": 2
+  },
+  "עטור": {
+    "english": "decorated",
+    "level": 1
+  },
+  "עיבוי": {
+    "english": "water vapor turning into liquid",
+    "level": 2
+  },
+  "עילג": {
+    "english": "speaking with mistakes",
+    "level": 1
+  },
+  "עיר מקלט": {
+    "english": "a city offering safety",
+    "level": 1
+  },
+  "עיר רפאים": {
+    "english": "a town where nobody lives",
+    "level": 1
+  },
+  "עישב": {
+    "english": "pulled out weeds",
+    "level": 2
+  },
+  "על נקלה": {
+    "english": "easily",
+    "level": 2
+  },
+  "על פרשת דרכים": {
+    "english": "facing a difficult choice",
+    "level": 1
+  },
+  "עלווה": {
+    "english": "the leaves on a tree",
+    "level": 2
+  },
+  "עלום": {
+    "english": "unknown",
+    "level": 0
+  },
+  "עמד בניסיון": {
+    "english": "did not give in to a bad urge",
+    "level": 2
+  },
+  "עמד מנגד": {
+    "english": "stood by without helping",
+    "level": 1
+  },
+  "עמד על טיבו": {
+    "english": "figured out what it was really like",
+    "level": 2
+  },
+  "ענבל": {
+    "english": "the swinging part inside a bell",
+    "level": 2
+  },
+  "עסיס": {
+    "english": "fruit juice",
+    "level": 2
+  },
+  "פדה": {
+    "english": "paid to set someone free",
+    "level": 2
+  },
+  "פלג": {
+    "english": "a small stream",
+    "level": 0
+  },
+  "פלה": {
+    "english": "removed lice",
+    "level": 3
+  },
+  "פלצות": {
+    "english": "great fear",
+    "level": 2
+  },
+  "פקד": {
+    "english": "visited",
+    "level": 2
+  },
+  "פקו ברכיו": {
+    "english": "his knees shook with fear",
+    "level": 3
+  },
+  "פשט יד": {
+    "english": "begged for money",
+    "level": 2
+  },
+  "צדודית": {
+    "english": "a side view of a face",
+    "level": 2
+  },
+  "צוהר": {
+    "english": "a small window",
+    "level": 2
+  },
+  "ציר": {
+    "english": "a rod a wheel turns around",
+    "level": 2
+  },
+  "צלח": {
+    "english": "crossed through water",
+    "level": 2
+  },
+  "קבל": {
+    "english": "complained",
+    "level": 2
+  },
+  "קדר": {
+    "english": "someone who makes clay pots",
+    "level": 2
+  },
+  "קובלנה": {
+    "english": "a complaint",
+    "level": 2
+  },
+  "קורטוב": {
+    "english": "a tiny amount",
+    "level": 2
+  },
+  "קורת רוח": {
+    "english": "a feeling of pleasure",
+    "level": 2
+  },
+  "קטם": {
+    "english": "cut off the tip",
+    "level": 2
+  },
+  "קטרג": {
+    "english": "spoke against someone",
+    "level": 2
+  },
+  "קל דעת": {
+    "english": "acting without thinking",
+    "level": 1
+  },
+  "קל תפיסה": {
+    "english": "quick to understand",
+    "level": 2
+  },
+  "קמל": {
+    "english": "dried up and faded",
+    "level": 1
+  },
+  "קנטור": {
+    "english": "teasing to make someone angry",
+    "level": 2
+  },
+  "קסת": {
+    "english": "a small pot for ink",
+    "level": 4
+  },
+  "קפא על שמריו": {
+    "english": "stopped changing or improving",
+    "level": 3
+  },
+  "קפץ את ידו": {
+    "english": "gave very little",
+    "level": 3
+  },
+  "קץ": {
+    "english": "became sick of",
+    "level": 2
+  },
+  "קצף (פעולה)": {
+    "english": "was angry",
+    "level": 3
+  },
+  "קצר רוח": {
+    "english": "impatient",
+    "level": 0
+  },
+  "קרקע בתולה": {
+    "english": "land never used for growing crops",
+    "level": 2
+  },
+  "קשה לב": {
+    "english": "cruel",
+    "level": 1
+  },
+  "קשה עורף": {
+    "english": "stubborn",
+    "level": 0
+  },
+  "קשר כתרים": {
+    "english": "praised highly",
+    "level": 3
+  },
+  "קתדרה": {
+    "english": "a small platform for a speaker",
+    "level": 4
+  },
+  "רב-לשוני": {
+    "english": "speaking several languages",
+    "level": 1
+  },
+  "רב-פעלים": {
+    "english": "having done many great things",
+    "level": 2
+  },
+  "רדה": {
+    "english": "took honey from a beehive",
+    "level": 2
+  },
+  "רדיד": {
+    "english": "a shawl",
+    "level": 4
+  },
+  "רהוט": {
+    "english": "speaking clearly and smoothly",
+    "level": 0
+  },
+  "רוויה": {
+    "english": "having as much as you can hold",
+    "level": 2
+  },
+  "רושף": {
+    "english": "giving off sparks",
+    "level": 2
+  },
+  "ריפה את ידיו": {
+    "english": "made him lose hope",
+    "level": 2
+  },
+  "רפו ידיו": {
+    "english": "lost hope",
+    "level": 2
+  },
+  "רקח (תכניות)": {
+    "english": "made plans",
+    "level": 2
+  },
+  "רקח (תרופות)": {
+    "english": "prepared medicines",
+    "level": 2
+  },
+  "רקיק": {
+    "english": "a thin flat cake",
+    "level": 4
+  },
+  "שטם": {
+    "english": "hated",
+    "level": 3
+  },
+  "שם נפשו בכפו": {
+    "english": "risked his life",
+    "level": 3
+  },
+  "שאון": {
+    "english": "a loud noise",
+    "level": 2
+  },
+  "שאט נפש": {
+    "english": "a feeling of disgust",
+    "level": 3
+  },
+  "שאר בשר": {
+    "english": "a family member",
+    "level": 3
+  },
+  "שביס": {
+    "english": "a head covering",
+    "level": 3
+  },
+  "שבק חיים": {
+    "english": "died",
+    "level": 2
+  },
+  "שומה עליו": {
+    "english": "he is required to",
+    "level": 3
+  },
+  "שזר": {
+    "english": "wove together",
+    "level": 1
+  },
+  "שיח ושיג": {
+    "english": "a discussion",
+    "level": 3
+  },
+  "שיסה": {
+    "english": "sent someone to attack",
+    "level": 2
+  },
+  "שכך": {
+    "english": "became weaker or calmer",
+    "level": 2
+  },
+  "שלט ברוחו": {
+    "english": "kept himself calm",
+    "level": 2
+  },
+  "שמאי": {
+    "english": "someone who works out what things are worth",
+    "level": 2
+  },
+  "שפלות רוח": {
+    "english": "not thinking you are better than others",
+    "level": 3
+  },
+  "שצף": {
+    "english": "flowed strongly",
+    "level": 4
+  },
+  "שרלטן": {
+    "english": "someone pretending to be an expert",
+    "level": 2
+  },
+  "שרר": {
+    "english": "was present",
+    "level": 4
+  },
+  "תגרן": {
+    "english": "a small trader",
+    "level": 4
+  },
+  "תוכחה": {
+    "english": "words pointing out someone's bad behavior",
+    "level": 2
+  },
+  "תיעב": {
+    "english": "hated deeply",
+    "level": 1
+  },
+  "תלם": {
+    "english": "a long narrow line cut into soil",
+    "level": 2
+  },
+  "תמה": {
+    "english": "was surprised",
+    "level": 0
+  },
+  "תעה": {
+    "english": "lost his way",
+    "level": 2
+  },
+  "תר": {
+    "english": "searched",
+    "level": 2
+  },
+  "תתרן": {
+    "english": "someone who cannot smell",
+    "level": 4
+  }
+}
