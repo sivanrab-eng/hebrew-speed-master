@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { Confetti } from "./Confetti";
 import { Button } from "@/components/ui/button";
 import { advanceRainProgress, initialRainProgress, rainTiming } from "@/lib/word-rain-speed";
+import { completeDifficulty, DIFFICULTY_STORAGE_KEY, difficultyPool, initialDifficulty, normalizeDifficulty } from "@/lib/wordfall-difficulty";
 
 const ROUNDS = 10;
 const LANES = 3;
@@ -26,6 +27,11 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
   const scoreRef = useRef(0);
   const lockedRef = useRef(false);
   const progressRef = useRef(initialRainProgress());
+  const difficultyRef = useRef(initialDifficulty());
+  const gameWordsRef = useRef<Word[]>([]);
+  const poolRef = useRef(VOCAB);
+  const [level, setLevel] = useState(0);
+  const [levelUnlocked, setLevelUnlocked] = useState(false);
   const [roundSpeed, setRoundSpeed] = useState(1);
   const [speedFlash, setSpeedFlash] = useState(0);
   const speedTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -46,12 +52,20 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
   const nextRound = (r: number) => {
     setRound(r);
     lockedRef.current = false;
-    if (r >= ROUNDS) { setDone(true); play("end"); completeCallback.current?.(scoreRef.current); return; }
+    if (r >= ROUNDS) {
+      if (standalone) {
+        const next = completeDifficulty(difficultyRef.current, scoreRef.current);
+        setLevelUnlocked(next.level > difficultyRef.current.level);
+        difficultyRef.current = next;
+        try { localStorage.setItem(DIFFICULTY_STORAGE_KEY, JSON.stringify(next)); } catch { /* optional device storage */ }
+      }
+      setDone(true); play("end"); completeCallback.current?.(scoreRef.current); return;
+    }
     const speed = progressRef.current.speed;
     setRoundSpeed(speed);
-    const word = VOCAB[Math.floor(Math.random() * VOCAB.length)];
+    const word = gameWordsRef.current[r];
     if (!word) return;
-    const others = shuffle(VOCAB.filter((w) => w !== word)).slice(0, LANES - 1);
+    const others = shuffle(poolRef.current.filter((w) => w !== word)).slice(0, LANES - 1);
     const lanes = shuffle([word, ...others]);
     setTarget(word);
     setHits(new Set()); setMisses(new Set());
@@ -64,7 +78,21 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
     }, rainTiming(speed).roundMs);
   };
 
-  useEffect(() => { startCallback.current?.(); nextRound(0); return () => { if (timerRef.current) clearTimeout(timerRef.current); if (speedTimerRef.current) clearTimeout(speedTimerRef.current); }; }, []);
+  const startGame = () => {
+    poolRef.current = standalone ? difficultyPool(difficultyRef.current) : VOCAB;
+    gameWordsRef.current = shuffle(poolRef.current).slice(0, ROUNDS);
+    setLevel(difficultyRef.current.level);
+    setLevelUnlocked(false);
+    startCallback.current?.(); nextRound(0);
+  };
+
+  useEffect(() => {
+    if (standalone) {
+      try { difficultyRef.current = normalizeDifficulty(JSON.parse(localStorage.getItem(DIFFICULTY_STORAGE_KEY) ?? "null")); } catch { difficultyRef.current = initialDifficulty(); }
+    }
+    startGame();
+    return () => { if (timerRef.current) clearTimeout(timerRef.current); if (speedTimerRef.current) clearTimeout(speedTimerRef.current); };
+  }, []);
 
   const pick = (d: Drop) => {
     if (!target || lockedRef.current || done) return;
@@ -87,14 +115,14 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
     }
   };
 
-  const restart = () => { progressRef.current = initialRainProgress(); scoreRef.current = 0; setScore(0); setRound(0); setDone(false); if (speedTimerRef.current) clearTimeout(speedTimerRef.current); setSpeedFlash(0); startCallback.current?.(); nextRound(0); };
+  const restart = () => { progressRef.current = initialRainProgress(); scoreRef.current = 0; setScore(0); setRound(0); setDone(false); if (speedTimerRef.current) clearTimeout(speedTimerRef.current); setSpeedFlash(0); startGame(); };
 
   return (
     <section className={cn("flex flex-col gap-4", standalone && "wordfall-game")}>
       {done && <Confetti pieces={120} />}
       <div className="flex items-center justify-between">
         <Button variant="ghost" onClick={onExit} className="text-muted-foreground"><ArrowRight className="h-4 w-4" /> חזרה</Button>
-        <p className="text-sm font-semibold text-muted-foreground">סיבוב {Math.min(round + 1, ROUNDS)}/{ROUNDS} · תפסת {score}</p>
+        <p className="text-sm font-semibold text-muted-foreground">{standalone && `שלב ${level + 1} · `}סיבוב {Math.min(round + 1, ROUNDS)}/{ROUNDS} · תפסת {score}</p>
       </div>
 
       {!done && target ? (
@@ -133,6 +161,7 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
           {standalone ? <CloudRain className="mx-auto h-16 w-16 text-secondary" /> : <p className="text-6xl">🌧️✨</p>}
           <h2 className="mt-2 font-display text-3xl font-black">כל הכבוד!</h2>
           <p className="mt-1 text-muted-foreground">תפסת {score} מתוך {ROUNDS} מילים</p>
+          {standalone && levelUnlocked && <p role="status" className="mt-3 font-display text-lg text-secondary">שלב {difficultyRef.current.level + 1} נפתח!</p>}
           <div className="mt-3 flex justify-center gap-1">
             {Array.from({ length: ROUNDS }, (_, i) => (
               <Heart key={i} className={cn("h-6 w-6", i < score ? "fill-primary text-primary" : "text-border")} />
