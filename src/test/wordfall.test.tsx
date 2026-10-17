@@ -16,7 +16,7 @@ const fallingWords = () => screen.getAllByRole("button").filter(button => button
 afterEach(() => { vi.useRealTimers(); localStorage.removeItem(DIFFICULTY_STORAGE_KEY); });
 
 describe("Wordfall", () => {
-  it("unlocks and saves the next tier after one full game with exactly eight catches", () => {
+  it("unlocks the next tier after eight catches for the next game, but starts a fresh visit at level one", () => {
     vi.useFakeTimers();
     const complete = vi.fn();
     const view = render(<WordRain standalone muted onExit={() => {}} onGameComplete={complete} />);
@@ -29,11 +29,21 @@ describe("Wordfall", () => {
       } else act(() => vi.advanceTimersByTime(ROUND_MS + 100));
     }
     expect(complete).toHaveBeenCalledExactlyOnceWith(8);
-    expect(JSON.parse(localStorage.getItem(DIFFICULTY_STORAGE_KEY) ?? "null")).toEqual({ level: 1, wins: 0 });
+    expect(screen.queryByRole("status")?.textContent).toBe("שלב 2 נפתח!");
+    fireEvent.click(screen.getByRole("button", { name: /עוד פעם/ }));
+    expect(screen.queryByText(/שלב 2 · סיבוב 1\/10/)).not.toBeNull();
     view.unmount();
     const restored = render(<WordRain standalone muted onExit={() => {}} />);
-    expect(screen.queryByText(/שלב 2 · סיבוב 1\/10/)).not.toBeNull();
+    expect(screen.queryByText(/שלב 1 · סיבוב 1\/10/)).not.toBeNull();
     restored.unmount();
+  });
+  it("starts at level one even when an earlier visit saved level five", () => {
+    vi.useFakeTimers();
+    localStorage.setItem(DIFFICULTY_STORAGE_KEY, JSON.stringify({ level: 4, wins: 0 }));
+    const view = render(<WordRain standalone muted onExit={() => {}} />);
+    expect(screen.queryByText(/שלב 1 · סיבוב 1\/10/)).not.toBeNull();
+    expect(screen.queryByText(/שלב 5 ·/)).toBeNull();
+    view.unmount();
   });
   it("finishes after ten rounds, including missed drops", () => {
     vi.useFakeTimers();
