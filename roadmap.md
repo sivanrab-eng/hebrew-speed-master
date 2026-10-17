@@ -1,5 +1,8 @@
 # Roadmap
 
+## Wordfall rich Hebrew, simple English
+- [ ] Restore only rich source Hebrew in graded tiers, simplify every English meaning to everyday words or short phrases; test and update separate Wordfall site without changing other games.
+
 ## Wordfall easy start
 - [x] Add 110 everyday words across three starter tiers and success-based difficulty between games (two games with 8+ catches unlock one tier), preserving other games. Fourteen tests pass; two complete games, unlock, saved progress and mobile fit verified locally and live at the separate Wordfall site; GitHub deployment succeeded.
 
