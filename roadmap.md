@@ -1,5 +1,8 @@
 # Roadmap
 
+## Wordfall gentle trial
+- [x] Level 1: seven everyday targets, three rich targets, no harder-tier mixing; repeat targets across three games, introduce new rich pairs before falling, and offer optional tier advancement after eight catches. All 33 tests pass; two complete browser games confirmed 7/3 mix, three first-time introductions, identical replay targets with no repeat introductions, staying at level 1 on replay, and level 2 only on choice. Build OK, no browser errors; preview only, not uploaded.
+
 ## Wordfall fresh start
 - [x] Start every fresh standalone opening at level 1, ignoring previously saved device progress; preserve advancement between completed games during the current visit. All 26 targeted tests pass; full browser game with 8/10 unlocked level 2, next game used level 2, and refresh returned to level 1 even with old level-5 storage. Build OK, no browser errors. Not uploaded to the separate Wordfall repository.
 
