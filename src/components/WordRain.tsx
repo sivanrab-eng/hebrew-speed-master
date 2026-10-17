@@ -139,14 +139,16 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
             <p className="text-sm font-semibold text-muted-foreground">{standalone ? "לתפוס את" : "תפסי את המילה בעברית שמתאימה ל־"}</p>
             <p dir="ltr" className="mt-1 font-display text-3xl font-black text-primary">{target.english}</p>
           </div>
-          {/* reserved strip so the speed-up banner never covers a falling word */}
-          <div className="relative flex h-12 items-center justify-center">
-            {speedFlash > 0 && (
-              <span key={speedFlash} aria-live="polite" className="animate-speed-up pointer-events-none inline-flex items-center gap-2 rounded-full border-2 border-accent-foreground bg-card px-4 py-1.5 font-display text-lg font-black text-accent-foreground shadow-[var(--shadow-pop)]">
-                <Zap className="h-5 w-5 fill-accent-foreground" /> מגבירים קצב!
-              </span>
-            )}
-          </div>
+          {/* arcade only: the reserved strip keeps the banner off the falling words */}
+          {!standalone && (
+            <div className="relative flex h-12 items-center justify-center">
+              {speedFlash > 0 && (
+                <span key={speedFlash} aria-live="polite" className="animate-speed-up pointer-events-none inline-flex items-center gap-2 rounded-full border-2 border-accent-foreground bg-card px-4 py-1.5 font-display text-lg font-black text-accent-foreground shadow-[var(--shadow-pop)]">
+                  <Zap className="h-5 w-5 fill-accent-foreground" /> מגבירים קצב!
+                </span>
+              )}
+            </div>
+          )}
           <div className="relative h-80 overflow-hidden rounded-3xl border border-border bg-muted/50">
             {drops.map((d, i) => (
               <Button
