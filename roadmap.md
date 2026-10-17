@@ -1,5 +1,9 @@
 # Roadmap
 
+## Wordfall confidence mix
+- [ ] Include exactly three everyday Hebrew targets in every ten-round standalone game at all five tiers; preserve seven rich words and simple English, leaving other games unchanged.
+- [ ] Verify a complete game with exactly eight catches unlocks the next tier after one game and survives refresh; do not upload to the separate Wordfall repository.
+
 ## Wordfall rich Hebrew, simple English
 - [x] Restore all 387 rich source Hebrew labels across five graded tiers, simplifying every English meaning to everyday words or short phrases; other games retain original vocabulary. Fifteen tests pass, local build OK, separate Wordfall deployment succeeded; two full games, tier unlock, persistence and mobile verified live without browser errors.
 

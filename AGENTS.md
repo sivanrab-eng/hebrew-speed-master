@@ -15,5 +15,5 @@
 - Keep word-rain progression and timing in a pure shared helper and apply speed changes at round boundaries so timers and falling animations stay synchronized.
 - Keep source vocabulary in a shared data module consumed by every game; merge duplicate visible Hebrew labels and render only available details so questions stay unambiguous without fabricated enrichment.
 - Export the separate Wordfall repository from the falling-word game's dependency subset with its own root route and hosting base path, excluding other games and backend clients so the original arcade remains independent.
-- Isolate standalone vocabulary tiers and success progression in a pure Wordfall helper; load device progress after hydration and save only completed games so the arcade vocabulary and mid-game difficulty remain unchanged.
+- Isolate standalone vocabulary tiers, confidence-word mixing and success progression in a pure Wordfall helper; load device progress after hydration and save only completed games so the arcade vocabulary and mid-game difficulty remain unchanged.
 - Store standalone English meanings and Hebrew difficulty tags as a complete overlay keyed by source labels, preserving source vocabulary in other games; exclude distractors sharing a target meaning to keep matching unambiguous.
