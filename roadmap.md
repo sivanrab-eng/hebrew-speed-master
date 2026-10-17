@@ -1,5 +1,8 @@
 # Roadmap
 
+## Separate Wordfall repository
+- [ ] Upload only the standalone falling-word game to sivanrab-eng/Wordfall, retaining the original application; verify the new GitHub Pages deployment.
+
 ## Vocabulary replacement
 - [x] Replace the shared vocabulary in all games with all 388 source records, without nikud; merge the repeated label נבצר into one of 387 unique answers while preserving both meanings.
 - [x] Adapt details and hints to source definitions without inventing enrichment; nine tests pass and cards, memory, speed challenge, and a full Wordfall game verified in the browser. Multiplayer shares the same vocabulary; a live multiplayer session was not tested.

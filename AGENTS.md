@@ -14,3 +14,4 @@
 - Wordfall analytics are browser-only, optional when no measurement ID is configured, and contain aggregate gameplay events without player identifiers.
 - Keep word-rain progression and timing in a pure shared helper and apply speed changes at round boundaries so timers and falling animations stay synchronized.
 - Keep source vocabulary in a shared data module consumed by every game; merge duplicate visible Hebrew labels and render only available details so questions stay unambiguous without fabricated enrichment.
+- Export the separate Wordfall repository from the falling-word game's dependency subset with its own root route and hosting base path, excluding other games and backend clients so the original arcade remains independent.
