@@ -39,9 +39,25 @@ export const sentenceParts = (w: Word) => {
   return m ? { before: m[1] ?? "", word: m[2] ?? "", after: m[3] ?? "" } : { before: w.exampleSentenceHebrew, word: "", after: "" };
 };
 
+let speechGeneration = 0;
+let fallbackTimer: ReturnType<typeof setTimeout> | undefined;
+let transitionTimer: ReturnType<typeof setTimeout> | undefined;
+
+// Invalidate callbacks before cancel(), which may itself emit an error event.
+export function cancelSpeech() {
+  speechGeneration += 1;
+  clearTimeout(fallbackTimer);
+  clearTimeout(transitionTimer);
+  fallbackTimer = undefined;
+  transitionTimer = undefined;
+  if (typeof window !== "undefined" && "speechSynthesis" in window) {
+    window.speechSynthesis.cancel();
+  }
+}
+
 export function speak(text: string) {
   if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
-  window.speechSynthesis.cancel();
+  cancelSpeech();
   const u = new SpeechSynthesisUtterance(text);
   u.lang = "he-IL";
   u.rate = 0.85;
@@ -54,7 +70,8 @@ export function speak(text: string) {
 // used on the Wordfall "new word" introduction card.
 export function speakPair(hebrew: string, english: string) {
   if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
-  window.speechSynthesis.cancel();
+  cancelSpeech();
+  const generation = speechGeneration;
   const h = new SpeechSynthesisUtterance(hebrew);
   h.lang = "he-IL";
   h.rate = 0.85;
@@ -65,7 +82,32 @@ export function speakPair(hebrew: string, english: string) {
   e.rate = 0.9;
   const ev = window.speechSynthesis.getVoices().find((x) => x.lang.startsWith("en"));
   if (ev) e.voice = ev;
-  // Utterances are queued, so the English meaning follows the Hebrew word.
+  let transitioned = false;
+  const playEnglish = (fallback = false) => {
+    if (generation !== speechGeneration) return;
+    h.onend = null;
+    h.onerror = null;
+    // A stuck Hebrew utterance must not keep English trapped in its queue.
+    if (fallback) window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(e);
+  };
+  const afterHebrew = () => {
+    if (generation !== speechGeneration || transitioned) return;
+    transitioned = true;
+    clearTimeout(fallbackTimer);
+    fallbackTimer = undefined;
+    transitionTimer = setTimeout(() => {
+      transitionTimer = undefined;
+      playEnglish();
+    }, 150);
+  };
+  h.onend = afterHebrew;
+  h.onerror = afterHebrew;
+  fallbackTimer = setTimeout(() => {
+    fallbackTimer = undefined;
+    if (generation !== speechGeneration || transitioned) return;
+    transitioned = true;
+    playEnglish(true);
+  }, 2000);
   window.speechSynthesis.speak(h);
-  window.speechSynthesis.speak(e);
 }
