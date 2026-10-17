@@ -45,10 +45,10 @@ export function difficultyPool(progress: DifficultyProgress): Word[] {
 }
 
 // Harder words borrowed from later tiers per game, growing by tier (2 → 3 → 4 → 6; last tier is all hard).
-export const HARD_MIX = [2, 3, 4, 6, 0] as const;
+export const HARD_MIX = [0, 3, 4, 6, 0] as const;
 
 export function mixedGameWords(progress: DifficultyProgress, rounds: number, shuffle: <T>(items: T[]) => T[]): Word[] {
-  const easy = shuffle([...EVERYDAY_WORDS]).slice(0, Math.min(3, rounds));
+  const easy = shuffle([...EVERYDAY_WORDS]).slice(0, Math.min(progress.level === 0 ? 7 : 3, rounds));
   const richRounds = rounds - easy.length;
   const easyLabels = new Set(EVERYDAY_WORDS.map(word => word.hebrew));
   const hardCount = Math.min(HARD_MIX[progress.level] ?? 0, richRounds);
@@ -57,3 +57,14 @@ export function mixedGameWords(progress: DifficultyProgress, rounds: number, shu
   const base = shuffle(difficultyPool(progress).filter(word => !easyLabels.has(word.hebrew))).slice(0, richRounds - hard.length);
   return [...easy, ...base, ...hard];
 }
+
+export function repeatedGameWords(progress: DifficultyProgress, previous: Word[], completedGames: number, rounds: number, shuffle: <T>(items: T[]) => T[]): Word[] {
+  return previous.length === rounds && completedGames % 3 !== 0
+    ? [...previous]
+    : mixedGameWords(progress, rounds, shuffle);
+}
+
+export const needsIntroduction = (word: Word, introduced: Set<string>) =>
+  !EVERYDAY_WORDS.some(easy => easy.hebrew === word.hebrew) && !introduced.has(word.hebrew);
+
+export const INTRODUCTION_MS = 2500;

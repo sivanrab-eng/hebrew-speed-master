@@ -17,3 +17,4 @@
 - Export the separate Wordfall repository from the falling-word game's dependency subset with its own root route and hosting base path, excluding other games and backend clients so the original arcade remains independent.
 - Isolate standalone vocabulary tiers, confidence-word mixing and success progression in a pure Wordfall helper; keep progress in the mounted game rather than device storage so fresh visits start from the initial tier without changing arcade vocabulary or mid-game difficulty.
 - Store standalone English meanings and Hebrew difficulty tags as a complete overlay keyed by source labels, preserving source vocabulary in other games; exclude distractors sharing a target meaning to keep matching unambiguous.
+- Keep standalone repetition batches and introduced-word history in the mounted game; gate falling timers behind introductions and apply eligible tier advancement only on explicit choice so confidence support never alters arcade play.

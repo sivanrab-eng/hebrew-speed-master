@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { Confetti } from "./Confetti";
 import { Button } from "@/components/ui/button";
 import { advanceRainProgress, ARCADE_PACE, ARCADE_RULES, initialRainProgress, rainTiming, STANDALONE_PACE, STANDALONE_RULES } from "@/lib/word-rain-speed";
-import { completeDifficulty, difficultyPool, initialDifficulty, mixedGameWords } from "@/lib/wordfall-difficulty";
+import { completeDifficulty, initialDifficulty, repeatedGameWords, needsIntroduction, INTRODUCTION_MS } from "@/lib/wordfall-difficulty";
 
 const ROUNDS = 10;
 const LANES = 3;
@@ -29,6 +29,10 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
   const progressRef = useRef(initialRainProgress());
   const difficultyRef = useRef(initialDifficulty());
   const gameWordsRef = useRef<Word[]>([]);
+  const batchRef = useRef<Word[]>([]);
+  const completedGamesRef = useRef(0);
+  const introducedRef = useRef(new Set<string>());
+  const [introducing, setIntroducing] = useState(false);
   const poolRef = useRef(VOCAB);
   const [level, setLevel] = useState(0);
   const [levelUnlocked, setLevelUnlocked] = useState(false);
@@ -59,7 +63,7 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
       if (standalone) {
         const next = completeDifficulty(difficultyRef.current, scoreRef.current);
         setLevelUnlocked(next.level > difficultyRef.current.level);
-        difficultyRef.current = next;
+        completedGamesRef.current += 1;
       }
       setDone(true); play("end"); completeCallback.current?.(scoreRef.current); return;
     }
