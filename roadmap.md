@@ -1,5 +1,8 @@
 # Roadmap
 
+## Wordfall fresh start
+- [ ] Start every fresh standalone opening at level 1, ignoring previously saved device progress; preserve advancement between completed games during the current visit. Test and verify a complete game locally; do not upload without a request.
+
 ## Publish approved Wordfall update
 - [x] Uploaded the approved confidence mix, one-game tier unlock, and slower fixed pace to the separate Wordfall repository (commit 6a8f21c); deployment succeeded. Complete live game verified: exactly three everyday words, 8/10 catches unlock tier 2 with refresh persistence, fixed 7s falls, no speed banner or runtime errors. ניאונית unchanged.
 

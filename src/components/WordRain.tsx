@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { Confetti } from "./Confetti";
 import { Button } from "@/components/ui/button";
 import { advanceRainProgress, ARCADE_PACE, ARCADE_RULES, initialRainProgress, rainTiming, STANDALONE_PACE, STANDALONE_RULES } from "@/lib/word-rain-speed";
-import { completeDifficulty, DIFFICULTY_STORAGE_KEY, difficultyPool, initialDifficulty, mixedGameWords, normalizeDifficulty } from "@/lib/wordfall-difficulty";
+import { completeDifficulty, difficultyPool, initialDifficulty, mixedGameWords } from "@/lib/wordfall-difficulty";
 
 const ROUNDS = 10;
 const LANES = 3;
@@ -60,7 +60,6 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
         const next = completeDifficulty(difficultyRef.current, scoreRef.current);
         setLevelUnlocked(next.level > difficultyRef.current.level);
         difficultyRef.current = next;
-        try { localStorage.setItem(DIFFICULTY_STORAGE_KEY, JSON.stringify(next)); } catch { /* optional device storage */ }
       }
       setDone(true); play("end"); completeCallback.current?.(scoreRef.current); return;
     }
@@ -95,9 +94,7 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
   };
 
   useEffect(() => {
-    if (standalone) {
-      try { difficultyRef.current = normalizeDifficulty(JSON.parse(localStorage.getItem(DIFFICULTY_STORAGE_KEY) ?? "null")); } catch { difficultyRef.current = initialDifficulty(); }
-    }
+    difficultyRef.current = initialDifficulty();
     startGame();
     return () => { if (timerRef.current) clearTimeout(timerRef.current); if (speedTimerRef.current) clearTimeout(speedTimerRef.current); };
   }, []);
