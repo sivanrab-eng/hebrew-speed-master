@@ -67,4 +67,4 @@ export function repeatedGameWords(progress: DifficultyProgress, previous: Word[]
 export const needsIntroduction = (word: Word, introduced: Set<string>) =>
   !EVERYDAY_WORDS.some(easy => easy.hebrew === word.hebrew) && !introduced.has(word.hebrew);
 
-export const INTRODUCTION_MS = 2500;
+export const INTRODUCTION_MS = 6000;

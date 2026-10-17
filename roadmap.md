@@ -1,5 +1,8 @@
 # Roadmap
 
+## Wordfall calm reading
+- [x] Hold the new-word card (Hebrew word with its simple English meaning) on screen for six seconds before the words start falling, with nothing falling during the pause; 31 tests pass and the live preview measured 6.0s twice. Preview only, not uploaded.
+
 ## Wordfall gentle trial
 - [x] Level 1: seven everyday targets, three rich targets, no harder-tier mixing; repeat targets across three games, introduce new rich pairs before falling, and offer optional tier advancement after eight catches. All 33 tests pass; two complete browser games confirmed 7/3 mix, three first-time introductions, identical replay targets with no repeat introductions, staying at level 1 on replay, and level 2 only on choice. Build OK, no browser errors; preview only, not uploaded.
 
