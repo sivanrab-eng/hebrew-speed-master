@@ -1,8 +1,8 @@
 # Roadmap
 
 ## Vocabulary replacement
-- [ ] Replace the shared vocabulary in all games with the extracted Hebrew–English list, without nikud; preserve source definitions and handle repeated labels.
-- [ ] Adapt details and hints to available source fields; verify tests and real gameplay.
+- [x] Replace the shared vocabulary in all games with all 388 source records, without nikud; merge the repeated label נבצר into one of 387 unique answers while preserving both meanings.
+- [x] Adapt details and hints to source definitions without inventing enrichment; nine tests pass and cards, memory, speed challenge, and a full Wordfall game verified in the browser. Multiplayer shares the same vocabulary; a live multiplayer session was not tested.
 
 ## Wordfall
 - [x] Gradual word-rain speed: +10% per three consecutive catches; streak reset only; retain ten rounds; tests and full browser game verified.
