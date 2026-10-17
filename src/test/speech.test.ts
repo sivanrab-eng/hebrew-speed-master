@@ -1,0 +1,86 @@
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { cancelSpeech, speak, speakPair } from "@/lib/vocab";
+
+class MockUtterance {
+  lang = "";
+  rate = 1;
+  onend: (() => void) | null = null;
+  onerror: (() => void) | null = null;
+  constructor(public text: string) {}
+}
+
+describe("Wordfall speech sequencing", () => {
+  const engine = { speak: vi.fn(), cancel: vi.fn(), getVoices: () => [] };
+  const hebrewUtterance = () => engine.speak.mock.calls[0]?.[0] as MockUtterance;
+
+  beforeEach(() => {
+    vi.useFakeTimers();
+    vi.stubGlobal("SpeechSynthesisUtterance", MockUtterance);
+    vi.stubGlobal("speechSynthesis", engine);
+    cancelSpeech();
+    vi.clearAllMocks();
+  });
+
+  afterEach(() => {
+    cancelSpeech();
+    vi.useRealTimers();
+    vi.unstubAllGlobals();
+  });
+
+  it.each(["onend", "onerror"] as const)("starts English exactly 150ms after Hebrew %s", (event) => {
+    speakPair("בית", "house");
+    expect(engine.speak).toHaveBeenCalledTimes(1);
+    expect(hebrewUtterance()).toMatchObject({ text: "בית", lang: "he-IL", rate: 0.85 });
+    hebrewUtterance()[event]?.();
+    vi.advanceTimersByTime(149);
+    expect(engine.speak).toHaveBeenCalledTimes(1);
+    vi.advanceTimersByTime(1);
+    expect(engine.speak.mock.calls[1]?.[0]).toMatchObject({ text: "house", lang: "en-US", rate: 0.9 });
+    vi.advanceTimersByTime(3000);
+    expect(engine.speak).toHaveBeenCalledTimes(2);
+  });
+
+  it("starts English at the two-second fallback and ignores late Hebrew events", () => {
+    speakPair("בית", "house");
+    const lateEnd = hebrewUtterance().onend;
+    vi.advanceTimersByTime(1999);
+    expect(engine.speak).toHaveBeenCalledTimes(1);
+    vi.advanceTimersByTime(1);
+    expect(engine.cancel).toHaveBeenCalledTimes(2);
+    expect(engine.speak.mock.calls[1]?.[0].text).toBe("house");
+    lateEnd?.();
+    vi.advanceTimersByTime(3000);
+    expect(engine.speak).toHaveBeenCalledTimes(2);
+  });
+
+  it.each([false, true])("repeat clears stale timers (transition pending: %s)", (pendingTransition) => {
+    speakPair("בית", "house");
+    const staleEnd = hebrewUtterance().onend;
+    if (pendingTransition) staleEnd?.();
+    speakPair("כלב", "dog");
+    staleEnd?.();
+    vi.advanceTimersByTime(2000);
+    expect(engine.speak.mock.calls.map(([utterance]) => utterance.text)).toEqual(["בית", "כלב", "dog"]);
+    expect(vi.getTimerCount()).toBe(0);
+  });
+
+  it.each([false, true])("explicit cancellation clears all timers (transition pending: %s)", (pendingTransition) => {
+    speakPair("בית", "house");
+    const staleError = hebrewUtterance().onerror;
+    if (pendingTransition) hebrewUtterance().onend?.();
+    cancelSpeech();
+    staleError?.();
+    expect(vi.getTimerCount()).toBe(0);
+    vi.advanceTimersByTime(3000);
+    expect(engine.speak).toHaveBeenCalledTimes(1);
+  });
+
+  it("a single Hebrew reading cancels a pending pair", () => {
+    speakPair("בית", "house");
+    hebrewUtterance().onend?.();
+    speak("כלב");
+    vi.advanceTimersByTime(3000);
+    expect(engine.speak.mock.calls.map(([utterance]) => utterance.text)).toEqual(["בית", "כלב"]);
+    expect(vi.getTimerCount()).toBe(0);
+  });
+});

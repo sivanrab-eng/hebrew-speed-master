@@ -1,5 +1,8 @@
 # Roadmap
 
+## Wordfall speech timing
+- [x] Sequence English 150ms after Hebrew end/error, with a two-second fallback and cancellation of stale timers. All 43 tests pass; browser instrumentation confirmed automatic sequencing, no stale English on repeat, and resumed falling after the introduction. Headless speech was checked through engine calls, not audible playback. Build OK; preview only, not uploaded.
+
 ## Wordfall calm reading
 - [x] Hold the new-word card (Hebrew word with its simple English meaning) on screen for six seconds before the words start falling, with nothing falling during the pause; 31 tests pass and the live preview measured 6.0s twice. Preview only, not uploaded.
 
