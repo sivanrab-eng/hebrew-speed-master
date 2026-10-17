@@ -1,0 +1,1942 @@
+[
+  {
+    "hebrew": "אגד",
+    "english": "adhesive bandage; sticking plaster",
+    "definition": "פלסטר המשמש לחבישה"
+  },
+  {
+    "hebrew": "אדווה",
+    "english": "ripple",
+    "definition": "גל קטן"
+  },
+  {
+    "hebrew": "אוושה",
+    "english": "rustle; soft murmuring sound",
+    "definition": "רעש קל ,רשרוש"
+  },
+  {
+    "hebrew": "אוזן ערלה",
+    "english": "an unresponsive ear; unwillingness to listen",
+    "definition": "אטימות"
+  },
+  {
+    "hebrew": "איחה",
+    "english": "joined; stitched together; mended",
+    "definition": "חיבר (קרעים או חתיכות) זה לזה"
+  },
+  {
+    "hebrew": "אלומה",
+    "english": "sheaf of grain",
+    "definition": "אגודת שיבולים"
+  },
+  {
+    "hebrew": "אמודאי",
+    "english": "diver; underwater worker",
+    "definition": "צוללן"
+  },
+  {
+    "hebrew": "אמיר",
+    "english": "treetop; crown of a tree",
+    "definition": "צמרת העץ"
+  },
+  {
+    "hebrew": "אמת מים",
+    "english": "aqueduct; water channel",
+    "definition": "תעלה להובלת מים"
+  },
+  {
+    "hebrew": "אמתלה",
+    "english": "excuse; pretext",
+    "definition": "תירוץ"
+  },
+  {
+    "hebrew": "אצר",
+    "english": "stored; accumulated; treasured",
+    "definition": "אסף ,שמר"
+  },
+  {
+    "hebrew": "אקרן",
+    "english": "projection screen",
+    "definition": "מסך שמקרינים עליו"
+  },
+  {
+    "hebrew": "ארך אפיים",
+    "english": "patient; slow to anger",
+    "definition": "אדם סבלני"
+  },
+  {
+    "hebrew": "ארכני",
+    "english": "excessively long; long-winded; lanky",
+    "definition": "( )1ארוך מדי ( )2דק ,ארוך ,צנום בצורה גמלונית."
+  },
+  {
+    "hebrew": "ברא",
+    "english": "cleared land by cutting down trees",
+    "definition": "פינה שטח ע\"י עקירת העצים שבו"
+  },
+  {
+    "hebrew": "בור",
+    "english": "uneducated person; ignoramus",
+    "definition": "חסר השכלה"
+  },
+  {
+    "hebrew": "בא בימים",
+    "english": "elderly; advanced in years",
+    "definition": "קשיש ,זקן"
+  },
+  {
+    "hebrew": "באו בדברים",
+    "english": "held talks; negotiated",
+    "definition": "נשאו ונתנו ,דיברו"
+  },
+  {
+    "hebrew": "בגפו",
+    "english": "alone; by himself",
+    "definition": "לבדו"
+  },
+  {
+    "hebrew": "בדימוס",
+    "english": "retired; formerly in office",
+    "definition": "לשעבר ,שפרש מתפקידו ,בגמלאות"
+  },
+  {
+    "hebrew": "בושש",
+    "english": "delayed; tarried",
+    "definition": "התעכב"
+  },
+  {
+    "hebrew": "בזעיר אנפין",
+    "english": "in miniature; on a small scale",
+    "definition": "בצורה מּוקטנת"
+  },
+  {
+    "hebrew": "ביאור",
+    "english": "explanation; commentary",
+    "definition": "פירוש ,הסבר"
+  },
+  {
+    "hebrew": "בין המצרים",
+    "english": "in distress; in a predicament",
+    "definition": "בצרה  ,במצוקה"
+  },
+  {
+    "hebrew": "ביעף",
+    "english": "swiftly; hurriedly",
+    "definition": "במהירות ,בחיפזון"
+  },
+  {
+    "hebrew": "בירוא",
+    "english": "forest clearance; deforestation",
+    "definition": "פינוי שטח ע\"י עקירת עצים"
+  },
+  {
+    "hebrew": "בית בד",
+    "english": "olive press; olive-oil mill",
+    "definition": "מקום שבו מייצרים שמן מזיתים"
+  },
+  {
+    "hebrew": "בית מרזח",
+    "english": "tavern; pub",
+    "definition": "מסבאה ,בר"
+  },
+  {
+    "hebrew": "בכליון עיניים",
+    "english": "with eager longing; impatiently",
+    "definition": "בגעגוע ,בקוצר רוח"
+  },
+  {
+    "hebrew": "בכר",
+    "english": "camel calf",
+    "definition": "גמל צעיר"
+  },
+  {
+    "hebrew": "במפגיע",
+    "english": "insistently; firmly; assertively",
+    "definition": "בנחישות ,באסרטיביות ,בתקיפות"
+  },
+  {
+    "hebrew": "בן בליעל",
+    "english": "scoundrel; villain",
+    "definition": "רשע ,נוכל"
+  },
+  {
+    "hebrew": "בן לוויה",
+    "english": "companion",
+    "definition": "אדם המשמש כמלווה קבוע למישהו"
+  },
+  {
+    "hebrew": "בן תשחורת",
+    "english": "young person; youth",
+    "definition": "צעיר"
+  },
+  {
+    "hebrew": "בעיניים כלות",
+    "english": "with longing eyes; in frustrated expectation",
+    "definition": "בציפייה רבה המלווה בתחושת תסכול ואכזבה"
+  },
+  {
+    "hebrew": "בעליל",
+    "english": "clearly; evidently",
+    "definition": "בבֵ ירור ,בלי סָּ פק"
+  },
+  {
+    "hebrew": "בר-כיבוש",
+    "english": "restrainable; controllable",
+    "definition": "משהו שאפשר לרסן"
+  },
+  {
+    "hebrew": "בר-מינן",
+    "english": "a deceased person",
+    "definition": "מת"
+  },
+  {
+    "hebrew": "בריש גלי",
+    "english": "openly; publicly",
+    "definition": "בגָּלוי ,בפרהסיה"
+  },
+  {
+    "hebrew": "ברם",
+    "english": "however; but",
+    "definition": "אבל"
+  },
+  {
+    "hebrew": "גאה",
+    "english": "rose; swelled (of water)",
+    "definition": "עולה (בעיקר פני הים ומים של נהר)"
+  },
+  {
+    "hebrew": "גדד",
+    "english": "harvested dates",
+    "definition": "קטף תמרים"
+  },
+  {
+    "hebrew": "גהר",
+    "english": "bent over; leaned down",
+    "definition": "רכן ,התכופף"
+  },
+  {
+    "hebrew": "גולה",
+    "english": "exile; expatriate",
+    "definition": "מגורש מארצו לארץ אחרת ,נודד לארץ אחרת"
+  },
+  {
+    "hebrew": "גיבב",
+    "english": "heaped up; piled haphazardly",
+    "definition": "הניח דברים בערימה בלי סדר"
+  },
+  {
+    "hebrew": "גילה את אוזנו",
+    "english": "confided in him; told him a secret",
+    "definition": "סיפר לו סוד"
+  },
+  {
+    "hebrew": "גילופין",
+    "english": "tipsiness; mild intoxication",
+    "definition": "שכרות (קלה)"
+  },
+  {
+    "hebrew": "גלב",
+    "english": "barber",
+    "definition": "ספר (מקצוע)"
+  },
+  {
+    "hebrew": "גמר אומר",
+    "english": "resolved; decided",
+    "definition": "החליט"
+  },
+  {
+    "hebrew": "גנזך",
+    "english": "archive",
+    "definition": "ארכיון"
+  },
+  {
+    "hebrew": "גרגרן",
+    "english": "glutton",
+    "definition": "אדם הלהוט אחר אוכל ,זללן ,רעבתן"
+  },
+  {
+    "hebrew": "דלק",
+    "english": "pursued; chased",
+    "definition": "רדף"
+  },
+  {
+    "hebrew": "דובב",
+    "english": "coaxed someone into speaking",
+    "definition": "שכנע אדם אחר לדבר"
+  },
+  {
+    "hebrew": "דידה",
+    "english": "hobbled; toddled",
+    "definition": "הלך בקפיצות קלות ,הלך בצעדים לא בטוחים"
+  },
+  {
+    "hebrew": "דמעות תנין",
+    "english": "crocodile tears; insincere sorrow",
+    "definition": "צער מזויף"
+  },
+  {
+    "hebrew": "דרך חתחתים",
+    "english": "a rough road; a path full of obstacles",
+    "definition": "דרך זרועה מכשולים"
+  },
+  {
+    "hebrew": "המרה",
+    "english": "disobeyed; defied an order",
+    "definition": "סרב פקודה ,לא ציית"
+  },
+  {
+    "hebrew": "התרה",
+    "english": "warned",
+    "definition": "הזהיר"
+  },
+  {
+    "hebrew": "העלה חרס בידו",
+    "english": "failed; came away empty-handed",
+    "definition": "לא הצליח במאמציו"
+  },
+  {
+    "hebrew": "השגה",
+    "english": "objection; criticism; intellectual understanding",
+    "definition": "ביקורת ,טענה ,תפיסה שכלית"
+  },
+  {
+    "hebrew": "האמיר",
+    "english": "rose; soared",
+    "definition": "עלה"
+  },
+  {
+    "hebrew": "הבליח",
+    "english": "flashed; flickered",
+    "definition": "הבהב ,נצנץ"
+  },
+  {
+    "hebrew": "הגיף",
+    "english": "closed; shut (a window or shutter)",
+    "definition": "סגר (חלון ,תריס וכו')"
+  },
+  {
+    "hebrew": "הדום",
+    "english": "footstool",
+    "definition": "שרפרף נמוך ששמים עליו את הרגליים"
+  },
+  {
+    "hebrew": "הדיוט",
+    "english": "layperson; nonexpert",
+    "definition": "אינו בקיא בתחום מסוים"
+  },
+  {
+    "hebrew": "הדיח",
+    "english": "incited someone to commit a crime",
+    "definition": "ניסה לגרום למישהו לפשוע"
+  },
+  {
+    "hebrew": "הדיף",
+    "english": "emitted (an odor)",
+    "definition": "הפיץ (ריח)"
+  },
+  {
+    "hebrew": "הוכיח",
+    "english": "proved; rebuked; admonished",
+    "definition": "( )1הראה שמשהו נכון ( )2נזף ,הטיף מוסר"
+  },
+  {
+    "hebrew": "הולאם",
+    "english": "was nationalized",
+    "definition": "רכוש שנהפך מרכוש פרטי לרכוש לאומי"
+  },
+  {
+    "hebrew": "הזים",
+    "english": "refuted; disproved",
+    "definition": "הפריך ,סתר"
+  },
+  {
+    "hebrew": "היה לו לרועץ",
+    "english": "was his downfall; worked to his detriment",
+    "definition": "הכשיל אותו ,צרה"
+  },
+  {
+    "hebrew": "היסה",
+    "english": "silenced; hushed",
+    "definition": "השתיק"
+  },
+  {
+    "hebrew": "היקוות",
+    "english": "pooling; accumulation of liquid",
+    "definition": "היאספות של נוזלים"
+  },
+  {
+    "hebrew": "הכביר",
+    "english": "multiplied; piled on (especially unnecessary words)",
+    "definition": "הרבה (בעיקר מילים שלא לצורך)"
+  },
+  {
+    "hebrew": "הכמין",
+    "english": "hid; concealed",
+    "definition": "החביא ,הסתיר"
+  },
+  {
+    "hebrew": "הלבין את פניו",
+    "english": "humiliated him; put him to shame",
+    "definition": "בייש ,העליב"
+  },
+  {
+    "hebrew": "הלעיט",
+    "english": "overfed; force-fed; supplied excessively",
+    "definition": "פיטם ,האכיל בכמות מרובה ,נתן דבר בכמות רבה מידי"
+  },
+  {
+    "hebrew": "המיר",
+    "english": "exchanged; converted (especially currency)",
+    "definition": "החליף (לרוב כסף)"
+  },
+  {
+    "hebrew": "הניא",
+    "english": "dissuaded; deterred",
+    "definition": "מנע ,שכנע שלא לפעול"
+  },
+  {
+    "hebrew": "הנץ",
+    "english": "dawn; sunrise",
+    "definition": "זריחה"
+  },
+  {
+    "hebrew": "הס",
+    "english": "hush!; silence",
+    "definition": "שקט( ,משמש גם כמילת קריאה להשתקה)"
+  },
+  {
+    "hebrew": "הסכית",
+    "english": "listened attentively",
+    "definition": "הקשיב"
+  },
+  {
+    "hebrew": "הסלים",
+    "english": "escalated; worsened",
+    "definition": "החמיר את המצב או שמצבו הוחמר"
+  },
+  {
+    "hebrew": "הסתגף",
+    "english": "practiced self-denial; subjected himself to privation",
+    "definition": "עינה את עצמו"
+  },
+  {
+    "hebrew": "העלה ארוכה",
+    "english": "healed; recovered",
+    "definition": "החלים"
+  },
+  {
+    "hebrew": "הפליא מכותיו",
+    "english": "beat severely",
+    "definition": "הכה מכות קשות"
+  },
+  {
+    "hebrew": "הפציר",
+    "english": "urged repeatedly; implored",
+    "definition": "ביקש בקשה חוזרת ונשנית בעקשנות"
+  },
+  {
+    "hebrew": "הצטדק",
+    "english": "justified himself; made excuses",
+    "definition": "התנַצֵל ,הביא סיבות להוכיח שאיננו אשם"
+  },
+  {
+    "hebrew": "הצטהל",
+    "english": "rejoiced; was delighted",
+    "definition": "צהל ,שמח"
+  },
+  {
+    "hebrew": "הצטווה",
+    "english": "was commanded; was ordered",
+    "definition": "מוטלת עליו מצווה ,ניתנת לו פקודה"
+  },
+  {
+    "hebrew": "הצטרד",
+    "english": "became hoarse",
+    "definition": "הפך לצרוד"
+  },
+  {
+    "hebrew": "הצר את צעדיו",
+    "english": "restricted his activities; hampered his progress",
+    "definition": "עיכב את התקדמותו של אחר"
+  },
+  {
+    "hebrew": "הקשה (שאלה)",
+    "english": "posed a difficult question",
+    "definition": "שאל קושיה ,שאלה"
+  },
+  {
+    "hebrew": "הקשה עורפו",
+    "english": "was stubborn; refused to comply",
+    "definition": "התעקש ,סרב להיענות ל"
+  },
+  {
+    "hebrew": "הרהיב בנפשו",
+    "english": "acted boldly; dared",
+    "definition": "נהג באומץ"
+  },
+  {
+    "hebrew": "השתופף",
+    "english": "stooped; crouched",
+    "definition": "התכופף"
+  },
+  {
+    "hebrew": "התאווה",
+    "english": "craved; desired intensely",
+    "definition": "חשק ,רצה מאוד"
+  },
+  {
+    "hebrew": "התאונן",
+    "english": "complained",
+    "definition": "התלונן"
+  },
+  {
+    "hebrew": "התבדה",
+    "english": "was proved wrong; had his expectations disproved",
+    "definition": "גילה שמה שחשב אינו נכון"
+  },
+  {
+    "hebrew": "התבסם",
+    "english": "became intoxicated",
+    "definition": "השתכר"
+  },
+  {
+    "hebrew": "התגעש",
+    "english": "became agitated; raged",
+    "definition": "נסער"
+  },
+  {
+    "hebrew": "התחבט",
+    "english": "wrestled with a dilemma; agonized",
+    "definition": "התלבט ,התייסר"
+  },
+  {
+    "hebrew": "התחוור",
+    "english": "became clear; became evident",
+    "definition": "התברר"
+  },
+  {
+    "hebrew": "התחלה",
+    "english": "feigned illness",
+    "definition": "התחזה לחולה"
+  },
+  {
+    "hebrew": "התחסד",
+    "english": "acted self-righteously; pretended to be pious",
+    "definition": "העמיד פני צדיק ותמים ,נהג בצביעות"
+  },
+  {
+    "hebrew": "התחקה",
+    "english": "traced; followed developments",
+    "definition": "עקב אחר התפתחות בנושא מסוים"
+  },
+  {
+    "hebrew": "התיירא",
+    "english": "feared; was afraid",
+    "definition": "פחד"
+  },
+  {
+    "hebrew": "התנכר",
+    "english": "acted estranged; deliberately disowned or ignored",
+    "definition": "התנהג כאילו אין לו קשר למשהו ,התעלם במכוון"
+  },
+  {
+    "hebrew": "התנצח",
+    "english": "argued stubbornly; engaged in verbal sparring",
+    "definition": "התווכח בצורה עקשנית"
+  },
+  {
+    "hebrew": "התעלה",
+    "english": "rose above self-interest; made a sacrifice for a higher goal",
+    "definition": "ויתר על משהו כדי להשיג משהו חשוב יותר"
+  },
+  {
+    "hebrew": "התערטל",
+    "english": "undressed; stripped",
+    "definition": "הוריד את בגדיו"
+  },
+  {
+    "hebrew": "התפכח",
+    "english": "sobered up; became disillusioned",
+    "definition": "יצא מאשליה או ממצב של שכרות"
+  },
+  {
+    "hebrew": "התקרש",
+    "english": "solidified; congealed",
+    "definition": "הפך למּוצָּ ק"
+  },
+  {
+    "hebrew": "התרוממות נפש",
+    "english": "elation; high spirits",
+    "definition": "התרגשות ושמחה"
+  },
+  {
+    "hebrew": "ויטלי",
+    "english": "lively; vigorous; full of vitality",
+    "definition": "שופע חיים ,חיוני ,מלא מרץ ואנרגיה"
+  },
+  {
+    "hebrew": "זבן",
+    "english": "shop assistant; salesperson",
+    "definition": "מוכר בחנות"
+  },
+  {
+    "hebrew": "זחוח",
+    "english": "smug; self-satisfied",
+    "definition": "מפגין שביעות רצון עצמית וביטחון עצמי"
+  },
+  {
+    "hebrew": "זמר",
+    "english": "pruned branches",
+    "definition": "קצץ ענפים"
+  },
+  {
+    "hebrew": "חבוט",
+    "english": "hackneyed; trite",
+    "definition": "נדוש ,חסר מקוריות"
+  },
+  {
+    "hebrew": "חבורה",
+    "english": "bruise",
+    "definition": "חבלה בעור לאחר מכה"
+  },
+  {
+    "hebrew": "חוסה",
+    "english": "sheltering; under someone's protection",
+    "definition": "נמצא תחת הגנה של אחר ,נמצא בתוך מחסה"
+  },
+  {
+    "hebrew": "חזר לסורו",
+    "english": "reverted to his bad habits",
+    "definition": "חזר להרגליו הרעים"
+  },
+  {
+    "hebrew": "חירף את נפשו",
+    "english": "risked his life",
+    "definition": "סיכן את חייו"
+  },
+  {
+    "hebrew": "חכך בדעתו",
+    "english": "deliberated; hesitated",
+    "definition": "התלבט ,התחבט ,היסס"
+  },
+  {
+    "hebrew": "חלחלה",
+    "english": "horror; shudder of dread",
+    "definition": "זעזוע"
+  },
+  {
+    "hebrew": "חלט",
+    "english": "blanched; scalded",
+    "definition": "בישל במים רותחים"
+  },
+  {
+    "hebrew": "חלץ",
+    "english": "removed; pulled off or out",
+    "definition": "להסיר דבר שהיה תקוע או מהודק (פקק מבקבוק או נעל מהרגל)"
+  },
+  {
+    "hebrew": "חמד",
+    "english": "coveted",
+    "definition": "רצה מאוד דבר מסוים  -בדר\"כ משהו השייך לאחר"
+  },
+  {
+    "hebrew": "חמד לצון",
+    "english": "joked; jested",
+    "definition": "התבדח"
+  },
+  {
+    "hebrew": "חסר תקנה",
+    "english": "incorrigible; beyond repair",
+    "definition": "שלא ניתן לתקן אותו"
+  },
+  {
+    "hebrew": "חרטום",
+    "english": "bow of a ship; beak; pointed front or tip",
+    "definition": "החלק הקדמי והמחודד של נעל ,ספינה ,כלי או מקור העופות"
+  },
+  {
+    "hebrew": "חריט",
+    "english": "purse; small money bag",
+    "definition": "ארנק ,תיק קטן לכסף"
+  },
+  {
+    "hebrew": "חרך",
+    "english": "slit; narrow opening",
+    "definition": "סדק ,חריץ קטן בקיר"
+  },
+  {
+    "hebrew": "חשק",
+    "english": "fastened together; desired; craved",
+    "definition": "א.חיבר זה לזה ,קירב ,הצמיד ב .רצה מאוד; התאווה; השתוקק; חפץ"
+  },
+  {
+    "hebrew": "חשק שפתיו",
+    "english": "kept his lips shut; remained silent",
+    "definition": "שתק ,נמנע מלדבר"
+  },
+  {
+    "hebrew": "חתה",
+    "english": "raked; moved (especially hot coals)",
+    "definition": "גרף ,העביר (בדרך כלל גחלים) ממקום למקום"
+  },
+  {
+    "hebrew": "טחן מים",
+    "english": "said nothing useful; repeated empty talk",
+    "definition": "אמר דברים חסרי טעם ,חזר על דברים שכבר נאמרו ואין בהם חידוש או תועלת"
+  },
+  {
+    "hebrew": "טרוניה",
+    "english": "complaint; grievance",
+    "definition": "טענה קשה"
+  },
+  {
+    "hebrew": "טרחן",
+    "english": "nitpicker; tiresome person",
+    "definition": "מתעסק בטפל ,מציק"
+  },
+  {
+    "hebrew": "טרף",
+    "english": "mixed; beat (a mixture)",
+    "definition": "ערבב"
+  },
+  {
+    "hebrew": "טרשי",
+    "english": "rocky; stony",
+    "definition": "סלעי"
+  },
+  {
+    "hebrew": "יגע",
+    "english": "weary; toiling",
+    "definition": "עייף ,עובד עבודה קשה ,טורח"
+  },
+  {
+    "hebrew": "יד רוחצת יד",
+    "english": "you scratch my back and I'll scratch yours",
+    "definition": "כינוי למצב שבו עוזרים אחד לשני כדי לקבל תמורה כל אחד מהאחר"
+  },
+  {
+    "hebrew": "יוגב",
+    "english": "farmer",
+    "definition": "איכר"
+  },
+  {
+    "hebrew": "יוצא מכליו",
+    "english": "loses his temper; flies into a rage",
+    "definition": "התפרץ ,איבד את שלוותו"
+  },
+  {
+    "hebrew": "יצוע",
+    "english": "bed; couch",
+    "definition": "מיטה"
+  },
+  {
+    "hebrew": "יקר המציאות",
+    "english": "extremely rare",
+    "definition": "נדיר ביותר"
+  },
+  {
+    "hebrew": "ירד מנכסיו",
+    "english": "lost his fortune; became impoverished",
+    "definition": "איבד את כל הונו ,התרושש"
+  },
+  {
+    "hebrew": "יש בדעתו",
+    "english": "intends; plans",
+    "definition": "מתכוון"
+  },
+  {
+    "hebrew": "יש בלבו עליו",
+    "english": "bears a grudge against him",
+    "definition": "שומר טינה ל"
+  },
+  {
+    "hebrew": "ישים",
+    "english": "feasible; implementable",
+    "definition": "דבר שאפשר לייׂשם אותו"
+  },
+  {
+    "hebrew": "כרך",
+    "english": "large city; metropolis",
+    "definition": "עיר גדולה"
+  },
+  {
+    "hebrew": "כברה",
+    "english": "a considerable distance; a stretch",
+    "definition": "מרחק רב למדי  -בדר\"כ בהתקדמות"
+  },
+  {
+    "hebrew": "כיתר",
+    "english": "surrounded; encircled",
+    "definition": "הקיף מכל הצדדים"
+  },
+  {
+    "hebrew": "כבישה",
+    "english": "pickling",
+    "definition": "שימור מזון בחומץ או במלח"
+  },
+  {
+    "hebrew": "כבש את יצרו",
+    "english": "controlled his urges; restrained himself",
+    "definition": "התאפק ,הבליג"
+  },
+  {
+    "hebrew": "כונן",
+    "english": "established; founded",
+    "definition": "יצר או ייסד"
+  },
+  {
+    "hebrew": "כיול",
+    "english": "calibration",
+    "definition": "כיוון מכשיר המדידה כדי לשפר את רמת הדיוק שלו"
+  },
+  {
+    "hebrew": "כיחד",
+    "english": "concealed; denied",
+    "definition": "לא גילה ,הסתיר ,הכחיש"
+  },
+  {
+    "hebrew": "כילה",
+    "english": "finished; consumed; destroyed",
+    "definition": "גמר ,חיסל ,השמיד"
+  },
+  {
+    "hebrew": "כילי",
+    "english": "miser; stingy person",
+    "definition": "קמצן"
+  },
+  {
+    "hebrew": "כיליון",
+    "english": "destruction; annihilation; extinction",
+    "definition": "כליה ,אובדן ,השמדה"
+  },
+  {
+    "hebrew": "כיסופים",
+    "english": "longing; yearning",
+    "definition": "געגועים"
+  },
+  {
+    "hebrew": "כיתור",
+    "english": "encirclement",
+    "definition": "להקיף דבר מסוים"
+  },
+  {
+    "hebrew": "כיתת רגליו",
+    "english": "walked extensively; went from place to place",
+    "definition": "הלך הליכה מרובה"
+  },
+  {
+    "hebrew": "כמוסה",
+    "english": "capsule (medicine)",
+    "definition": "טבליה של תרופה"
+  },
+  {
+    "hebrew": "כמיהה",
+    "english": "yearning; longing",
+    "definition": "השתוקקות ,רצון ,געגועים"
+  },
+  {
+    "hebrew": "כמש",
+    "english": "withers; shrivels",
+    "definition": "נובל ,מצטמק ,קמל"
+  },
+  {
+    "hebrew": "כן",
+    "english": "base; pedestal",
+    "definition": "בסיס ,יסוד"
+  },
+  {
+    "hebrew": "כסיה",
+    "english": "a long glove reaching to the elbow",
+    "definition": "כפפה נשית מהיד עד המרפק"
+  },
+  {
+    "hebrew": "כפות",
+    "english": "bound; tied up",
+    "definition": "קשור היטב"
+  },
+  {
+    "hebrew": "כפר",
+    "english": "denied; rejected a belief; disbelieved in God",
+    "definition": "הכחיש (טענה מסוימת או אשמה) ,לא האמין באלוהים"
+  },
+  {
+    "hebrew": "לא חסך שבטו",
+    "english": "criticized unsparingly",
+    "definition": "לא נמנע מביקורת קשה ,גינה"
+  },
+  {
+    "hebrew": "לא כל שכן",
+    "english": "all the more so; much less (depending on context)",
+    "definition": "על אחת כמה וכמה ,אדרבה"
+  },
+  {
+    "hebrew": "לאה",
+    "english": "weary; exhausted",
+    "definition": "עייף ,יגע"
+  },
+  {
+    "hebrew": "לבה (אש)",
+    "english": "fanned; stoked (a fire)",
+    "definition": "מגביר את האש"
+  },
+  {
+    "hebrew": "להגן",
+    "english": "chatterbox; talkative person",
+    "definition": "מי שאוהב לדבר"
+  },
+  {
+    "hebrew": "לוקה",
+    "english": "afflicted; defective; suffering from",
+    "definition": "נפגע ,ניזוק ,חולה ,פגום"
+  },
+  {
+    "hebrew": "ליבה",
+    "english": "core",
+    "definition": "מרכז ,פנים ,לב"
+  },
+  {
+    "hebrew": "למכביר",
+    "english": "in abundance; plentifully",
+    "definition": "הרבה מאוד"
+  },
+  {
+    "hebrew": "למצער",
+    "english": "at least",
+    "definition": "לכל הפחות"
+  },
+  {
+    "hebrew": "למשעי",
+    "english": "perfectly; impeccably",
+    "definition": "באופן מושלם"
+  },
+  {
+    "hebrew": "לערך",
+    "english": "approximately",
+    "definition": "בערך"
+  },
+  {
+    "hebrew": "לקוני",
+    "english": "laconic; concise",
+    "definition": "מנוסח בקיצור"
+  },
+  {
+    "hebrew": "מסבאה",
+    "english": "tavern; pub",
+    "definition": "בית מרזח ,מקום שמגישים בו משקאות"
+  },
+  {
+    "hebrew": "מאכלת",
+    "english": "slaughtering knife",
+    "definition": "סכין לשחיטה"
+  },
+  {
+    "hebrew": "מבכר",
+    "english": "prefers",
+    "definition": "מעדיף"
+  },
+  {
+    "hebrew": "מגבעת",
+    "english": "brimmed hat",
+    "definition": "כובע גברים בעל שוליים"
+  },
+  {
+    "hebrew": "מגדף",
+    "english": "reviles; blasphemes",
+    "definition": "משמיע דברי בוז"
+  },
+  {
+    "hebrew": "מגיה",
+    "english": "proofreader; proofreads",
+    "definition": "בודק ומתקן שיבושים בטקסטים"
+  },
+  {
+    "hebrew": "מגנת לב",
+    "english": "grief; sorrow",
+    "definition": "צער"
+  },
+  {
+    "hebrew": "מדווה",
+    "english": "pain; illness",
+    "definition": "כאב ,חולי"
+  },
+  {
+    "hebrew": "מהביל",
+    "english": "steaming; speaking nonsense",
+    "definition": "מעלה אדים ,אומר דברי הבל"
+  },
+  {
+    "hebrew": "מהוה",
+    "english": "worn out; shabby",
+    "definition": "בלוי ,מרופט"
+  },
+  {
+    "hebrew": "מהסה",
+    "english": "silences; hushes",
+    "definition": "משתיק"
+  },
+  {
+    "hebrew": "מהל",
+    "english": "mixed liquids; diluted",
+    "definition": "ערבב נוזל בנוזל"
+  },
+  {
+    "hebrew": "מהתלה",
+    "english": "joke; prank",
+    "definition": "מעשה או דיבור שנועדו להצחיק"
+  },
+  {
+    "hebrew": "מוסר כליות",
+    "english": "remorse; pangs of conscience",
+    "definition": "חרטה ,ייסורי מצפון"
+  },
+  {
+    "hebrew": "מורת רוח",
+    "english": "displeasure; dissatisfaction",
+    "definition": "חוסר נחת ,אכזבה"
+  },
+  {
+    "hebrew": "מזוכך",
+    "english": "purified; refined",
+    "definition": "מטוהר"
+  },
+  {
+    "hebrew": "מזקקה",
+    "english": "distillery",
+    "definition": "מפעל לייצור משקאות חריפים ע\"י זיקוק"
+  },
+  {
+    "hebrew": "מחושים",
+    "english": "aches; pains",
+    "definition": "כאבים"
+  },
+  {
+    "hebrew": "מחושל",
+    "english": "forged (metal); toughened by hardship",
+    "definition": "א .מתכת המעוצבת באש ב.מחוזק לאחר עמידה בניסיון קשה"
+  },
+  {
+    "hebrew": "מחלצות",
+    "english": "fine clothes; finery",
+    "definition": "לבוש הדור"
+  },
+  {
+    "hebrew": "מט לנפול",
+    "english": "rickety; on the verge of collapse",
+    "definition": "רעוע ,לא יציב"
+  },
+  {
+    "hebrew": "מיאן",
+    "english": "refused",
+    "definition": "סרב"
+  },
+  {
+    "hebrew": "מייגע",
+    "english": "tiring; tedious",
+    "definition": "מעייף"
+  },
+  {
+    "hebrew": "מכורה",
+    "english": "homeland; native land",
+    "definition": "מולדת"
+  },
+  {
+    "hebrew": "מכמורת",
+    "english": "fishing net; trawl",
+    "definition": "רשת דיג"
+  },
+  {
+    "hebrew": "מכשור",
+    "english": "equipment; instrumentation",
+    "definition": "כְ לַל המכשירים המשמשים לפעולה מסוימת"
+  },
+  {
+    "hebrew": "מליץ יושר",
+    "english": "advocate; someone who speaks in another's favor",
+    "definition": "מי שמעיד על טיבו של אחר"
+  },
+  {
+    "hebrew": "מן הנמנע",
+    "english": "impossible",
+    "definition": "לא ייתכן"
+  },
+  {
+    "hebrew": "מנץ",
+    "english": "buds; dawns",
+    "definition": "מוציא ניצנים ,זורח"
+  },
+  {
+    "hebrew": "מסוקס",
+    "english": "rough; rugged; knotty",
+    "definition": "מחוספס"
+  },
+  {
+    "hebrew": "מסמר שער",
+    "english": "hair-raising; horrifying",
+    "definition": "מחריד ,מצמרר"
+  },
+  {
+    "hebrew": "מסעד",
+    "english": "furniture support; armrest; backrest",
+    "definition": "חלק ברהיט המשעינים עליו את הראש הרגליים או הידיים"
+  },
+  {
+    "hebrew": "מסק",
+    "english": "harvested olives",
+    "definition": "קטף זיתים"
+  },
+  {
+    "hebrew": "מעל",
+    "english": "betrayed a trust; embezzled",
+    "definition": "הפר את האמון שנתנו בו"
+  },
+  {
+    "hebrew": "מעפיל",
+    "english": "climbs; strives for a higher achievement",
+    "definition": "עולה למקום גבוה ,מתחרה על הישג גבוה יותר"
+  },
+  {
+    "hebrew": "מפח נפש",
+    "english": "disappointment; dismay",
+    "definition": "אכזבה"
+  },
+  {
+    "hebrew": "מצועצע",
+    "english": "ornate; overdecorated",
+    "definition": "מקושט יותר מידי"
+  },
+  {
+    "hebrew": "מצר",
+    "english": "regrets; is sorry",
+    "definition": "מצטער"
+  },
+  {
+    "hebrew": "מקומם",
+    "english": "incites rebellion; provokes outrage",
+    "definition": "ממריד ,מעורר למרד"
+  },
+  {
+    "hebrew": "מקטורן",
+    "english": "jacket",
+    "definition": "מעיל קצר (ז'קט)"
+  },
+  {
+    "hebrew": "מקים שאון",
+    "english": "noisemaker; someone creating a commotion",
+    "definition": "אדם העושה רעש ,אדם המעורר המולה"
+  },
+  {
+    "hebrew": "מקשה",
+    "english": "a field of melons or gourds",
+    "definition": "שדה אבטיחים  ,קישואים ושאר דלועים"
+  },
+  {
+    "hebrew": "מרובב",
+    "english": "stained; increased ten-thousandfold (rare sense in source)",
+    "definition": "שיש עליו כתמים ,גָּדֵ ל ּפי עׂשרת אלפים ,נִהיֶה לִ רבָּ בה"
+  },
+  {
+    "hebrew": "מרשה",
+    "english": "client of a lawyer",
+    "definition": "לקוח של עורך דין"
+  },
+  {
+    "hebrew": "מש (mash)",
+    "english": "moved",
+    "definition": "זז"
+  },
+  {
+    "hebrew": "משוא פנים",
+    "english": "favoritism; partiality",
+    "definition": "הפליה לטובה"
+  },
+  {
+    "hebrew": "משובב נפש",
+    "english": "refreshing; uplifting; delightful",
+    "definition": "עושה נחת ,מרענן"
+  },
+  {
+    "hebrew": "משח",
+    "english": "smeared; spread",
+    "definition": "מרח"
+  },
+  {
+    "hebrew": "משכון",
+    "english": "pledge; collateral",
+    "definition": "עירבון ,חפץ המופקד בידי המלווה להבטחת פירעון החוב"
+  },
+  {
+    "hebrew": "משמים",
+    "english": "boring; dreary",
+    "definition": "משעמם"
+  },
+  {
+    "hebrew": "משעול",
+    "english": "path; trail",
+    "definition": "שביל"
+  },
+  {
+    "hebrew": "מתבדר",
+    "english": "amuses himself; flutters in the wind",
+    "definition": "משתעשע ,מתנפנף ברוח"
+  },
+  {
+    "hebrew": "מתוודע",
+    "english": "becomes acquainted; introduces himself",
+    "definition": "עושה היכרות עם אחר,מזדהה,נעשה מיודע"
+  },
+  {
+    "hebrew": "מתחסד",
+    "english": "acts self-righteously; feigns piety",
+    "definition": "מתחזה לצדיק"
+  },
+  {
+    "hebrew": "מתחצף",
+    "english": "acts insolently; is rude",
+    "definition": "מתנהג בחוצפה"
+  },
+  {
+    "hebrew": "מתיימר",
+    "english": "presumes; claims unproven abilities",
+    "definition": "מתפאר ביכולת שעדיין לא עמדה למבחן"
+  },
+  {
+    "hebrew": "מתקער",
+    "english": "becomes concave",
+    "definition": "נעשה קעור"
+  },
+  {
+    "hebrew": "מתרס",
+    "english": "barricade",
+    "definition": "מחסום ,בריקדה"
+  },
+  {
+    "hebrew": "נרפה",
+    "english": "weak; slack; lazy",
+    "definition": "עצל ,חלש"
+  },
+  {
+    "hebrew": "נכר",
+    "english": "foreign land",
+    "definition": "ארץ זרה"
+  },
+  {
+    "hebrew": "נא",
+    "english": "partly cooked; please",
+    "definition": "מבושל למחצה ,מילת נימוס המשמשת לבקשה"
+  },
+  {
+    "hebrew": "נאקה",
+    "english": "female camel",
+    "definition": "נקבת הגמל"
+  },
+  {
+    "hebrew": "נביא זעם",
+    "english": "prophet of doom",
+    "definition": "אדם המזהיר מפני חורבן המתקרב ובא עקב עיוותים מוסריים או דתיים"
+  },
+  {
+    "hebrew": "נבצר",
+    "english": "prevented; unable to do something",
+    "definition": "מי שמנוע מלעשות דבר מסוים"
+  },
+  {
+    "hebrew": "נבצר",
+    "english": "harvested (of grapes)",
+    "definition": "ענב שנקטף"
+  },
+  {
+    "hebrew": "נוגה",
+    "english": "brightness; radiance; Venus",
+    "definition": "זוהר ,אור חזק ,הכוכב השני במערכת השמש"
+  },
+  {
+    "hebrew": "נדם",
+    "english": "fell silent",
+    "definition": "השתתק"
+  },
+  {
+    "hebrew": "נדן",
+    "english": "scabbard; sheath",
+    "definition": "נרתיק לחרב"
+  },
+  {
+    "hebrew": "נהיר",
+    "english": "clear; understandable",
+    "definition": "ברור ,בהיר"
+  },
+  {
+    "hebrew": "נהנתן",
+    "english": "pleasure-seeker; hedonist",
+    "definition": "רודף תענוגות"
+  },
+  {
+    "hebrew": "נודה",
+    "english": "was ostracized; was excommunicated",
+    "definition": "הורחק ,הוחרם חברתית"
+  },
+  {
+    "hebrew": "נוח לכעוס",
+    "english": "easily angered; irritable",
+    "definition": "שנוטה לכעוס ,שכועס בקלות"
+  },
+  {
+    "hebrew": "נוטר",
+    "english": "guard; keeper",
+    "definition": "שומר"
+  },
+  {
+    "hebrew": "נוטר טינה",
+    "english": "bears a grudge",
+    "definition": "שומר שנאה בליבו"
+  },
+  {
+    "hebrew": "נול",
+    "english": "loom",
+    "definition": "מכונת אריגה"
+  },
+  {
+    "hebrew": "נועץ",
+    "english": "consults; seeks advice",
+    "definition": "מתייעץ"
+  },
+  {
+    "hebrew": "נושה",
+    "english": "creditor",
+    "definition": "אדם התובע מלווה את חובו"
+  },
+  {
+    "hebrew": "נושע",
+    "english": "was rescued; was saved",
+    "definition": "שמישהו הציל אותו (הושיע אותו)"
+  },
+  {
+    "hebrew": "נחמה פורתא",
+    "english": "small consolation",
+    "definition": "נחמה קטנה"
+  },
+  {
+    "hebrew": "נחשול",
+    "english": "a large wave; surge",
+    "definition": "גל גבוה"
+  },
+  {
+    "hebrew": "נחתום",
+    "english": "baker",
+    "definition": "אופה"
+  },
+  {
+    "hebrew": "נטה חסד",
+    "english": "showed favor; treated kindly",
+    "definition": "נהג בחיבה כלפי"
+  },
+  {
+    "hebrew": "נטע",
+    "english": "planted",
+    "definition": "שתל"
+  },
+  {
+    "hebrew": "ניאות",
+    "english": "agrees; consents",
+    "definition": "מסכים"
+  },
+  {
+    "hebrew": "ניבים",
+    "english": "canine teeth; fangs",
+    "definition": "שיניים"
+  },
+  {
+    "hebrew": "ניגף",
+    "english": "was defeated; was struck down",
+    "definition": "מובס,מוכה,נפגע"
+  },
+  {
+    "hebrew": "נידה",
+    "english": "ostracized; excluded",
+    "definition": "הרחיק מן הציבור"
+  },
+  {
+    "hebrew": "ניואנס",
+    "english": "nuance; subtle variation",
+    "definition": "גיוון קל"
+  },
+  {
+    "hebrew": "ניחא",
+    "english": "all right; so be it",
+    "definition": "מילא ,נו טוב ,שיהיה"
+  },
+  {
+    "hebrew": "ניחם",
+    "english": "regretted; repented",
+    "definition": "התחרט"
+  },
+  {
+    "hebrew": "ניחן",
+    "english": "was endowed with (a quality or talent)",
+    "definition": "יש לו סגולות טובות כמו יופי או כישרון ,מאופיין ב (בדר\"כ בדבר טוב)"
+  },
+  {
+    "hebrew": "ניחר",
+    "english": "parched; very dry",
+    "definition": "יבש מאוד"
+  },
+  {
+    "hebrew": "ניכש",
+    "english": "weeded; removed weeds",
+    "definition": "תלש עשבים שוטים"
+  },
+  {
+    "hebrew": "נים ולא נים",
+    "english": "half-asleep; dozing",
+    "definition": "לא ישן לגמרי (מילולית ישן ולא ישן)"
+  },
+  {
+    "hebrew": "נישא",
+    "english": "was said; was carried; married (depending on vocalization)",
+    "definition": "א .נאמר ,נסחב .ב .נכנס לברית נישואין"
+  },
+  {
+    "hebrew": "ניתך",
+    "english": "poured or spattered forcefully; melted",
+    "definition": "ניתז בחוזקה ,נמס  -הפך ממוצק לנוזל"
+  },
+  {
+    "hebrew": "נעתר",
+    "english": "acceded; agreed after persuasion",
+    "definition": "נענה לבקשה (בדרך כלל אחרי שכנועים רבים)"
+  },
+  {
+    "hebrew": "נפתל",
+    "english": "struggles; wrestles; twisted; devious",
+    "definition": "א .מסתבך ,נאבק ב.עקמומי ,לא ישר"
+  },
+  {
+    "hebrew": "נצר את לשונו / נצר את שפתיו",
+    "english": "held his tongue; kept silent",
+    "definition": "שתק"
+  },
+  {
+    "hebrew": "נקלה",
+    "english": "contemptible; lowly",
+    "definition": "בזוי ,נחות"
+  },
+  {
+    "hebrew": "נקפו ליבו",
+    "english": "felt remorse; had pangs of conscience",
+    "definition": "התחרט ,הרגיש ייסורי מצפון"
+  },
+  {
+    "hebrew": "נרגן",
+    "english": "grumbling; quarrelsome",
+    "definition": "רוטן ,מתלונן ,מעורר ריב"
+  },
+  {
+    "hebrew": "נשגב מבינתו",
+    "english": "beyond his comprehension",
+    "definition": "לא מצליח להבין"
+  },
+  {
+    "hebrew": "סבא",
+    "english": "became drunk",
+    "definition": "השתכר"
+  },
+  {
+    "hebrew": "סגלגל",
+    "english": "oval; elliptical; purplish (depending on vocalization)",
+    "definition": "אליפטי ,סגול במקצת"
+  },
+  {
+    "hebrew": "סורר",
+    "english": "rebellious; disobedient",
+    "definition": "מרדן ,לא מציית"
+  },
+  {
+    "hebrew": "סילף",
+    "english": "distorted; misrepresented",
+    "definition": "תיאר דבר בצורה לא נאמנה למציאות"
+  },
+  {
+    "hebrew": "סיקל",
+    "english": "cleared stones",
+    "definition": "סילק אבנים"
+  },
+  {
+    "hebrew": "סיתת",
+    "english": "dressed or chiseled stone",
+    "definition": "החליק אבנים לצורך בניה"
+  },
+  {
+    "hebrew": "סכך",
+    "english": "covered; roofed with branches",
+    "definition": "כיסה ,שם סכך"
+  },
+  {
+    "hebrew": "סכר את פיו",
+    "english": "kept silent; silenced someone",
+    "definition": "שתק בעצמו ,השתיק אדם אחר"
+  },
+  {
+    "hebrew": "סנגר",
+    "english": "defended; acted as defense counsel",
+    "definition": "שימש כסנגור ,מגן על נאשם במשפט"
+  },
+  {
+    "hebrew": "סתום",
+    "english": "obscure; unclear",
+    "definition": "לא מפורש ,לא ברור"
+  },
+  {
+    "hebrew": "עדי",
+    "english": "ornament; piece of jewelry",
+    "definition": "תכשיט"
+  },
+  {
+    "hebrew": "עול ימים",
+    "english": "young; youthful",
+    "definition": "צעיר"
+  },
+  {
+    "hebrew": "עומד במריו",
+    "english": "persists in defiance",
+    "definition": "אדם שלא נכנע"
+  },
+  {
+    "hebrew": "עומד בעינו",
+    "english": "remains unchanged",
+    "definition": "נותר לא שינוי"
+  },
+  {
+    "hebrew": "עורר את חמתו",
+    "english": "angered him; provoked his wrath",
+    "definition": "הכעיס ,הרגיז ,עצבן את"
+  },
+  {
+    "hebrew": "עטור",
+    "english": "adorned; decorated",
+    "definition": "מעוטר ,מקושט"
+  },
+  {
+    "hebrew": "עיבוי",
+    "english": "condensation",
+    "definition": "הפיכה של אדי מים לנוזל"
+  },
+  {
+    "hebrew": "עילג",
+    "english": "inarticulate; speaking with errors",
+    "definition": "מגמגם ,שאינו רהוט,שיש בו שגיאות"
+  },
+  {
+    "hebrew": "עיר מקלט",
+    "english": "city of refuge; safe haven",
+    "definition": "עיר מחסה ומקלט ,מקום מבטחים"
+  },
+  {
+    "hebrew": "עיר רפאים",
+    "english": "ghost town",
+    "definition": "כינוי לעיר שתושביה עזבו אותה  ,עיר ללא אנשים"
+  },
+  {
+    "hebrew": "עישב",
+    "english": "weeded",
+    "definition": "תלש עשבים"
+  },
+  {
+    "hebrew": "על נקלה",
+    "english": "easily",
+    "definition": "בקלות"
+  },
+  {
+    "hebrew": "על פרשת דרכים",
+    "english": "at a crossroads; facing a dilemma",
+    "definition": "מצב שיש בו התלבטות"
+  },
+  {
+    "hebrew": "עלווה",
+    "english": "foliage",
+    "definition": "כלל העלים שעל העץ"
+  },
+  {
+    "hebrew": "עלום",
+    "english": "unknown; hidden",
+    "definition": "נעלם ,לא ידוע"
+  },
+  {
+    "hebrew": "עמד בניסיון",
+    "english": "resisted temptation; passed a test of character",
+    "definition": "לא התפתה"
+  },
+  {
+    "hebrew": "עמד מנגד",
+    "english": "stood by without helping",
+    "definition": "לא בא לעזור"
+  },
+  {
+    "hebrew": "עמד על טיבו",
+    "english": "ascertained his character; understood its nature",
+    "definition": "תהה את אופיו או מהותו"
+  },
+  {
+    "hebrew": "ענבל",
+    "english": "bell clapper; uvula",
+    "definition": "א .לשון הפעמון שבאמצעותה הפעמון מפיק צליל ב.איבר בפה הנמצא בלוע"
+  },
+  {
+    "hebrew": "עסיס",
+    "english": "fruit juice; nectar",
+    "definition": "מיץ של פירות"
+  },
+  {
+    "hebrew": "פדה",
+    "english": "paid for; redeemed; freed; rescued",
+    "definition": "א.נתן כסף עבור אדם או סחורה ב.שיחרר ,הציל"
+  },
+  {
+    "hebrew": "פלג",
+    "english": "stream; tributary; faction",
+    "definition": "(א) נחל קטן ,יובל( ,ב) קבוצה עצמאית בתוך מפלגה"
+  },
+  {
+    "hebrew": "פלה",
+    "english": "removed lice",
+    "definition": "הוציא כינים"
+  },
+  {
+    "hebrew": "פלצות",
+    "english": "terror; horror",
+    "definition": "פחד גדול ,זעזוע"
+  },
+  {
+    "hebrew": "פקד",
+    "english": "visited",
+    "definition": "ביקר"
+  },
+  {
+    "hebrew": "פקו ברכיו",
+    "english": "his knees trembled with fear",
+    "definition": "רעדו לו הברכיים (מפחד)"
+  },
+  {
+    "hebrew": "פשט יד",
+    "english": "begged; asked for alms",
+    "definition": "קיבץ נדבות"
+  },
+  {
+    "hebrew": "צדודית",
+    "english": "profile",
+    "definition": "פרופיל"
+  },
+  {
+    "hebrew": "צוהר",
+    "english": "small window; opening",
+    "definition": "אשנב ,חלון קטן"
+  },
+  {
+    "hebrew": "ציר",
+    "english": "axle; hinge pin; hub; main route; labor contraction; stock or broth; parliamentary representative",
+    "definition": "מוט שעליו נע גלגל או דלת; מרכז פעילות; דרך ראשית; כאבי לידה; תמצית מרק; נציג בפרלמנט"
+  },
+  {
+    "hebrew": "צלח",
+    "english": "crossed; forded (water)",
+    "definition": "עבר במים ממקום למקום"
+  },
+  {
+    "hebrew": "קבל",
+    "english": "complained",
+    "definition": "התלונן  ,טען נגד אדם אחר"
+  },
+  {
+    "hebrew": "קדר",
+    "english": "potter",
+    "definition": "יוצר כלי חרס"
+  },
+  {
+    "hebrew": "קובלנה",
+    "english": "complaint; grievance",
+    "definition": "טענה ,תלונה"
+  },
+  {
+    "hebrew": "קורטוב",
+    "english": "a little; a dash; a small amount",
+    "definition": "קצת ,מידה כלשהי של"
+  },
+  {
+    "hebrew": "קורת רוח",
+    "english": "contentment; satisfaction",
+    "definition": "נחת ,סיפוק"
+  },
+  {
+    "hebrew": "קטם",
+    "english": "clipped; cut off the tip",
+    "definition": "חותך את הקצה (של ענף וכו')"
+  },
+  {
+    "hebrew": "קטרג",
+    "english": "accused; denounced; acted as prosecutor",
+    "definition": "הוציא ביקורת חריפה ,האשים אחר"
+  },
+  {
+    "hebrew": "קל דעת",
+    "english": "rash; frivolous",
+    "definition": "פזיז"
+  },
+  {
+    "hebrew": "קל תפיסה",
+    "english": "quick-witted; quick to understand",
+    "definition": "בעל תפיסה מהירה"
+  },
+  {
+    "hebrew": "קמל",
+    "english": "withered",
+    "definition": "נובל"
+  },
+  {
+    "hebrew": "קנטור",
+    "english": "provocation; taunting",
+    "definition": "הכעסה ,הרגזה על ידי הקנטה"
+  },
+  {
+    "hebrew": "קסת",
+    "english": "inkwell",
+    "definition": "צלוחית קטנה לדיו"
+  },
+  {
+    "hebrew": "קפא על שמריו",
+    "english": "stagnated; rested on his laurels",
+    "definition": "היה שמרן ,לא התקדם"
+  },
+  {
+    "hebrew": "קפץ את ידו",
+    "english": "was tight-fisted; withheld generosity",
+    "definition": "נהג בחוסר נדיבות ,מיעט לתת"
+  },
+  {
+    "hebrew": "קץ",
+    "english": "became sick of; loathed",
+    "definition": "מאס"
+  },
+  {
+    "hebrew": "קצף (פעולה)",
+    "english": "was angry; raged",
+    "definition": "כעס על"
+  },
+  {
+    "hebrew": "קצר רוח",
+    "english": "impatient",
+    "definition": "חסר סבלנות"
+  },
+  {
+    "hebrew": "קרקע בתולה",
+    "english": "virgin soil; uncultivated land",
+    "definition": "אדמה שלא עיבדו אותה מעולם"
+  },
+  {
+    "hebrew": "קשה לב",
+    "english": "hard-hearted; cruel",
+    "definition": "אכזר ,רשע"
+  },
+  {
+    "hebrew": "קשה עורף",
+    "english": "stubborn; obstinate",
+    "definition": "עקשן"
+  },
+  {
+    "hebrew": "קשר כתרים",
+    "english": "praised highly; lavished praise",
+    "definition": "הלל ,שיבח"
+  },
+  {
+    "hebrew": "קתדרה",
+    "english": "rostrum; speaker's platform",
+    "definition": "במה קטנה שהנואם עומד עליה"
+  },
+  {
+    "hebrew": "רב-לשוני",
+    "english": "multilingual",
+    "definition": "אדם הדובר כמה שפות"
+  },
+  {
+    "hebrew": "רב-פעלים",
+    "english": "accomplished; having many achievements",
+    "definition": "אדם שעשה הרבה דברים הראויים לשבח"
+  },
+  {
+    "hebrew": "רדה",
+    "english": "extracted honey; ruled harshly",
+    "definition": "( )1הוציא דבש מהכוורת ( )2שלט ביד חזקה"
+  },
+  {
+    "hebrew": "רדיד",
+    "english": "scarf; shawl",
+    "definition": "צעיף"
+  },
+  {
+    "hebrew": "רהוט",
+    "english": "fluent; articulate",
+    "definition": "שוטף ,ברור ,ללא שגיאות"
+  },
+  {
+    "hebrew": "רוויה",
+    "english": "saturation; satiation",
+    "definition": "שובע ,עודף ממשהו ,בדרך כלל מנוזלים."
+  },
+  {
+    "hebrew": "רושף",
+    "english": "emitting sparks; blazing with anger",
+    "definition": "מתיז ניצוצות ,מלא חימה ותוכחה"
+  },
+  {
+    "hebrew": "ריפה את ידיו",
+    "english": "discouraged him",
+    "definition": "החליש התלהבות של אחר"
+  },
+  {
+    "hebrew": "רפו ידיו",
+    "english": "lost heart; despaired",
+    "definition": "התייאש"
+  },
+  {
+    "hebrew": "רקח (תכניות)",
+    "english": "devised; plotted (plans)",
+    "definition": "תכנן תכניות"
+  },
+  {
+    "hebrew": "רקח (תרופות)",
+    "english": "compounded; prepared (medicines)",
+    "definition": "הכין תרופות"
+  },
+  {
+    "hebrew": "רקיק",
+    "english": "thin flat cake; wafer",
+    "definition": "עוגה שטוחה"
+  },
+  {
+    "hebrew": "שטם",
+    "english": "hated; bore animosity",
+    "definition": "שנא"
+  },
+  {
+    "hebrew": "שם נפשו בכפו",
+    "english": "risked his life",
+    "definition": "הסתכן"
+  },
+  {
+    "hebrew": "שאון",
+    "english": "noise; clamor",
+    "definition": "רעש ,המולה"
+  },
+  {
+    "hebrew": "שאט נפש",
+    "english": "disgust; revulsion",
+    "definition": "סלידה ,מיאוס"
+  },
+  {
+    "hebrew": "שאר בשר",
+    "english": "relative; kinsman",
+    "definition": "קרוב משפחה"
+  },
+  {
+    "hebrew": "שביס",
+    "english": "headscarf; head covering",
+    "definition": "כיסוי ראש"
+  },
+  {
+    "hebrew": "שבק חיים",
+    "english": "died; passed away",
+    "definition": "הלך לעולמו ,מת"
+  },
+  {
+    "hebrew": "שומה עליו",
+    "english": "is obliged; it is his duty",
+    "definition": "מחויב ,התפקיד מוטל עליו"
+  },
+  {
+    "hebrew": "שזר",
+    "english": "interwove; braided",
+    "definition": "שילב זה בזה ,קלע ,ארג"
+  },
+  {
+    "hebrew": "שיח ושיג",
+    "english": "give-and-take; discourse; discussion",
+    "definition": "דיבור ,דיון"
+  },
+  {
+    "hebrew": "שיסה",
+    "english": "incited; set someone on another",
+    "definition": "הסית ,שלח את ..לתקוף"
+  },
+  {
+    "hebrew": "שכך",
+    "english": "subsided; abated",
+    "definition": "נחלש ,נרגע"
+  },
+  {
+    "hebrew": "שלט ברוחו",
+    "english": "controlled himself; kept his composure",
+    "definition": "התנהג באיפוק"
+  },
+  {
+    "hebrew": "שמאי",
+    "english": "appraiser; valuer",
+    "definition": "שמקצועו הוא לקבוע ולהעריך שווים של דברים"
+  },
+  {
+    "hebrew": "שפלות רוח",
+    "english": "humility; submissiveness; servility",
+    "definition": "צניעות רבה ,כניעה ,התרפסות"
+  },
+  {
+    "hebrew": "שצף",
+    "english": "gushed; flowed forcefully",
+    "definition": "זרם בחוזקה"
+  },
+  {
+    "hebrew": "שרלטן",
+    "english": "charlatan; fraud",
+    "definition": "ַרמַ אי המתיַימר להיות מּומחֶ ה"
+  },
+  {
+    "hebrew": "שרר",
+    "english": "prevailed; existed",
+    "definition": "היה ,נכח"
+  },
+  {
+    "hebrew": "תגרן",
+    "english": "peddler; small trader",
+    "definition": "רוכל  ,סוחר קטן"
+  },
+  {
+    "hebrew": "תוכחה",
+    "english": "rebuke; admonition",
+    "definition": "דברי מוסר ,דברי נזיפה"
+  },
+  {
+    "hebrew": "תיעב",
+    "english": "loathed; detested",
+    "definition": "מאס ב"
+  },
+  {
+    "hebrew": "תלם",
+    "english": "furrow",
+    "definition": "חריץ שנוצר ע\"י מחרשה"
+  },
+  {
+    "hebrew": "תמה",
+    "english": "wondered; was astonished",
+    "definition": "מתפלא ,מופתע"
+  },
+  {
+    "hebrew": "תעה",
+    "english": "lost his way; wandered astray",
+    "definition": "הגיע בטעות למקום שלא התכוונת להגיע אליו ,לא למצוא את הדרך הנכונה"
+  },
+  {
+    "hebrew": "תר",
+    "english": "toured; explored; searched",
+    "definition": "טייל ,סייר ,חיפש אחר"
+  },
+  {
+    "hebrew": "תתרן",
+    "english": "person without a sense of smell; anosmic person",
+    "definition": "חסר חוש הריח"
+  }
+]

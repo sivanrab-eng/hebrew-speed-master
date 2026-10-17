@@ -161,8 +161,8 @@ function NeonitGame() {
               <p dir="ltr" className="mt-3 font-display text-3xl font-black text-primary sm:text-4xl">{q.word.english}</p>
               {hint ? (
                 <div className="mt-4 rounded-2xl bg-muted p-3 text-right">
-                  <p className="font-hebrew text-xl leading-relaxed">{sentenceBlank(q.word)}</p>
-                  <p dir="ltr" className="mt-1 text-left text-sm italic text-muted-foreground">{q.word.exampleSentenceEnglish}</p>
+                  <p className="font-hebrew text-xl leading-relaxed">{q.word.exampleSentenceHebrew ? sentenceBlank(q.word) : q.word.definition}</p>
+                  {q.word.exampleSentenceEnglish && <p dir="ltr" className="mt-1 text-left text-sm italic text-muted-foreground">{q.word.exampleSentenceEnglish}</p>}
                 </div>
               ) : (
                 <button onClick={() => setHint(true)} disabled={!!picked} className="mx-auto mt-4 flex items-center gap-1 rounded-full border border-border bg-muted px-4 py-1.5 text-sm font-bold transition hover:border-primary"><Lightbulb className="h-4 w-4 text-primary" /> רמז <span className="hidden text-xs text-muted-foreground sm:inline">(H)</span></button>
