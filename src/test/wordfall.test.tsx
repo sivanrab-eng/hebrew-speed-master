@@ -3,9 +3,15 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { WordRain } from "@/components/WordRain";
 import { VOCAB } from "@/lib/vocab";
 import { DIFFICULTY_STORAGE_KEY, WORDFALL_WORDS } from "@/lib/wordfall-difficulty";
+import { STANDALONE_PACE } from "@/lib/word-rain-speed";
 
 vi.mock("@/lib/sfx", () => ({ sfx: { correct: vi.fn(), tick: vi.fn(), end: vi.fn(), speedUp: vi.fn() } }));
 vi.mock("@/components/Confetti", () => ({ Confetti: () => null }));
+
+const ROUND_MS = STANDALONE_PACE.roundMs;
+const arcadeTarget = () => VOCAB.find(word => screen.queryByText(word.english) && screen.queryByRole("button", { name: word.hebrew }));
+const wordfallTarget = () => WORDFALL_WORDS.find(word => screen.queryByText(word.english) && screen.queryByRole("button", { name: word.hebrew }));
+const fallingWords = () => screen.getAllByRole("button").filter(button => button.getAttribute("aria-label"));
 
 afterEach(() => { vi.useRealTimers(); localStorage.removeItem(DIFFICULTY_STORAGE_KEY); });
 
@@ -16,11 +22,11 @@ describe("Wordfall", () => {
     const view = render(<WordRain standalone muted onExit={() => {}} onGameComplete={complete} />);
     for (let i = 0; i < 10; i++) {
       if (i < 8) {
-        const target = WORDFALL_WORDS.find(word => screen.queryByText(word.english) && screen.queryByRole("button", { name: word.hebrew }));
+        const target = wordfallTarget();
         if (!target) throw new Error("No target rendered");
         fireEvent.click(screen.getByRole("button", { name: target.hebrew }));
         act(() => vi.advanceTimersByTime(650));
-      } else act(() => vi.advanceTimersByTime(6000));
+      } else act(() => vi.advanceTimersByTime(ROUND_MS + 100));
     }
     expect(complete).toHaveBeenCalledExactlyOnceWith(8);
     expect(JSON.parse(localStorage.getItem(DIFFICULTY_STORAGE_KEY) ?? "null")).toEqual({ level: 1, wins: 0 });
@@ -33,7 +39,7 @@ describe("Wordfall", () => {
     vi.useFakeTimers();
     const complete = vi.fn();
     const view = render(<WordRain standalone muted onExit={() => {}} onGameComplete={complete} />);
-    for (let i = 0; i < 10; i++) act(() => vi.advanceTimersByTime(6000));
+    for (let i = 0; i < 10; i++) act(() => vi.advanceTimersByTime(ROUND_MS + 100));
     expect(complete).toHaveBeenCalledExactlyOnceWith(0);
     view.unmount();
   });
@@ -41,7 +47,7 @@ describe("Wordfall", () => {
     vi.useFakeTimers();
     const complete = vi.fn();
     const view = render(<WordRain standalone muted onExit={() => {}} onGameComplete={complete} />);
-    const target = WORDFALL_WORDS.find(word => screen.queryByText(word.english) && screen.queryByRole("button", { name: word.hebrew }));
+    const target = wordfallTarget();
     if (!target) throw new Error("No target rendered");
     const wrong = screen.getAllByRole("button").find(button => WORDFALL_WORDS.some(word => word.hebrew === button.getAttribute("aria-label") && word !== target));
     if (!wrong) throw new Error("No distractor rendered");
@@ -50,17 +56,35 @@ describe("Wordfall", () => {
     fireEvent.click(correct);
     fireEvent.click(correct);
     act(() => vi.advanceTimersByTime(650));
-    for (let i = 0; i < 9; i++) act(() => vi.advanceTimersByTime(6000));
+    for (let i = 0; i < 9; i++) act(() => vi.advanceTimersByTime(ROUND_MS + 100));
     expect(complete).toHaveBeenCalledExactlyOnceWith(1);
     view.unmount();
   });
 
-  it("flashes a speed-up banner after three catches without pausing the round", () => {
+  it("keeps one slow fall speed in Wordfall and never shows the speed-up banner", () => {
     vi.useFakeTimers();
     const view = render(<WordRain standalone muted onExit={() => {}} />);
     for (let i = 0; i < 3; i++) {
-      const target = WORDFALL_WORDS.find(word => screen.queryByText(word.english) && screen.queryByRole("button", { name: word.hebrew }));
+      const target = wordfallTarget();
       if (!target) throw new Error("No target rendered");
+      fireEvent.click(screen.getByRole("button", { name: target.hebrew }));
+      act(() => vi.advanceTimersByTime(650));
+    }
+    expect(screen.queryByText("מגבירים קצב!")).toBeNull();
+    expect(screen.queryByText(/סיבוב 4\/10/)).not.toBeNull();
+    expect(fallingWords().every(word => word.style.animationDuration === "7s")).toBe(true);
+    act(() => vi.advanceTimersByTime(ROUND_MS + 100));
+    expect(screen.queryByText(/סיבוב 5\/10/)).not.toBeNull();
+    expect(fallingWords().every(word => word.style.animationDuration === "7s")).toBe(true);
+    view.unmount();
+  });
+
+  it("flashes a speed-up banner after three catches in the arcade game", () => {
+    vi.useFakeTimers();
+    const view = render(<WordRain muted onExit={() => {}} />);
+    for (let i = 0; i < 3; i++) {
+      const target = arcadeTarget();
+      if (!target) throw new Error("No arcade target rendered");
       fireEvent.click(screen.getByRole("button", { name: target.hebrew }));
       act(() => vi.advanceTimersByTime(650));
     }
@@ -68,7 +92,6 @@ describe("Wordfall", () => {
     expect(screen.queryByText(/סיבוב 4\/10/)).not.toBeNull();
     act(() => vi.advanceTimersByTime(1400));
     expect(screen.queryByText("מגבירים קצב!")).toBeNull();
-    // the round itself ran shorter than the initial 6s: the game never stopped
     act(() => vi.advanceTimersByTime(5460));
     expect(screen.queryByText(/סיבוב 5\/10/)).not.toBeNull();
     view.unmount();

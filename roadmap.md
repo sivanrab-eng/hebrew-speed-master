@@ -27,6 +27,7 @@
 - [ ] Activate Google Analytics — blocked: user declined the connection; measurement ID not configured.
 - [x] Tests and local end-to-end verification.
 - [x] Verify latest Wordfall on GitHub — commit 1548964 reached main, deploy run #14 green, banner confirmed live in a real browser.
+- [x] Wordfall falls slower (7s instead of 5s, ten-second rounds) and keeps one steady pace — the speed jump and its banner are off there for now; the arcade word rain keeps 5s falls, the +10% jump and the banner. Twenty-seven tests pass; full games verified in the browser for both games. Not uploaded to the separate Wordfall repository.
 
 - [x] GitHub Actions workflow ל-GitHub Pages (.github/workflows/deploy.yml)
 - [x] Prerender סטטי של עמוד המשחק (vite.config.ts)
