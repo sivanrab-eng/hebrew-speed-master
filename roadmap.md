@@ -1,5 +1,8 @@
 # Roadmap
 
+## Publish complete approved Wordfall trial
+- [ ] Upload the standalone dependency subset to sivanrab-eng/Wordfall, configure the supplied analytics ID, confirm successful GitHub Pages deployment and verify the live game; preserve ניאונית.
+
 ## Wordfall speech timing
 - [x] Sequence English 150ms after Hebrew end/error, with a two-second fallback and cancellation of stale timers. All 43 tests pass; browser instrumentation confirmed automatic sequencing, no stale English on repeat, and resumed falling after the introduction. Headless speech was checked through engine calls, not audible playback. Build OK; preview only, not uploaded.
 
