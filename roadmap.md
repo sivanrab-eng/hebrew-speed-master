@@ -54,3 +54,5 @@
 - [x] תיקון כשל CI: workflow מאתר לבד את תיקיית הפלט (dist/client או .output/public)
 
 - [x] מדריך חיבור ל-GitHub בתוך האפליקציה (מסך במשחק, נפתח ממסך הפתיחה) — נבדק בדפדפן, כולל בנייה סטטית ל-GitHub Pages
+
+- [x] Wordfall reads the new-word card aloud (Hebrew word, then its simple English meaning) when the introduction opens, with an in-card "שמיעה חוזרת" repeat button; catches keep speaking only the Hebrew word. Verified by a unit test (button present, game continues) and a live browser check capturing the queued he-IL + en-US utterances.

@@ -49,3 +49,23 @@ export function speak(text: string) {
   if (v) u.voice = v;
   window.speechSynthesis.speak(u);
 }
+
+// Reads a word aloud in Hebrew and then its everyday English meaning,
+// used on the Wordfall "new word" introduction card.
+export function speakPair(hebrew: string, english: string) {
+  if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+  window.speechSynthesis.cancel();
+  const h = new SpeechSynthesisUtterance(hebrew);
+  h.lang = "he-IL";
+  h.rate = 0.85;
+  const hv = window.speechSynthesis.getVoices().find((x) => x.lang.startsWith("he"));
+  if (hv) h.voice = hv;
+  const e = new SpeechSynthesisUtterance(english);
+  e.lang = "en-US";
+  e.rate = 0.9;
+  const ev = window.speechSynthesis.getVoices().find((x) => x.lang.startsWith("en"));
+  if (ev) e.voice = ev;
+  // Utterances are queued, so the English meaning follows the Hebrew word.
+  window.speechSynthesis.speak(h);
+  window.speechSynthesis.speak(e);
+}

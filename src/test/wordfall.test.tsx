@@ -91,6 +91,28 @@ describe("Wordfall", () => {
     expect(repeated.sort()).toEqual(targets.sort());
     view.unmount();
   });
+  it("offers a repeat-audio button on the new-word introduction card and keeps the game running", () => {
+    vi.useFakeTimers();
+    const view = render(<WordRain standalone muted onExit={() => {}} />);
+    let seen = false;
+    for (let i = 0; i < 10 && !seen; i++) {
+      if (screen.queryByText("טיפה חדשה!")) {
+        seen = true;
+        expect(() => fireEvent.click(screen.getByRole("button", { name: /שמיעה חוזרת/ }))).not.toThrow();
+        act(() => vi.advanceTimersByTime(INTRODUCTION_MS));
+        expect(screen.queryByText("טיפה חדשה!")).toBeNull();
+        expect(fallingWords()).not.toHaveLength(0);
+      } else {
+        finishIntroduction();
+        const target = wordfallTarget();
+        if (!target) throw new Error("Missing target before introduction");
+        fireEvent.click(screen.getByRole("button", { name: target.hebrew }));
+        act(() => vi.advanceTimersByTime(650));
+      }
+    }
+    expect(seen).toBe(true);
+    view.unmount();
+  });
   it("starts at level one even when an earlier visit saved level five", () => {
     vi.useFakeTimers();
     localStorage.setItem(DIFFICULTY_STORAGE_KEY, JSON.stringify({ level: 4, wins: 0 }));
