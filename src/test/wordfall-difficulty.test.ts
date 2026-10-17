@@ -39,3 +39,13 @@ describe("Wordfall vocabulary difficulty", () => {
     expect(VOCAB.find(word => word.hebrew === "אמתלה")?.english).toBe("excuse; pretext");
   });
 });
+import { mixedGameWords as mix, WORDFALL_POOLS as P } from "@/lib/wordfall-difficulty";
+describe("hard word mix", () => {
+  const id = <T,>(a: T[]) => a;
+  it.each([[0, 2], [1, 3], [2, 4], [3, 6]])("level %i has %i harder words in 10", (level, hard) => {
+    const words = mix({ level, wins: 0 }, 10, id);
+    const later = new Set(P.slice(level + 1).flat());
+    expect(words).toHaveLength(10);
+    expect(words.filter(w => later.has(w))).toHaveLength(hard);
+  });
+});

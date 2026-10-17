@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { Confetti } from "./Confetti";
 import { Button } from "@/components/ui/button";
 import { advanceRainProgress, initialRainProgress, rainTiming } from "@/lib/word-rain-speed";
-import { completeDifficulty, DIFFICULTY_STORAGE_KEY, difficultyPool, initialDifficulty, normalizeDifficulty } from "@/lib/wordfall-difficulty";
+import { completeDifficulty, DIFFICULTY_STORAGE_KEY, difficultyPool, initialDifficulty, mixedGameWords, normalizeDifficulty } from "@/lib/wordfall-difficulty";
 
 const ROUNDS = 10;
 const LANES = 3;
@@ -79,8 +79,13 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
   };
 
   const startGame = () => {
-    poolRef.current = standalone ? difficultyPool(difficultyRef.current) : VOCAB;
-    gameWordsRef.current = shuffle(poolRef.current).slice(0, ROUNDS);
+    if (standalone) {
+      gameWordsRef.current = shuffle(mixedGameWords(difficultyRef.current, ROUNDS, shuffle));
+      poolRef.current = [...new Set([...difficultyPool(difficultyRef.current), ...gameWordsRef.current])];
+    } else {
+      poolRef.current = VOCAB;
+      gameWordsRef.current = shuffle(VOCAB).slice(0, ROUNDS);
+    }
     setLevel(difficultyRef.current.level);
     setLevelUnlocked(false);
     startCallback.current?.(); nextRound(0);

@@ -31,3 +31,14 @@ export function completeDifficulty(progress: DifficultyProgress, score: number):
 export function difficultyPool(progress: DifficultyProgress): Word[] {
   return WORDFALL_POOLS[progress.level] ?? WORDFALL_POOLS[0] ?? [];
 }
+
+// Harder words borrowed from later tiers per game, growing by tier (2 → 3 → 4 → 6; last tier is all hard).
+export const HARD_MIX = [2, 3, 4, 6, 0] as const;
+
+export function mixedGameWords(progress: DifficultyProgress, rounds: number, shuffle: <T>(items: T[]) => T[]): Word[] {
+  const hardCount = Math.min(HARD_MIX[progress.level] ?? 0, rounds);
+  const later = WORDFALL_POOLS.slice(progress.level + 1).flat();
+  const hard = shuffle([...later]).slice(0, hardCount);
+  const base = shuffle([...difficultyPool(progress)]).slice(0, rounds - hard.length);
+  return [...base, ...hard];
+}
