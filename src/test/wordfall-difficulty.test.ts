@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { completeDifficulty, difficultyPool, EVERYDAY_WORDS, initialDifficulty, normalizeDifficulty, WORDFALL_POOLS, repeatedGameWords, needsIntroduction } from "@/lib/wordfall-difficulty";
+import { completeDifficulty, difficultyPool, EVERYDAY_WORDS, initialDifficulty, INTRODUCTION_MS, normalizeDifficulty, WORDFALL_POOLS, repeatedGameWords, needsIntroduction } from "@/lib/wordfall-difficulty";
 import { VOCAB } from "@/lib/vocab";
 
 describe("Wordfall vocabulary difficulty", () => {
@@ -14,6 +14,9 @@ describe("Wordfall vocabulary difficulty", () => {
     expect(first).toEqual({ level: 1, wins: 0 });
     expect(completeDifficulty(first, 8)).toEqual({ level: 2, wins: 0 });
     expect(difficultyPool({ level: 1, wins: 0 })).not.toEqual(difficultyPool(initialDifficulty()));
+  });
+  it("holds a new word on screen long enough to read calmly", () => {
+    expect(INTRODUCTION_MS).toBe(6000);
   });
   it("does not remove progress or promote on a lower score", () => {
     expect(completeDifficulty({ level: 2, wins: 1 }, 7)).toEqual({ level: 2, wins: 1 });
