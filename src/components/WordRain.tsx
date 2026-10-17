@@ -59,6 +59,7 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
   const nextRound = (r: number) => {
     setRound(r);
     lockedRef.current = false;
+    setIntroducing(false);
     if (r >= ROUNDS) {
       if (standalone) {
         const next = completeDifficulty(difficultyRef.current, scoreRef.current);
@@ -75,19 +76,32 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
     const lanes = shuffle([word, ...others]);
     setTarget(word);
     setHits(new Set()); setMisses(new Set());
-    setDrops(lanes.map((w, i) => ({ word: w, lane: i, key: `${r}-${w.hebrew}` })));
     if (timerRef.current) clearTimeout(timerRef.current);
-    // no penalty: if time runs out, just move on
-    timerRef.current = setTimeout(() => {
-      progressRef.current = advanceRainProgress(progressRef.current, false, rules);
-      nextRound(r + 1);
-    }, rainTiming(speed, pace).roundMs);
+    const beginFall = () => {
+      setIntroducing(false);
+      lockedRef.current = false;
+      setDrops(lanes.map((w, i) => ({ word: w, lane: i, key: `${r}-${w.hebrew}` })));
+      // The full catch window starts only after the new-word introduction.
+      timerRef.current = setTimeout(() => {
+        progressRef.current = advanceRainProgress(progressRef.current, false, rules);
+        nextRound(r + 1);
+      }, rainTiming(speed, pace).roundMs);
+    };
+    if (standalone && needsIntroduction(word, introducedRef.current)) {
+      introducedRef.current.add(word.hebrew);
+      lockedRef.current = true;
+      setIntroducing(true);
+      setDrops([]);
+      timerRef.current = setTimeout(beginFall, INTRODUCTION_MS);
+    } else beginFall();
   };
 
   const startGame = () => {
     if (standalone) {
-      gameWordsRef.current = shuffle(mixedGameWords(difficultyRef.current, ROUNDS, shuffle));
-      poolRef.current = [...new Set([...difficultyPool(difficultyRef.current), ...gameWordsRef.current])];
+      batchRef.current = repeatedGameWords(difficultyRef.current, batchRef.current, completedGamesRef.current, ROUNDS, shuffle);
+      gameWordsRef.current = shuffle(batchRef.current);
+      // Keep distractors familiar too, rather than importing the entire rich tier.
+      poolRef.current = gameWordsRef.current;
     } else {
       poolRef.current = VOCAB;
       gameWordsRef.current = shuffle(VOCAB).slice(0, ROUNDS);
@@ -124,7 +138,16 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
     }
   };
 
-  const restart = () => { progressRef.current = initialRainProgress(); scoreRef.current = 0; setScore(0); setRound(0); setDone(false); if (speedTimerRef.current) clearTimeout(speedTimerRef.current); setSpeedFlash(0); startGame(); };
+  const restart = (advance = false) => {
+    if (advance && standalone && levelUnlocked) {
+      difficultyRef.current = completeDifficulty(difficultyRef.current, scoreRef.current);
+      batchRef.current = [];
+      completedGamesRef.current = 0;
+    }
+    progressRef.current = initialRainProgress(); scoreRef.current = 0; setScore(0); setRound(0); setDone(false);
+    if (speedTimerRef.current) clearTimeout(speedTimerRef.current);
+    setSpeedFlash(0); startGame();
+  };
 
   return (
     <section className={cn("flex flex-col gap-4", standalone && "wordfall-game")}>
@@ -151,6 +174,14 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
             </div>
           )}
           <div className="relative h-80 overflow-hidden rounded-3xl border border-border bg-muted/50">
+            {introducing && target && (
+              <div role="status" aria-live="polite" className="absolute inset-0 flex flex-col items-center justify-center gap-4 px-6 text-center">
+                <CloudRain className="h-9 w-9 text-secondary" />
+                <p className="font-display text-lg text-secondary">טיפה חדשה!</p>
+                <p className="break-words font-hebrew text-4xl font-bold text-foreground">{target.hebrew}</p>
+                <p dir="ltr" className="text-xl text-primary">{target.english}</p>
+              </div>
+            )}
             {drops.map((d, i) => (
               <Button
                 key={d.key}
@@ -172,13 +203,14 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
           {standalone ? <CloudRain className="mx-auto h-16 w-16 text-secondary" /> : <p className="text-6xl">🌧️✨</p>}
           <h2 className="mt-2 font-display text-3xl font-black">כל הכבוד!</h2>
           <p className="mt-1 text-muted-foreground">תפסת {score} מתוך {ROUNDS} מילים</p>
-          {standalone && levelUnlocked && <p role="status" className="mt-3 font-display text-lg text-secondary">שלב {difficultyRef.current.level + 1} נפתח!</p>}
+          {standalone && levelUnlocked && <p role="status" className="mt-3 font-display text-lg text-secondary">שלב {level + 2} זמין!</p>}
           <div className="mt-3 flex justify-center gap-1">
             {Array.from({ length: ROUNDS }, (_, i) => (
               <Heart key={i} className={cn("h-6 w-6", i < score ? "fill-primary text-primary" : "text-border")} />
             ))}
           </div>
-          <Button onClick={restart} className="mt-6 h-14 w-full text-xl font-black shadow-[var(--shadow-pop)]"><RotateCcw className="h-5 w-5" /> עוד פעם</Button>
+          <Button onClick={() => restart()} className="mt-6 h-14 w-full text-xl font-black shadow-[var(--shadow-pop)]"><RotateCcw className="h-5 w-5" /> עוד פעם</Button>
+          {standalone && levelUnlocked && <Button variant="outline" onClick={() => restart(true)} className="mt-3 h-12 w-full text-lg"><Zap className="h-5 w-5" /> לשלב {level + 2}</Button>}
         </div>
       ) : null}
     </section>
