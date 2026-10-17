@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { completeDifficulty, difficultyPool, initialDifficulty, normalizeDifficulty, WORDFALL_POOLS } from "@/lib/wordfall-difficulty";
+import { completeDifficulty, difficultyPool, EVERYDAY_WORDS, initialDifficulty, normalizeDifficulty, WORDFALL_POOLS } from "@/lib/wordfall-difficulty";
 import { VOCAB } from "@/lib/vocab";
 
 describe("Wordfall vocabulary difficulty", () => {
@@ -42,6 +42,14 @@ describe("Wordfall vocabulary difficulty", () => {
 import { mixedGameWords as mix, WORDFALL_POOLS as P } from "@/lib/wordfall-difficulty";
 describe("hard word mix", () => {
   const id = <T,>(a: T[]) => a;
+  it.each([0, 1, 2, 3, 4])("includes exactly three everyday and seven rich words at level %i", level => {
+    const words = mix({ level, wins: 0 }, 10, id);
+    expect(words).toHaveLength(10);
+    expect(words.filter(word => EVERYDAY_WORDS.includes(word))).toHaveLength(3);
+    expect(words.filter(word => P.flat().includes(word))).toHaveLength(7);
+    expect(new Set(words.map(word => word.hebrew)).size).toBe(10);
+    expect(words.every(word => word.english.trim().split(/\s+/).length <= 12)).toBe(true);
+  });
   it.each([[0, 2], [1, 3], [2, 4], [3, 6]])("level %i has %i harder words in 10", (level, hard) => {
     const words = mix({ level, wins: 0 }, 10, id);
     const later = new Set(P.slice(level + 1).flat());

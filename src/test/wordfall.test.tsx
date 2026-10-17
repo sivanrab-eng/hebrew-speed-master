@@ -10,6 +10,25 @@ vi.mock("@/components/Confetti", () => ({ Confetti: () => null }));
 afterEach(() => { vi.useRealTimers(); localStorage.removeItem(DIFFICULTY_STORAGE_KEY); });
 
 describe("Wordfall", () => {
+  it("unlocks and saves the next tier after one full game with exactly eight catches", () => {
+    vi.useFakeTimers();
+    const complete = vi.fn();
+    const view = render(<WordRain standalone muted onExit={() => {}} onGameComplete={complete} />);
+    for (let i = 0; i < 10; i++) {
+      if (i < 8) {
+        const target = WORDFALL_WORDS.find(word => screen.queryByText(word.english) && screen.queryByRole("button", { name: word.hebrew }));
+        if (!target) throw new Error("No target rendered");
+        fireEvent.click(screen.getByRole("button", { name: target.hebrew }));
+        act(() => vi.advanceTimersByTime(650));
+      } else act(() => vi.advanceTimersByTime(6000));
+    }
+    expect(complete).toHaveBeenCalledExactlyOnceWith(8);
+    expect(JSON.parse(localStorage.getItem(DIFFICULTY_STORAGE_KEY) ?? "null")).toEqual({ level: 1, wins: 0 });
+    view.unmount();
+    const restored = render(<WordRain standalone muted onExit={() => {}} />);
+    expect(screen.queryByText(/שלב 2 · סיבוב 1\/10/)).not.toBeNull();
+    restored.unmount();
+  });
   it("finishes after ten rounds, including missed drops", () => {
     vi.useFakeTimers();
     const complete = vi.fn();
