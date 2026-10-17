@@ -1,5 +1,8 @@
 # Roadmap
 
+## Wordfall speech timing
+- [ ] Sequence English 150ms after Hebrew end/error, with a two-second fallback and cancellation of stale timers; verify tests and preview only, without uploading.
+
 ## Wordfall calm reading
 - [x] Hold the new-word card (Hebrew word with its simple English meaning) on screen for six seconds before the words start falling, with nothing falling during the pause; 31 tests pass and the live preview measured 6.0s twice. Preview only, not uploaded.
 
