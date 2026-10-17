@@ -1,7 +1,7 @@
 # Roadmap
 
 ## Publish approved Wordfall update
-- [ ] Upload the approved confidence mix, one-game tier unlock, and slower fixed pace to the separate Wordfall repository; verify its deployment and a complete live game, preserving ניאונית.
+- [x] Uploaded the approved confidence mix, one-game tier unlock, and slower fixed pace to the separate Wordfall repository (commit 6a8f21c); deployment succeeded. Complete live game verified: exactly three everyday words, 8/10 catches unlock tier 2 with refresh persistence, fixed 7s falls, no speed banner or runtime errors. ניאונית unchanged.
 
 ## Wordfall confidence mix
 - [x] Include exactly three everyday Hebrew targets in every ten-round standalone game at all five tiers; preserve seven rich words and simple English, leaving other games unchanged. All 25 targeted tests pass.
