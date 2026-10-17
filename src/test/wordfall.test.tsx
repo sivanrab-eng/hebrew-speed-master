@@ -22,7 +22,7 @@ describe("Wordfall", () => {
     vi.useFakeTimers();
     const complete = vi.fn();
     const view = render(<WordRain standalone muted onExit={() => {}} onGameComplete={complete} />);
-    const target = WORDFALL_WORDS.find(word => screen.queryByText(word.english));
+    const target = WORDFALL_WORDS.find(word => screen.queryByText(word.english) && screen.queryByRole("button", { name: word.hebrew }));
     if (!target) throw new Error("No target rendered");
     const wrong = screen.getAllByRole("button").find(button => WORDFALL_WORDS.some(word => word.hebrew === button.getAttribute("aria-label") && word !== target));
     if (!wrong) throw new Error("No distractor rendered");
@@ -40,7 +40,7 @@ describe("Wordfall", () => {
     vi.useFakeTimers();
     const view = render(<WordRain standalone muted onExit={() => {}} />);
     for (let i = 0; i < 3; i++) {
-      const target = WORDFALL_WORDS.find(word => screen.queryByText(word.english));
+      const target = WORDFALL_WORDS.find(word => screen.queryByText(word.english) && screen.queryByRole("button", { name: word.hebrew }));
       if (!target) throw new Error("No target rendered");
       fireEvent.click(screen.getByRole("button", { name: target.hebrew }));
       act(() => vi.advanceTimersByTime(650));
