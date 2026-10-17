@@ -1,5 +1,8 @@
 # Roadmap
 
+## Wordfall easy start
+- [ ] Add everyday starter words and gradual success-based difficulty between games, preserving other games; test locally and update the separate Wordfall site.
+
 ## Separate Wordfall repository
 - [x] Upload only the standalone falling-word game to sivanrab-eng/Wordfall, retaining the original application; GitHub deployment succeeded and the live game completed with 10/10 catches, speed banner and restart, with no browser errors.
 
