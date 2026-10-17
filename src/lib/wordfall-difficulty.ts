@@ -22,10 +22,10 @@ export function normalizeDifficulty(value: unknown): DifficultyProgress {
   return { level, wins };
 }
 
-// Two strong completed games unlock one tier; mistakes never remove earned progress.
+// One strong completed game (8+ catches) unlocks the next tier; mistakes never remove earned progress.
 export function completeDifficulty(progress: DifficultyProgress, score: number): DifficultyProgress {
   if (score < 8 || progress.level >= WORDFALL_POOLS.length - 1) return progress;
-  return progress.wins === 1 ? { level: progress.level + 1, wins: 0 } : { ...progress, wins: 1 };
+  return { level: progress.level + 1, wins: 0 };
 }
 
 export function difficultyPool(progress: DifficultyProgress): Word[] {

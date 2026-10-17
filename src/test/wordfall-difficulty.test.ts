@@ -9,10 +9,10 @@ describe("Wordfall vocabulary difficulty", () => {
     expect(pool.some(word => word.hebrew === "בית")).toBe(false);
     expect(pool.some(word => word.hebrew === "כלב")).toBe(false);
   });
-  it("unlocks only one tier after two games with at least eight catches", () => {
+  it("unlocks the next tier after a single game with at least eight catches", () => {
     const first = completeDifficulty(initialDifficulty(), 8);
-    expect(first).toEqual({ level: 0, wins: 1 });
-    expect(completeDifficulty(first, 8)).toEqual({ level: 1, wins: 0 });
+    expect(first).toEqual({ level: 1, wins: 0 });
+    expect(completeDifficulty(first, 8)).toEqual({ level: 2, wins: 0 });
     expect(difficultyPool({ level: 1, wins: 0 })).not.toEqual(difficultyPool(initialDifficulty()));
   });
   it("does not remove progress or promote on a lower score", () => {
