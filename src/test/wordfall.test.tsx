@@ -213,7 +213,7 @@ describe("Wordfall", () => {
     view.unmount();
   });
 
-  it("repeats the same ten words on replay without introducing them again", () => {
+  it("refreshes four everyday and one rich word on replay, introducing only the new rich target", () => {
     vi.useFakeTimers();
     const view = render(<WordRain standalone muted onExit={() => {}} />);
     const targets: string[] = [];
@@ -228,15 +228,21 @@ describe("Wordfall", () => {
     expect(screen.queryByText(/כל הכבוד/)).not.toBeNull();
     fireEvent.click(screen.getByRole("button", { name: /עוד פעם/ }));
     const repeated: string[] = [];
+    let introductions = 0;
     for (let i = 0; i < 10; i++) {
-      expect(screen.queryByText("טיפה חדשה!")).toBeNull();
+      const introducing = !!screen.queryByText("טיפה חדשה!");
+      if (introducing) { introductions += 1; finishIntroduction(); }
       const target = wordfallTarget();
       if (!target) throw new Error("Missing repeated target");
+      expect(introducing).toBe(!targets.includes(target.hebrew) && !EVERYDAY_WORDS.some(word => word.hebrew === target.hebrew));
       repeated.push(target.hebrew);
       fireEvent.click(screen.getByRole("button", { name: target.hebrew }));
       settleNextRound();
     }
-    expect(repeated.sort()).toEqual(targets.sort());
+    const changed = repeated.filter(label => !targets.includes(label));
+    expect(changed).toHaveLength(5);
+    expect(changed.filter(label => EVERYDAY_WORDS.some(word => word.hebrew === label))).toHaveLength(4);
+    expect(introductions).toBe(1);
     view.unmount();
   });
   it("offers a repeat-audio button on the new-word introduction card and keeps the game running", () => {
