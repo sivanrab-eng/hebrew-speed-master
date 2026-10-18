@@ -1,22 +1,602 @@
 {
-  "בית": { "hebrew": "אני גר ב[בית] גדול.", "english": "I live in a big house." },
-  "כלב": { "hebrew": "ה[כלב] שלי אוהב לשחק.", "english": "My dog likes to play." },
-  "חתול": { "hebrew": "ה[חתול] ישן על המיטה.", "english": "The cat sleeps on the bed." },
-  "מים": { "hebrew": "אני שותה [מים] אחרי המשחק.", "english": "I drink water after the game." },
-  "לחם": { "hebrew": "אכלנו [לחם] עם גבינה.", "english": "We ate bread with cheese." },
-  "שמש": { "hebrew": "ה[שמש] מאירה את הגינה.", "english": "The sun lights up the garden." },
-  "ירח": { "hebrew": "ראינו [ירח] גדול בשמים.", "english": "We saw a big moon in the sky." },
-  "ים": { "hebrew": "הלכנו ל[ים] ביום חם.", "english": "We went to the sea on a hot day." },
-  "עץ": { "hebrew": "יש [עץ] ליד הבית שלנו.", "english": "There is a tree next to our house." },
-  "פרח": { "hebrew": "מצאתי [פרח] קטן בגינה.", "english": "I found a small flower in the garden." },
-  "ספר": { "hebrew": "אני קורא [ספר] לפני השינה.", "english": "I read a book before bed." },
-  "כדור": { "hebrew": "שיחקנו ב[כדור] בחצר.", "english": "We played ball in the yard." },
-  "שמח": { "hebrew": "אני [שמח] לראות אותך.", "english": "I am happy to see you." },
-  "גדול": { "hebrew": "יש לנו שולחן [גדול] במטבח.", "english": "We have a big table in the kitchen." },
-  "קטן": { "hebrew": "ראיתי כלב [קטן] ברחוב.", "english": "I saw a small dog in the street." },
-  "לשחק": { "hebrew": "אנחנו אוהבים [לשחק] ביחד.", "english": "We like to play together." },
-  "לרוץ": { "hebrew": "אני אוהב [לרוץ] בפארק.", "english": "I like to run in the park." },
-  "לישון": { "hebrew": "הגיע הזמן [לישון] עכשיו.", "english": "It is time to sleep now." },
-  "לאכול": { "hebrew": "בואו [לאכול] ארוחת ערב.", "english": "Come and eat dinner." },
-  "לשתות": { "hebrew": "אפשר [לשתות] מים כאן.", "english": "You can drink water here." }
+  "בית": {
+    "hebrew": "אני גר ב[בית] גדול.",
+    "english": "I live in a big house."
+  },
+  "כלב": {
+    "hebrew": "ה[כלב] שלי אוהב לשחק.",
+    "english": "My dog likes to play."
+  },
+  "חתול": {
+    "hebrew": "ה[חתול] ישן על המיטה.",
+    "english": "The cat sleeps on the bed."
+  },
+  "מים": {
+    "hebrew": "אני שותה [מים] אחרי המשחק.",
+    "english": "I drink water after the game."
+  },
+  "לחם": {
+    "hebrew": "אכלנו [לחם] עם גבינה.",
+    "english": "We ate bread with cheese."
+  },
+  "שמש": {
+    "hebrew": "ה[שמש] מאירה את הגינה.",
+    "english": "The sun lights up the garden."
+  },
+  "ירח": {
+    "hebrew": "ראינו [ירח] גדול בשמים.",
+    "english": "We saw a big moon in the sky."
+  },
+  "ים": {
+    "hebrew": "הלכנו ל[ים] ביום חם.",
+    "english": "We went to the sea on a hot day."
+  },
+  "עץ": {
+    "hebrew": "יש [עץ] ליד הבית שלנו.",
+    "english": "There is a tree next to our house."
+  },
+  "פרח": {
+    "hebrew": "מצאתי [פרח] קטן בגינה.",
+    "english": "I found a small flower in the garden."
+  },
+  "ספר": {
+    "hebrew": "אני קורא [ספר] לפני השינה.",
+    "english": "I read a book before bed."
+  },
+  "כדור": {
+    "hebrew": "שיחקנו ב[כדור] בחצר.",
+    "english": "We played ball in the yard."
+  },
+  "שמח": {
+    "hebrew": "אני [שמח] לראות אותך.",
+    "english": "I am happy to see you."
+  },
+  "גדול": {
+    "hebrew": "יש לנו שולחן [גדול] במטבח.",
+    "english": "We have a big table in the kitchen."
+  },
+  "קטן": {
+    "hebrew": "ראיתי כלב [קטן] ברחוב.",
+    "english": "I saw a small dog in the street."
+  },
+  "לשחק": {
+    "hebrew": "אנחנו אוהבים [לשחק] ביחד.",
+    "english": "We like to play together."
+  },
+  "לרוץ": {
+    "hebrew": "אני אוהב [לרוץ] בפארק.",
+    "english": "I like to run in the park."
+  },
+  "לישון": {
+    "hebrew": "הגיע הזמן [לישון] עכשיו.",
+    "english": "It is time to sleep now."
+  },
+  "לאכול": {
+    "hebrew": "בואו [לאכול] ארוחת ערב.",
+    "english": "Come and eat dinner."
+  },
+  "לשתות": {
+    "hebrew": "אפשר [לשתות] מים כאן.",
+    "english": "You can drink water here."
+  },
+  "אגד": {
+    "hebrew": "האחות עטפה את היד ב[אגד] נקי.",
+    "english": "The nurse wrapped the hand in a clean bandage."
+  },
+  "אדווה": {
+    "hebrew": "[אדווה] קטנה נוצרה על המים.",
+    "english": "A small ripple formed on the water."
+  },
+  "אוושה": {
+    "hebrew": "שמענו [אוושה] בין עלי העץ.",
+    "english": "We heard rustling among the leaves."
+  },
+  "אוזן ערלה": {
+    "hebrew": "הוא הקשיב לבקשותיי ב[אוזן ערלה].",
+    "english": "He turned a deaf ear to my requests."
+  },
+  "איחה": {
+    "hebrew": "הרופא [איחה] את שולי הפצע.",
+    "english": "The doctor joined the edges of the wound."
+  },
+  "אלומה": {
+    "hebrew": "האיכר קשר [אלומה] של שיבולים.",
+    "english": "The farmer tied a bundle of grain stalks."
+  },
+  "אמודאי": {
+    "hebrew": "[אמודאי] ירד לבדוק את הספינה.",
+    "english": "A diver went down to inspect the ship."
+  },
+  "אמיר": {
+    "hebrew": "ציפור ישבה על [אמיר] העץ.",
+    "english": "A bird sat at the top of the tree."
+  },
+  "אמת מים": {
+    "hebrew": "[אמת מים] הובילה מים לכפר.",
+    "english": "An aqueduct carried water to the village."
+  },
+  "אמתלה": {
+    "hebrew": "הוא מצא [אמתלה] להישאר בבית.",
+    "english": "He found an excuse to stay home."
+  },
+  "אצר": {
+    "hebrew": "סבא [אצר] מכתבים ישנים בקופסה.",
+    "english": "Grandpa kept old letters in a box."
+  },
+  "אקרן": {
+    "hebrew": "הסרט הוקרן על [אקרן] גדול.",
+    "english": "The film was shown on a large screen."
+  },
+  "ארך אפיים": {
+    "hebrew": "המורה [ארך אפיים] כשהילדים מרעישים.",
+    "english": "The teacher is patient when the children are noisy."
+  },
+  "ארכני": {
+    "hebrew": "הסיפור היה [ארכני], והילדים התעייפו.",
+    "english": "The story was too long, and the children grew tired."
+  },
+  "ברא": {
+    "hebrew": "האיכר [ברא] את היער ליד ביתו.",
+    "english": "The farmer cleared the forest near his house."
+  },
+  "בור": {
+    "hebrew": "הוא היה [בור] בתחום, וביקש ללמוד.",
+    "english": "He knew nothing about the subject and wanted to learn."
+  },
+  "בא בימים": {
+    "hebrew": "סבי [בא בימים], אך עדיין מטייל.",
+    "english": "My grandfather is old but still goes on walks."
+  },
+  "באו בדברים": {
+    "hebrew": "השכנים [באו בדברים] כדי לפתור בעיה.",
+    "english": "The neighbors held talks to solve a problem."
+  },
+  "בגפו": {
+    "hebrew": "הוא גר [בגפו] בבית קטן.",
+    "english": "He lives alone in a small house."
+  },
+  "בדימוס": {
+    "hebrew": "השופט [בדימוס] עוזר בבית הספר.",
+    "english": "The retired judge helps at the school."
+  },
+  "בושש": {
+    "hebrew": "האוטובוס [בושש] להגיע, וחיכינו בגשם.",
+    "english": "The bus was late, and we waited in the rain."
+  },
+  "בזעיר אנפין": {
+    "hebrew": "הדגם מציג את העיר [בזעיר אנפין].",
+    "english": "The model shows the city in miniature."
+  },
+  "ביאור": {
+    "hebrew": "המורה נתנה [ביאור] פשוט למשפט.",
+    "english": "The teacher gave a simple explanation of the sentence."
+  },
+  "בין המצרים": {
+    "hebrew": "ללא כסף ועבודה, הוא נמצא [בין המצרים].",
+    "english": "Without money or work, he is in a difficult situation."
+  },
+  "ביעף": {
+    "hebrew": "היא עברה [ביעף] על רשימת הקניות.",
+    "english": "She quickly looked over the shopping list."
+  },
+  "בירוא": {
+    "hebrew": "[בירוא] היער השאיר חיות ללא בית.",
+    "english": "Clearing the forest left animals without a home."
+  },
+  "בית בד": {
+    "hebrew": "בכפר יש [בית בד] להכנת שמן.",
+    "english": "There is an olive press in the village for making oil."
+  },
+  "בית מרזח": {
+    "hebrew": "בסיפור, המלחים נפגשו ב[בית מרזח].",
+    "english": "In the story, the sailors met in a tavern."
+  },
+  "בכליון עיניים": {
+    "hebrew": "הילדים חיכו [בכליון עיניים] לבוא סבתא.",
+    "english": "The children eagerly waited for Grandma to arrive."
+  },
+  "בכר": {
+    "hebrew": "[בכר] קטן הלך אחרי אמו במדבר.",
+    "english": "A young camel followed its mother in the desert."
+  },
+  "במפגיע": {
+    "hebrew": "היא דרשה [במפגיע] שיחזירו את כספה.",
+    "english": "She firmly demanded her money back."
+  },
+  "בן בליעל": {
+    "hebrew": "בסיפור, [בן בליעל] גנב את האוצר.",
+    "english": "In the story, a scoundrel stole the treasure."
+  },
+  "בן לוויה": {
+    "hebrew": "לטיול חיפשתי [בן לוויה] נחמד.",
+    "english": "I looked for a nice companion for the trip."
+  },
+  "בן תשחורת": {
+    "hebrew": "כשהיה [בן תשחורת], עבד בחנות אביו.",
+    "english": "As a youth, he worked in his father's shop."
+  },
+  "בעיניים כלות": {
+    "hebrew": "היא חיכתה [בעיניים כלות], אך איש לא בא.",
+    "english": "She waited with longing, but no one came."
+  },
+  "בעליל": {
+    "hebrew": "הסיפור הזה שקרי [בעליל].",
+    "english": "This story is clearly false."
+  },
+  "בר-כיבוש": {
+    "hebrew": "הכעס הזה [בר-כיבוש], אם ננשום לאט.",
+    "english": "This anger can be controlled if we breathe slowly."
+  },
+  "בר-מינן": {
+    "hebrew": "בסיפור, קברו את ה[בר-מינן] ליד הוריו.",
+    "english": "In the story, the deceased was buried beside his parents."
+  },
+  "בריש גלי": {
+    "hebrew": "היא אמרה את דעתה [בריש גלי].",
+    "english": "She expressed her opinion openly."
+  },
+  "ברם": {
+    "hebrew": "רציתי לבוא, [ברם] לא הרגשתי טוב.",
+    "english": "I wanted to come, but I did not feel well."
+  },
+  "גאה": {
+    "hebrew": "הנהר [גאה] אחרי הגשם החזק.",
+    "english": "The river rose after the heavy rain."
+  },
+  "גדד": {
+    "hebrew": "האיכר [גדד] תמרים מן הדקל.",
+    "english": "The farmer harvested dates from the palm tree."
+  },
+  "גהר": {
+    "hebrew": "הרופא [גהר] מעל הילד ובדק אותו.",
+    "english": "The doctor bent over the boy and examined him."
+  },
+  "גולה": {
+    "hebrew": "[גולה] מארצו מצא בית בכפר שלנו.",
+    "english": "An exile from his country found a home in our village."
+  },
+  "גיבב": {
+    "hebrew": "הוא [גיבב] בגדים על הכיסא.",
+    "english": "He piled clothes haphazardly on the chair."
+  },
+  "גילה את אוזנו": {
+    "hebrew": "דני [גילה את אוזנו] של חברו בדבר ההפתעה.",
+    "english": "Danny told his friend the secret about the surprise."
+  },
+  "גילופין": {
+    "hebrew": "בסיפור, האיש חזר כשהיה ב[גילופין].",
+    "english": "In the story, the man returned slightly drunk."
+  },
+  "גלב": {
+    "hebrew": "ה[גלב] גילח את זקנו של אבי.",
+    "english": "The barber shaved my father's beard."
+  },
+  "גמר אומר": {
+    "hebrew": "הוא [גמר אומר] ללמוד לנגן.",
+    "english": "He made up his mind to learn to play music."
+  },
+  "גנזך": {
+    "hebrew": "המכתבים הישנים נשמרים ב[גנזך] העירייה.",
+    "english": "The old letters are kept in the city archive."
+  },
+  "גרגרן": {
+    "hebrew": "בסיפור, ה[גרגרן] אכל את כל העוגה.",
+    "english": "In the story, the greedy eater ate the whole cake."
+  },
+  "דלק": {
+    "hebrew": "הכלב [דלק] אחרי החתול ברחוב.",
+    "english": "The dog chased the cat down the street."
+  },
+  "דובב": {
+    "hebrew": "המורה [דובב] את הילד בשאלות פשוטות.",
+    "english": "The teacher got the boy talking with simple questions."
+  },
+  "דידה": {
+    "hebrew": "הפעוט [דידה] לאט אל אמו.",
+    "english": "The toddler toddled slowly toward his mother."
+  },
+  "דמעות תנין": {
+    "hebrew": "הוא הזיל [דמעות תנין] ולא באמת הצטער.",
+    "english": "He shed fake tears and was not truly sorry."
+  },
+  "דרך חתחתים": {
+    "hebrew": "עברנו [דרך חתחתים] עד שהגענו לבית.",
+    "english": "We traveled a difficult path before reaching the house."
+  },
+  "המרה": {
+    "hebrew": "הילד [המרה] את פי אביו.",
+    "english": "The boy disobeyed his father."
+  },
+  "התרה": {
+    "hebrew": "האב [התרה] בילד שלא יתקרב לאש.",
+    "english": "The father warned the boy not to go near the fire."
+  },
+  "העלה חרס בידו": {
+    "hebrew": "הוא חיפש את המפתח, אך [העלה חרס בידו].",
+    "english": "He looked for the key but had no success."
+  },
+  "השגה": {
+    "hebrew": "יש לי [השגה] על ההחלטה הזאת.",
+    "english": "I have an objection to this decision."
+  },
+  "האמיר": {
+    "hebrew": "מחיר הלחם [האמיר] בשנה האחרונה.",
+    "english": "The price of bread rose sharply over the past year."
+  },
+  "הבליח": {
+    "hebrew": "אור קטן [הבליח] בחושך ונעלם.",
+    "english": "A small light flashed in the darkness and disappeared."
+  },
+  "הגיף": {
+    "hebrew": "הוא [הגיף] את התריסים לפני השינה.",
+    "english": "He shut the shutters before bed."
+  },
+  "הדום": {
+    "hebrew": "סבתא הניחה את רגליה על [הדום].",
+    "english": "Grandma rested her feet on a footstool."
+  },
+  "הדיוט": {
+    "hebrew": "אני [הדיוט] ברפואה, ולכן שאלתי רופא.",
+    "english": "I am not an expert in medicine, so I asked a doctor."
+  },
+  "הדיח": {
+    "hebrew": "בסיפור, הוא [הדיח] את חברו לגנוב.",
+    "english": "In the story, he persuaded his friend to steal."
+  },
+  "הדיף": {
+    "hebrew": "הלחם הטרי [הדיף] ריח נעים.",
+    "english": "The fresh bread gave off a pleasant smell."
+  },
+  "הוכיח": {
+    "hebrew": "הצילום [הוכיח] שהכלב היה בגינה.",
+    "english": "The photo proved that the dog was in the garden."
+  },
+  "הולאם": {
+    "hebrew": "הבנק [הולאם] ועבר לידי המדינה.",
+    "english": "The bank became state property."
+  },
+  "הזים": {
+    "hebrew": "הסרטון [הזים] את הטענה שהוא גנב.",
+    "english": "The video disproved the claim that he had stolen."
+  },
+  "היה לו לרועץ": {
+    "hebrew": "חוסר הניסיון [היה לו לרועץ] בראיון.",
+    "english": "His lack of experience worked against him in the interview."
+  },
+  "היסה": {
+    "hebrew": "המורה [היסה] את הילדים בזמן הסרט.",
+    "english": "The teacher hushed the children during the film."
+  },
+  "היקוות": {
+    "hebrew": "[היקוות] המים בחצר יצרה שלולית.",
+    "english": "Water collecting in the yard formed a puddle."
+  },
+  "הכביר": {
+    "hebrew": "הוא [הכביר] מילים במקום לענות בקצרה.",
+    "english": "He used too many words instead of answering briefly."
+  },
+  "הכמין": {
+    "hebrew": "הילד [הכמין] את הממתקים מתחת למיטה.",
+    "english": "The boy hid the sweets under the bed."
+  },
+  "הלבין את פניו": {
+    "hebrew": "הוא [הלבין את פניו] מול כולם.",
+    "english": "He humiliated him in front of everyone."
+  },
+  "הלעיט": {
+    "hebrew": "בסיפור, הוא [הלעיט] את הילד בממתקים.",
+    "english": "In the story, he overfed the boy with sweets."
+  },
+  "המיר": {
+    "hebrew": "הוא [המיר] דולרים לשקלים לפני הטיול.",
+    "english": "He exchanged dollars for shekels before the trip."
+  },
+  "הניא": {
+    "hebrew": "הגשם [הניא] אותנו מלצאת לטיול.",
+    "english": "The rain discouraged us from going on a trip."
+  },
+  "הנץ": {
+    "hebrew": "יצאנו לדרך עם [הנץ] החמה.",
+    "english": "We set off at sunrise."
+  },
+  "הס": {
+    "hebrew": "[הס], התינוק ישן בחדר לידנו!",
+    "english": "Hush, the baby is sleeping next door!"
+  },
+  "הסכית": {
+    "hebrew": "הילד [הסכית] לדברי סבו.",
+    "english": "The boy listened carefully to his grandfather."
+  },
+  "הסלים": {
+    "hebrew": "הוויכוח [הסלים] כשהם התחילו לצעוק.",
+    "english": "The argument got worse when they started shouting."
+  },
+  "הסתגף": {
+    "hebrew": "בסיפור, הנזיר [הסתגף] ואכל מעט לחם.",
+    "english": "In the story, the monk denied himself comforts and ate little bread."
+  },
+  "העלה ארוכה": {
+    "hebrew": "הפצע [העלה ארוכה] לאחר כמה שבועות.",
+    "english": "The wound healed after a few weeks."
+  },
+  "הפליא מכותיו": {
+    "hebrew": "בסיפור, האיש [הפליא מכותיו] באויב.",
+    "english": "In the story, the man beat the enemy severely."
+  },
+  "הפציר": {
+    "hebrew": "הילד [הפציר] באמו לקנות לו כלב.",
+    "english": "The boy kept begging his mother to buy him a dog."
+  },
+  "הצטדק": {
+    "hebrew": "הוא [הצטדק] ואמר שלא ידע.",
+    "english": "He defended himself and said he had not known."
+  },
+  "הצטהל": {
+    "hebrew": "הילד [הצטהל] כשקיבל אופניים חדשים.",
+    "english": "The boy was overjoyed when he got a new bicycle."
+  },
+  "הצטווה": {
+    "hebrew": "החייל [הצטווה] לשמור על השער.",
+    "english": "The soldier was ordered to guard the gate."
+  },
+  "הצטרד": {
+    "hebrew": "הזמר [הצטרד] אחרי ששר כל הערב.",
+    "english": "The singer became hoarse after singing all evening."
+  },
+  "הצר את צעדיו": {
+    "hebrew": "המנהל [הצר את צעדיו] ומנע ממנו להתקדם.",
+    "english": "The manager restricted his actions and stopped him advancing."
+  },
+  "הקשה (שאלה)": {
+    "hebrew": "התלמיד [הקשה] ושאל מדוע התשובה נכונה.",
+    "english": "The student asked a challenging question about why the answer was correct."
+  },
+  "הקשה עורפו": {
+    "hebrew": "הילד [הקשה עורפו] וסירב להקשיב לאמו.",
+    "english": "The boy stubbornly refused to listen to his mother."
+  },
+  "הרהיב בנפשו": {
+    "hebrew": "הילד [הרהיב בנפשו] ונכנס לחדר החשוך.",
+    "english": "The boy found the courage to enter the dark room."
+  },
+  "השתופף": {
+    "hebrew": "הוא [השתופף] כדי לעבור בדלת הנמוכה.",
+    "english": "He bent down to pass through the low doorway."
+  },
+  "התאווה": {
+    "hebrew": "הילד [התאווה] לעוגת השוקולד שבחלון.",
+    "english": "The boy longed for the chocolate cake in the window."
+  },
+  "התאונן": {
+    "hebrew": "הוא [התאונן] על הרעש בחדר.",
+    "english": "He complained about the noise in the room."
+  },
+  "התבדה": {
+    "hebrew": "הוא חשב שינצח, אך לבסוף [התבדה].",
+    "english": "He thought he would win but was proved wrong."
+  },
+  "התבסם": {
+    "hebrew": "בסיפור, הוא [התבסם] מיין במהלך הארוחה.",
+    "english": "In the story, he became tipsy from wine during the meal."
+  },
+  "התגעש": {
+    "hebrew": "הקהל [התגעש] כששמע שהמופע בוטל.",
+    "english": "The crowd became upset when they heard the show was canceled."
+  },
+  "התחבט": {
+    "hebrew": "הוא [התחבט] בשאלה איזה ספר לבחור.",
+    "english": "He struggled to decide which book to choose."
+  },
+  "התחוור": {
+    "hebrew": "לבסוף [התחוור] לי מדוע היא כעסה.",
+    "english": "At last, it became clear to me why she was angry."
+  },
+  "התחלה": {
+    "hebrew": "הילד [התחלה] כדי להישאר בבית.",
+    "english": "The boy pretended to be sick to stay home."
+  },
+  "התחסד": {
+    "hebrew": "הוא [התחסד] וטען שמעולם לא שיקר.",
+    "english": "He acted self-righteously and claimed he had never lied."
+  },
+  "התחקה": {
+    "hebrew": "החוקר [התחקה] אחר עקבות הכלב.",
+    "english": "The researcher traced the dog's tracks."
+  },
+  "התיירא": {
+    "hebrew": "הילד [התיירא] להיכנס לבד לחדר החשוך.",
+    "english": "The boy was afraid to enter the dark room alone."
+  },
+  "התנכר": {
+    "hebrew": "הוא [התנכר] לאחיו וסירב לדבר איתו.",
+    "english": "He rejected his brother and refused to speak to him."
+  },
+  "התנצח": {
+    "hebrew": "הוא [התנצח] עם חברו על התשובה.",
+    "english": "He argued stubbornly with his friend about the answer."
+  },
+  "התעלה": {
+    "hebrew": "הוא [התעלה] מעל כעסו ועזר לחברו.",
+    "english": "He rose above his anger and helped his friend."
+  },
+  "התערטל": {
+    "hebrew": "הוא [התערטל] לפני שנכנס למקלחת.",
+    "english": "He took off his clothes before getting into the shower."
+  },
+  "התפכח": {
+    "hebrew": "הוא [התפכח] והבין שההבטחות היו שקריות.",
+    "english": "He saw the truth and realized the promises were false."
+  },
+  "התקרש": {
+    "hebrew": "הדם על הפצע [התקרש] במהירות.",
+    "english": "The blood on the wound clotted quickly."
+  },
+  "התרוממות נפש": {
+    "hebrew": "חשתי [התרוממות נפש] כששמעתי את השירה.",
+    "english": "I felt uplifted when I heard the singing."
+  },
+  "ויטלי": {
+    "hebrew": "סבא אדם [ויטלי] שאוהב לרקוד ולטייל.",
+    "english": "Grandpa is a lively person who loves dancing and hiking."
+  },
+  "זבן": {
+    "hebrew": "ה[זבן] עזר לי לבחור חולצה חדשה.",
+    "english": "The shop assistant helped me choose a new shirt."
+  },
+  "זחוח": {
+    "hebrew": "הוא נראה [זחוח] אחרי הניצחון הקל.",
+    "english": "He looked too pleased with himself after the easy victory."
+  },
+  "זמר": {
+    "hebrew": "האיכר [זמר] את הגפנים לפני האביב.",
+    "english": "The farmer pruned the grapevines before spring."
+  },
+  "חבוט": {
+    "hebrew": "זה רעיון [חבוט] שכבר שמענו פעמים רבות.",
+    "english": "That is an overused idea we have heard many times."
+  },
+  "חבורה": {
+    "hebrew": "אחרי הנפילה הופיעה [חבורה] על זרועו.",
+    "english": "After the fall, a bruise appeared on his arm."
+  },
+  "חוסה": {
+    "hebrew": "הילד [חוסה] תחת הגנתה של דודתו.",
+    "english": "The boy is under his aunt's protection."
+  },
+  "חזר לסורו": {
+    "hebrew": "אחרי שבוע שקט, הוא [חזר לסורו] ושיקר.",
+    "english": "After a quiet week, he returned to his old ways and lied."
+  },
+  "חירף את נפשו": {
+    "hebrew": "הכבאי [חירף את נפשו] להצלת הילד.",
+    "english": "The firefighter risked his life to save the boy."
+  },
+  "חכך בדעתו": {
+    "hebrew": "הוא [חכך בדעתו] אם לקבל את ההצעה.",
+    "english": "He thought carefully about whether to accept the offer."
+  },
+  "חלחלה": {
+    "hebrew": "[חלחלה] אחזה בי כששמעתי על התאונה.",
+    "english": "I felt horror when I heard about the accident."
+  },
+  "חלט": {
+    "hebrew": "הטבח [חלט] את העגבניות במים רותחים.",
+    "english": "The cook briefly put the tomatoes in boiling water."
+  },
+  "חלץ": {
+    "hebrew": "הוא [חלץ] את נעליו בכניסה לבית.",
+    "english": "He took off his shoes at the entrance to the house."
+  },
+  "חמד": {
+    "hebrew": "הוא [חמד] את האופניים של שכנו.",
+    "english": "He badly wanted his neighbor's bicycle."
+  },
+  "חמד לצון": {
+    "hebrew": "סבא [חמד לצון] וסיפר סיפור מצחיק.",
+    "english": "Grandpa was feeling playful and told a funny story."
+  },
+  "חסר תקנה": {
+    "hebrew": "השעון שבור לגמרי והוא [חסר תקנה].",
+    "english": "The watch is completely broken and beyond repair."
+  }
 }
