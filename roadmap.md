@@ -1,5 +1,9 @@
 # Roadmap
 
+## Wordfall replay variety (preview only)
+- [ ] Replace four everyday and one rich target on every tier-1 replay; replace three everyday and two rich targets on higher-tier replays, preserving mix and difficulty.
+- [ ] Verify consecutive replay batches and the complete replay flow; do not publish or change the arcade.
+
 ## Wordfall mixed rounds and reliable Hebrew audio (preview only)
 - [x] Interleave rich/new targets naturally with everyday targets while preserving the repeated ten-word batch and arcade behavior.
 - [x] Give caught Hebrew sentences priority over SFX, later word readings and introduction speech without pausing rounds.

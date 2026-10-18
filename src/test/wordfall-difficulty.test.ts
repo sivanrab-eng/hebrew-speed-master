@@ -68,12 +68,22 @@ describe("hard word mix", () => {
     expect(words).toHaveLength(10);
     expect(words.filter(w => later.has(w))).toHaveLength(hard);
   });
-  it("repeats the target batch for three games before choosing a new batch", () => {
-    const previous = mix(initialDifficulty(), 10, id);
-    const reverse = <T,>(a: T[]) => [...a].reverse();
-    expect(repeatedGameWords(initialDifficulty(), previous, 1, 10, reverse)).toEqual(previous);
-    expect(repeatedGameWords(initialDifficulty(), previous, 2, 10, reverse)).toEqual(previous);
-    expect(repeatedGameWords(initialDifficulty(), previous, 3, 10, reverse)).not.toEqual(previous);
+  it.each([0, 1, 2, 3, 4])("refreshes exactly five balanced targets on every replay at tier %i", level => {
+    const progress = { level, wins: 0 };
+    let previous = mix(progress, 10, id);
+    for (let game = 1; game <= 6; game++) {
+      const next = repeatedGameWords(progress, previous, game, 10, id);
+      const oldLabels = new Set(previous.map(word => word.hebrew));
+      const changed = next.filter(word => !oldLabels.has(word.hebrew));
+      expect(changed).toHaveLength(5);
+      expect(changed.filter(word => EVERYDAY_WORDS.includes(word))).toHaveLength(level === 0 ? 4 : 3);
+      expect(changed.filter(word => !EVERYDAY_WORDS.includes(word))).toHaveLength(level === 0 ? 1 : 2);
+      expect(next.filter(word => EVERYDAY_WORDS.includes(word))).toHaveLength(level === 0 ? 7 : 3);
+      expect(new Set(next.map(word => word.hebrew)).size).toBe(10);
+      const later = new Set(P.slice(level + 1).flat());
+      expect(next.filter(word => later.has(word))).toHaveLength([0, 3, 4, 6, 0][level]);
+      previous = next;
+    }
   });
   it("introduces rich words only on first encounter, never everyday targets", () => {
     const rich = P[0]?.[0];
