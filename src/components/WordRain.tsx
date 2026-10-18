@@ -151,8 +151,10 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
         if (field && field.width > 0 && field.height > 0) setBurst({ x: (rect.left + rect.width / 2 - field.left) / field.width * 100, y: (rect.top + rect.height / 2 - field.top) / field.height * 100 });
       } else play("correct");
       if (progressRef.current.speed > speedBefore) flashSpeedUp();
-      const example = standalone ? getWordfallSentence(d.word.hebrew) : undefined;
-      // A caught word with a sentence is heard inside the sentence reading instead.
+      // Only a word the player met on the "טיפה חדשה!" card gets the sentence stop;
+      // a familiar word is simply heard once and the rain keeps falling.
+      const isNew = standalone && introducedRef.current.has(d.word.hebrew);
+      const example = isNew ? getWordfallSentence(d.word.hebrew) : undefined;
       if (!muted && !example) speak(d.word.hebrew);
       scoreRef.current += 1;
       setScore(scoreRef.current);
@@ -292,7 +294,7 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
           {standalone && levelUnlocked && <Button variant="outline" onClick={() => restart(true)} className="mt-3 h-12 w-full text-lg"><Zap className="h-5 w-5" /> לשלב {level + 2}</Button>}
         </div>
       ) : null}
-      {standalone && done && review.length > 0 && <div className="space-y-5 border-t border-border pt-5"><h3 className="font-display text-lg text-secondary">טיפות שאספת</h3>{[...review.filter(word => needsIntroduction(word, new Set<string>())), ...review.filter(word => !needsIntroduction(word, new Set<string>()))].slice(0, 3).map(word => {
+      {standalone && done && review.length > 0 && <div className="space-y-5 border-t border-border pt-5"><h3 className="font-display text-lg text-secondary">טיפות שאספת</h3>{review.slice(0, 3).map(word => {
         const example = getWordfallSentence(word.hebrew);
         return example ? <div key={word.hebrew} className="border-b border-border/50 pb-5"><p className="mb-2 font-bold text-primary">{word.hebrew}</p><SentenceText sentence={example} /></div> : null;
       })}</div>}
