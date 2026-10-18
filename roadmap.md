@@ -1,5 +1,8 @@
 # Roadmap
 
+## Wordfall sentence reading
+- [ ] Read the caught word's sentence aloud in Hebrew when the review card opens, and keep the card on screen until the reading ends (with a fallback cap); arcade catches unchanged, preview only until asked.
+
 ## Wordfall neon catch trial
 - [x] Add standalone neon catch particles/flash/trails and layered sound, no-pressure points and streaks, three-second sentence pauses with hold/continue/audio, and end review prioritizing rich caught words; preserve arcade behavior and fixed pace.
 - [x] Add 407 label-keyed Hebrew sentence/English translation examples without nikud. All 51 tests passed; full browser game confirmed 10/10, 1750 points, held reading without falling words, optional tier advancement, fresh-visit reset, mobile no overflow and no runtime errors. Build OK. Preview only; not published. Actual audible output remains device-dependent.
