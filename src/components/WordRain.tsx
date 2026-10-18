@@ -11,6 +11,7 @@ import { advanceCatchProgress, initialCatchProgress, SENTENCE_FALLBACK_MS } from
 import { getWordfallSentence, type WordfallSentence as Sentence } from "@/lib/wordfall-sentences";
 import { WordfallSentence, SentenceText } from "./WordfallSentence";
 import { WordfallCatch } from "./WordfallCatch";
+import { wordfallSpokenSentence, wordfallSpokenWord } from "@/lib/wordfall-pronunciation";
 
 const ROUNDS = 10;
 const LANES = 3;
@@ -62,7 +63,7 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
   const readIntroduction = (word: Word) => {
     if (muted) return;
     if (sentenceAudioRef.current) pendingIntroductionRef.current = word;
-    else speakPair(word.hebrew, word.english);
+    else speakPair(wordfallSpokenWord(word.hebrew), word.english);
   };
   // Wordfall falls slower and keeps one steady pace; the arcade game keeps its own
   const pace = standalone ? STANDALONE_PACE : ARCADE_PACE;
@@ -166,7 +167,7 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
       if (progressRef.current.speed > speedBefore) flashSpeedUp();
       // Only a word the player met on the "טיפה חדשה!" card gets the example sentence;
       // a familiar word is simply heard once and the rain keeps falling.
-      if (!muted && !example && !(standalone && sentenceAudioRef.current)) speak(d.word.hebrew);
+      if (!muted && !example && !(standalone && sentenceAudioRef.current)) speak(standalone ? wordfallSpokenWord(d.word.hebrew) : d.word.hebrew);
       scoreRef.current += 1;
       setScore(scoreRef.current);
       setHits(new Set([d.key]));
@@ -186,7 +187,7 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
           nextRound(round + 1);
         };
         if (!muted) {
-          speakHebrew(example.hebrew.replace(/[[\]]/g, ""), resume, SENTENCE_FALLBACK_MS, true);
+          speakHebrew(wordfallSpokenSentence(d.word.hebrew, example.hebrew), resume, SENTENCE_FALLBACK_MS, true);
         } else sentenceTimerRef.current = setTimeout(resume, SENTENCE_FALLBACK_MS);
       } else timerRef.current = setTimeout(() => nextRound(round + 1), 650);
     } else {
