@@ -30,6 +30,7 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
   const catchRef = useRef(initialCatchProgress());
   const [catchProgress, setCatchProgress] = useState(initialCatchProgress);
   const [sentence, setSentence] = useState<Sentence | null>(null);
+  const [sentenceLabel, setSentenceLabel] = useState("");
   const sentenceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const sentenceAudioRef = useRef(false);
   const audioGenerationRef = useRef(0);
@@ -173,6 +174,7 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
       if (sentenceTimerRef.current) clearTimeout(sentenceTimerRef.current);
       // The strip always shows the latest catch, never a stale one.
       setSentence(example ?? null);
+      setSentenceLabel(example ? d.word.hebrew : "");
       if (example) {
         setReview(words => [...words.filter(word => word.hebrew !== d.word.hebrew), d.word]);
         if (!muted) {
@@ -281,7 +283,7 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
               </Button>
             ))}
           </div>
-          {standalone && sentence && target && <WordfallSentence label={target.hebrew} sentence={sentence} points={catchProgress.awarded} streak={catchProgress.streak} />}
+          {standalone && sentence && <WordfallSentence label={sentenceLabel} sentence={sentence} points={catchProgress.awarded} streak={catchProgress.streak} />}
           {!standalone && <p className="text-center text-xs text-muted-foreground">אין עונש על טעות — פשוט ממשיכים 😊</p>}
         </>
       ) : done ? (

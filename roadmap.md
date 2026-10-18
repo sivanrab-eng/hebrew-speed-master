@@ -1,10 +1,10 @@
 # Roadmap
 
 ## Wordfall mixed rounds and reliable Hebrew audio (preview only)
-- [ ] Interleave rich/new targets naturally with everyday targets while preserving the repeated ten-word batch and arcade behavior.
-- [ ] Give caught Hebrew sentences priority over SFX, later word readings and introduction speech without pausing rounds.
-- [ ] Verify targeted tests and a complete preview game; do not upload to GitHub.
-- [ ] Identify examples of mispronounced Hebrew before changing pronunciation data.
+- [x] Interleave rich/new targets naturally with everyday targets while preserving the repeated ten-word batch and arcade behavior.
+- [x] Give caught Hebrew sentences priority over SFX, later word readings and introduction speech without pausing rounds.
+- [x] Verify tests and a complete preview game: 63 tests passed; ten catches completed with rich targets at rounds 2, 5 and 9; mocked engine calls confirmed no next-round cancellation. Actual audible playback remains device-dependent. No GitHub upload.
+- [x] User reports no current mispronunciations; leave pronunciation data unchanged.
 
 ## Wordfall sentence strip
 - [x] The new-word card reads English first, then the Hebrew word 150ms after English ends or errors, with the two-second fallback and stale-timer cancellation kept. 12 speech tests pass; a live recording showed en-US at 783ms then he-IL at 967ms, and en-US at 16785ms then he-IL at 16944ms.
