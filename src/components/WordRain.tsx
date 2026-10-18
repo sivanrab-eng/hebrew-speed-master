@@ -151,7 +151,7 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
         if (field && field.width > 0 && field.height > 0) setBurst({ x: (rect.left + rect.width / 2 - field.left) / field.width * 100, y: (rect.top + rect.height / 2 - field.top) / field.height * 100 });
       } else play("correct");
       if (progressRef.current.speed > speedBefore) flashSpeedUp();
-      // Only a word the player met on the "טיפה חדשה!" card gets the sentence stop;
+      // Only a word the player met on the "טיפה חדשה!" card gets the example sentence;
       // a familiar word is simply heard once and the rain keeps falling.
       const isNew = standalone && introducedRef.current.has(d.word.hebrew);
       const example = isNew ? getWordfallSentence(d.word.hebrew) : undefined;
@@ -178,11 +178,6 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
       play("tick"); // gentle sound only, no penalty
       setMisses((m) => new Set(m).add(d.key));
     }
-  };
-
-  const continueReading = () => {
-    if (timerRef.current) clearTimeout(timerRef.current);
-    nextRound(round + 1);
   };
 
 
