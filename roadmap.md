@@ -1,5 +1,10 @@
 # Roadmap
 
+## Wordfall consistent gentle mix and pronunciation (preview only)
+- [ ] Guarantee seven everyday and three rich targets at every tier, including replays; preserve the approved five-target replacement split.
+- [ ] Add standalone-only vocalized speech text without changing visible vocabulary or arcade audio.
+- [ ] Run relevant tests and verify a full preview game and replay; no GitHub upload.
+
 ## Wordfall sentence freeze (preview only)
 - [x] Freeze new-word catches until Hebrew sentence completion; use a four-second audio-failure watchdog without cutting healthy longer speech. Familiar catches and arcade unchanged.
 - [x] 68 tests passed; two full preview games verified six frozen sentence readings beyond four seconds, continuation on speech end, 10/10 results and no runtime errors. Browser speech was instrumented, not audibly verified. Build OK; no upload.
