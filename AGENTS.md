@@ -20,4 +20,4 @@
 - Keep standalone repetition batches and introduced-word history in the mounted game; gate falling timers behind introductions and apply eligible tier advancement only on explicit choice so confidence support never alters arcade play.
 - Speak the Wordfall introduction through a cancellable English-then-Hebrew pair with end/error sequencing, fallback and repeat control; invalidate stale timers so earlier readings cannot collide.
 - Keep standalone sentence examples in a complete label-keyed overlay and catch/score visuals in focused modules; protect sentence speech locally from SFX and subsequent readings without holding round timers, so arcade timing and audio remain independent.
-- Interleave standalone targets through the pure difficulty helper after selecting a repeated batch, so category order varies without changing vocabulary counts or repetition history.
+- Refresh standalone replay targets within everyday/base/later-tier categories in the pure difficulty helper, then interleave them; this preserves difficulty counts and introduction history while providing variety.
