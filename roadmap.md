@@ -1,9 +1,9 @@
 # Roadmap
 
 ## Wordfall consistent gentle mix and pronunciation (preview only)
-- [ ] Guarantee seven everyday and three rich targets at every tier, including replays; preserve the approved five-target replacement split.
-- [ ] Add standalone-only vocalized speech text without changing visible vocabulary or arcade audio.
-- [ ] Run relevant tests and verify a full preview game and replay; no GitHub upload.
+- [x] Guarantee seven everyday and three rich targets at every tier, including replays; preserve the approved five-target replacement split. All five tiers and six replays per tier pass the concrete mix assertions.
+- [x] Add standalone-only vocalized speech text for all 407 words and sentences, drafted offline with Dicta and curated ambiguous word readings; visible vocabulary and arcade audio are unchanged. No runtime service or extra app dependency.
+- [x] 73 tests passed, build OK; three full preview games verified 7+3 at levels 1 and 2, five balanced replacements on the level-2 replay, vocalized engine input and healthy sentence freezes beyond four seconds. Original arcade opening preserved, no runtime errors. Audible pronunciation quality still needs real-device listening; no GitHub upload.
 
 ## Wordfall sentence freeze (preview only)
 - [x] Freeze new-word catches until Hebrew sentence completion; use a four-second audio-failure watchdog without cutting healthy longer speech. Familiar catches and arcade unchanged.
