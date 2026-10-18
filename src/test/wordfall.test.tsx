@@ -19,6 +19,23 @@ const finishIntroduction = () => {
 afterEach(() => { vi.useRealTimers(); localStorage.removeItem(DIFFICULTY_STORAGE_KEY); });
 
 describe("Wordfall", () => {
+  it("pauses falling for a sentence and lets the reader hold and continue", () => {
+    vi.useFakeTimers();
+    const view = render(<WordRain standalone muted onExit={() => {}} />);
+    finishIntroduction();
+    const target = wordfallTarget();
+    if (!target) throw new Error("Missing target");
+    fireEvent.click(screen.getByRole("button", { name: target.hebrew }));
+    act(() => vi.advanceTimersByTime(450));
+    expect(fallingWords()).toHaveLength(0);
+    fireEvent.click(screen.getByRole("button", { name: "זמן לקרוא" }));
+    act(() => vi.advanceTimersByTime(15000));
+    expect(screen.queryByText(/סיבוב 1\/10/)).not.toBeNull();
+    fireEvent.click(screen.getByRole("button", { name: /ממשיכים/ }));
+    expect(screen.queryByText(/סיבוב 2\/10/)).not.toBeNull();
+    view.unmount();
+  });
+
   it("offers a next tier at eight catches but repeats the current tier unless chosen", () => {
     vi.useFakeTimers();
     const complete = vi.fn();
@@ -29,7 +46,7 @@ describe("Wordfall", () => {
         const target = wordfallTarget();
         if (!target) throw new Error("No target rendered");
         fireEvent.click(screen.getByRole("button", { name: target.hebrew }));
-        act(() => vi.advanceTimersByTime(650));
+        act(() => vi.advanceTimersByTime(3450));
       } else act(() => vi.advanceTimersByTime(ROUND_MS + 100));
     }
     expect(complete).toHaveBeenCalledExactlyOnceWith(8);
@@ -49,7 +66,7 @@ describe("Wordfall", () => {
       const target = wordfallTarget();
       if (!target) throw new Error("Missing target");
       fireEvent.click(screen.getByRole("button", { name: target.hebrew }));
-      act(() => vi.advanceTimersByTime(650));
+      act(() => vi.advanceTimersByTime(3450));
     }
     fireEvent.click(screen.getByRole("button", { name: "לשלב 2" }));
     expect(screen.queryByText(/שלב 2 · סיבוב 1\/10/)).not.toBeNull();
@@ -75,7 +92,7 @@ describe("Wordfall", () => {
       if (!target) throw new Error("Missing target after introduction");
       targets.push(target.hebrew);
       fireEvent.click(screen.getByRole("button", { name: target.hebrew }));
-      act(() => vi.advanceTimersByTime(650));
+      act(() => vi.advanceTimersByTime(3450));
     }
     expect(rich).not.toBe("");
     fireEvent.click(screen.getByRole("button", { name: /עוד פעם/ }));
@@ -86,7 +103,7 @@ describe("Wordfall", () => {
       if (!target) throw new Error("Missing repeated target");
       repeated.push(target.hebrew);
       fireEvent.click(screen.getByRole("button", { name: target.hebrew }));
-      act(() => vi.advanceTimersByTime(650));
+      act(() => vi.advanceTimersByTime(3450));
     }
     expect(repeated.sort()).toEqual(targets.sort());
     view.unmount();
@@ -107,7 +124,7 @@ describe("Wordfall", () => {
         const target = wordfallTarget();
         if (!target) throw new Error("Missing target before introduction");
         fireEvent.click(screen.getByRole("button", { name: target.hebrew }));
-        act(() => vi.advanceTimersByTime(650));
+        act(() => vi.advanceTimersByTime(3450));
       }
     }
     expect(seen).toBe(true);
@@ -142,7 +159,7 @@ describe("Wordfall", () => {
     const correct = screen.getByRole("button", { name: target.hebrew });
     fireEvent.click(correct);
     fireEvent.click(correct);
-    act(() => vi.advanceTimersByTime(650));
+    act(() => vi.advanceTimersByTime(3450));
     for (let i = 0; i < 9; i++) { finishIntroduction(); act(() => vi.advanceTimersByTime(ROUND_MS + 100)); }
     expect(complete).toHaveBeenCalledExactlyOnceWith(1);
     view.unmount();
@@ -156,7 +173,7 @@ describe("Wordfall", () => {
       const target = wordfallTarget();
       if (!target) throw new Error("No target rendered");
       fireEvent.click(screen.getByRole("button", { name: target.hebrew }));
-      act(() => vi.advanceTimersByTime(650));
+      act(() => vi.advanceTimersByTime(3450));
     }
     expect(screen.queryByText("מגבירים קצב!")).toBeNull();
     expect(screen.queryByText(/סיבוב 4\/10/)).not.toBeNull();
