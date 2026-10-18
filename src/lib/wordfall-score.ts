@@ -1,7 +1,6 @@
 export type CatchProgress = { points: number; streak: number; bestStreak: number; awarded: number };
-// How long the Hebrew example sentence stays on screen after a new word is caught.
-// It never holds the round: the rain keeps falling while it is shown and read.
-export const SENTENCE_SHOW_MS = 4500;
+// Release a sentence freeze when audio fails; healthy speech waits for its end.
+export const SENTENCE_FALLBACK_MS = 4000;
 export const initialCatchProgress = (): CatchProgress => ({ points: 0, streak: 0, bestStreak: 0, awarded: 0 });
 
 export function advanceCatchProgress(progress: CatchProgress, caught: boolean): CatchProgress {

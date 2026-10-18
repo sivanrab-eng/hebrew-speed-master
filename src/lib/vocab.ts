@@ -115,7 +115,7 @@ export function speakPair(hebrew: string, english: string) {
 // Reads Hebrew text aloud (used for Wordfall sentence readings) and reports
 // when playback is truly finished — on end, on error, or after a fallback
 // timeout for engines that never fire onend.
-export function speakHebrew(text: string, onDone?: () => void, fallbackMs = 12000) {
+export function speakHebrew(text: string, onDone?: () => void, fallbackMs = 12000, waitForActiveSpeech = false) {
   if (typeof window === "undefined" || !("speechSynthesis" in window)) {
     onDone?.();
     return;
@@ -123,6 +123,7 @@ export function speakHebrew(text: string, onDone?: () => void, fallbackMs = 1200
   cancelSpeech();
   const generation = speechGeneration;
   let done = false;
+  let started = false;
   const finish = () => {
     if (generation !== speechGeneration || done) return;
     done = true;
@@ -137,6 +138,17 @@ export function speakHebrew(text: string, onDone?: () => void, fallbackMs = 1200
   if (v) u.voice = v;
   u.onend = finish;
   u.onerror = finish;
-  fallbackTimer = setTimeout(finish, fallbackMs);
+  u.onstart = () => { started = true; };
+  const watchdog = () => {
+    if (generation !== speechGeneration || done) return;
+    // A healthy reading is not a timeout: wait for its actual end, even when long.
+    if (waitForActiveSpeech && started && window.speechSynthesis.speaking && !window.speechSynthesis.paused) {
+      fallbackTimer = setTimeout(watchdog, fallbackMs);
+      return;
+    }
+    if (waitForActiveSpeech) window.speechSynthesis.cancel();
+    finish();
+  };
+  fallbackTimer = setTimeout(watchdog, fallbackMs);
   window.speechSynthesis.speak(u);
 }

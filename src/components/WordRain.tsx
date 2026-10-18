@@ -7,7 +7,7 @@ import { Confetti } from "./Confetti";
 import { Button } from "@/components/ui/button";
 import { advanceRainProgress, ARCADE_PACE, ARCADE_RULES, initialRainProgress, rainTiming, STANDALONE_PACE, STANDALONE_RULES } from "@/lib/word-rain-speed";
 import { completeDifficulty, initialDifficulty, repeatedGameWords, interleavedGameWords, needsIntroduction, INTRODUCTION_MS } from "@/lib/wordfall-difficulty";
-import { advanceCatchProgress, initialCatchProgress, SENTENCE_SHOW_MS } from "@/lib/wordfall-score";
+import { advanceCatchProgress, initialCatchProgress, SENTENCE_FALLBACK_MS } from "@/lib/wordfall-score";
 import { getWordfallSentence, type WordfallSentence as Sentence } from "@/lib/wordfall-sentences";
 import { WordfallSentence, SentenceText } from "./WordfallSentence";
 import { WordfallCatch } from "./WordfallCatch";
@@ -77,7 +77,7 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
   };
 
   const nextRound = (r: number) => {
-    // A sentence already on screen keeps showing and reading across the round change.
+    // Sentence catches release this transition only once reading has finished.
     pendingIntroductionRef.current = null;
     setBurst(null);
     setRound(r);
@@ -177,20 +177,18 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
       setSentenceLabel(example ? d.word.hebrew : "");
       if (example) {
         setReview(words => [...words.filter(word => word.hebrew !== d.word.hebrew), d.word]);
+        sentenceAudioRef.current = true;
+        const generation = ++audioGenerationRef.current;
+        const resume = () => {
+          if (generation !== audioGenerationRef.current) return;
+          sentenceAudioRef.current = false;
+          setSentence(null);
+          nextRound(round + 1);
+        };
         if (!muted) {
-          sentenceAudioRef.current = true;
-          const generation = ++audioGenerationRef.current;
-          speakHebrew(example.hebrew.replace(/[[\]]/g, ""), () => {
-            if (generation !== audioGenerationRef.current) return;
-            sentenceAudioRef.current = false;
-            const pending = pendingIntroductionRef.current;
-            pendingIntroductionRef.current = null;
-            if (pending) readIntroduction(pending);
-          });
-        }
-        sentenceTimerRef.current = setTimeout(() => setSentence(null), SENTENCE_SHOW_MS);
-      }
-      timerRef.current = setTimeout(() => nextRound(round + 1), 650);
+          speakHebrew(example.hebrew.replace(/[[\]]/g, ""), resume, SENTENCE_FALLBACK_MS, true);
+        } else sentenceTimerRef.current = setTimeout(resume, SENTENCE_FALLBACK_MS);
+      } else timerRef.current = setTimeout(() => nextRound(round + 1), 650);
     } else {
       if (standalone) {
         catchRef.current = advanceCatchProgress(catchRef.current, false);
