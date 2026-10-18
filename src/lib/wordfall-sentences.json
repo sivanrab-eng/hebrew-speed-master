@@ -1,0 +1,22 @@
+{
+  "בית": { "hebrew": "אני גר ב[בית] גדול.", "english": "I live in a big house." },
+  "כלב": { "hebrew": "ה[כלב] שלי אוהב לשחק.", "english": "My dog likes to play." },
+  "חתול": { "hebrew": "ה[חתול] ישן על המיטה.", "english": "The cat sleeps on the bed." },
+  "מים": { "hebrew": "אני שותה [מים] אחרי המשחק.", "english": "I drink water after the game." },
+  "לחם": { "hebrew": "אכלנו [לחם] עם גבינה.", "english": "We ate bread with cheese." },
+  "שמש": { "hebrew": "ה[שמש] מאירה את הגינה.", "english": "The sun lights up the garden." },
+  "ירח": { "hebrew": "ראינו [ירח] גדול בשמים.", "english": "We saw a big moon in the sky." },
+  "ים": { "hebrew": "הלכנו ל[ים] ביום חם.", "english": "We went to the sea on a hot day." },
+  "עץ": { "hebrew": "יש [עץ] ליד הבית שלנו.", "english": "There is a tree next to our house." },
+  "פרח": { "hebrew": "מצאתי [פרח] קטן בגינה.", "english": "I found a small flower in the garden." },
+  "ספר": { "hebrew": "אני קורא [ספר] לפני השינה.", "english": "I read a book before bed." },
+  "כדור": { "hebrew": "שיחקנו ב[כדור] בחצר.", "english": "We played ball in the yard." },
+  "שמח": { "hebrew": "אני [שמח] לראות אותך.", "english": "I am happy to see you." },
+  "גדול": { "hebrew": "יש לנו שולחן [גדול] במטבח.", "english": "We have a big table in the kitchen." },
+  "קטן": { "hebrew": "ראיתי כלב [קטן] ברחוב.", "english": "I saw a small dog in the street." },
+  "לשחק": { "hebrew": "אנחנו אוהבים [לשחק] ביחד.", "english": "We like to play together." },
+  "לרוץ": { "hebrew": "אני אוהב [לרוץ] בפארק.", "english": "I like to run in the park." },
+  "לישון": { "hebrew": "הגיע הזמן [לישון] עכשיו.", "english": "It is time to sleep now." },
+  "לאכול": { "hebrew": "בואו [לאכול] ארוחת ערב.", "english": "Come and eat dinner." },
+  "לשתות": { "hebrew": "אפשר [לשתות] מים כאן.", "english": "You can drink water here." }
+}
