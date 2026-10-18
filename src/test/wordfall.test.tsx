@@ -4,7 +4,7 @@ import { WordRain } from "@/components/WordRain";
 import { VOCAB } from "@/lib/vocab";
 import { DIFFICULTY_STORAGE_KEY, EVERYDAY_WORDS, WORDFALL_WORDS, INTRODUCTION_MS } from "@/lib/wordfall-difficulty";
 import { STANDALONE_PACE } from "@/lib/word-rain-speed";
-import { SENTENCE_SHOW_MS } from "@/lib/wordfall-score";
+import { SENTENCE_FALLBACK_MS } from "@/lib/wordfall-score";
 import { getWordfallSentence } from "@/lib/wordfall-sentences";
 
 vi.mock("@/lib/sfx", () => ({ sfx: { correct: vi.fn(), tick: vi.fn(), end: vi.fn(), speedUp: vi.fn() } }));
@@ -44,7 +44,7 @@ const playToIntroduction = () => {
 afterEach(() => { vi.useRealTimers(); localStorage.removeItem(DIFFICULTY_STORAGE_KEY); });
 
 describe("Wordfall", () => {
-  it("shows the new word's Hebrew sentence without holding the round", () => {
+  it("holds a muted new-word sentence for the four-second fallback", () => {
     vi.useFakeTimers();
     const view = render(<WordRain standalone muted onExit={() => {}} />);
     const round = playToIntroduction();
@@ -57,18 +57,16 @@ describe("Wordfall", () => {
     expect(sentenceCard()).not.toBeNull();
     expect(sentenceCard()?.textContent).toContain(target.hebrew);
     expect(sentenceCard()?.textContent).not.toContain(caughtSentence.english);
-    // The round keeps its own schedule: it moves on while the sentence stays up.
-    act(() => vi.advanceTimersByTime(650));
-    expect(currentRound()).toBe(round + 1);
-    expect(sentenceCard()).not.toBeNull();
-    act(() => vi.advanceTimersByTime(SENTENCE_SHOW_MS - 651));
+    act(() => vi.advanceTimersByTime(SENTENCE_FALLBACK_MS - 1));
+    expect(currentRound()).toBe(round);
     expect(sentenceCard()).not.toBeNull();
     act(() => vi.advanceTimersByTime(1));
+    expect(currentRound()).toBe(round + 1);
     expect(sentenceCard()).toBeNull();
     view.unmount();
   });
 
-  it("reads the caught sentence in Hebrew right away and never waits for it", () => {
+  it("reads the caught sentence immediately and resumes only on speech end", () => {
     vi.useFakeTimers();
     class Utterance {
       lang = ""; rate = 1; onend: (() => void) | null = null; onerror: (() => void) | null = null;
@@ -87,10 +85,13 @@ describe("Wordfall", () => {
     engine.speak.mockClear();
     fireEvent.click(screen.getByRole("button", { name: target.hebrew }));
     expect(engine.speak.mock.calls.at(-1)?.[0]).toMatchObject({ text: caughtSentence.hebrew.replace(/[[\]]/g, ""), lang: "he-IL" });
-    // The reading is still running, yet the round already moved on underneath it.
+    const reading = engine.speak.mock.calls.at(-1)?.[0];
     act(() => vi.advanceTimersByTime(650));
-    expect(currentRound()).toBe(round + 1);
+    expect(currentRound()).toBe(round);
     expect(sentenceCard()).not.toBeNull();
+    act(() => reading?.onend?.());
+    expect(currentRound()).toBe(round + 1);
+    expect(sentenceCard()).toBeNull();
     view.unmount();
     vi.unstubAllGlobals();
   });
@@ -114,48 +115,60 @@ describe("Wordfall", () => {
         return;
       }
       expect(sentenceCard()).not.toBeNull();
-      act(() => vi.advanceTimersByTime(3001));
+      act(() => vi.advanceTimersByTime(4001));
     }
     throw new Error("No familiar word appeared as a target");
   });
 
-  it("protects Hebrew sentence audio from familiar catches, SFX and the next introduction", () => {
+  it("keeps a healthy long Hebrew sentence frozen beyond four seconds", () => {
+    vi.useFakeTimers();
+    class Utterance {
+      lang = ""; rate = 1; onstart: (() => void) | null = null; onend: (() => void) | null = null; onerror: (() => void) | null = null;
+      constructor(public text: string) {}
+    }
+    const engine = { speak: vi.fn(), cancel: vi.fn(), getVoices: () => [], speaking: true, paused: false };
+    vi.stubGlobal("SpeechSynthesisUtterance", Utterance);
+    vi.stubGlobal("speechSynthesis", engine);
+    const view = render(<WordRain standalone muted={false} onExit={() => {}} />);
+    try {
+      const round = playToIntroduction();
+      finishIntroduction();
+      const target = wordfallTarget();
+      if (!target) throw new Error("Missing introduced target");
+      fireEvent.click(screen.getByRole("button", { name: target.hebrew }));
+      const reading = engine.speak.mock.calls.at(-1)?.[0] as Utterance;
+      act(() => reading.onstart?.());
+      engine.speak.mockClear(); engine.cancel.mockClear();
+      act(() => vi.advanceTimersByTime(7000));
+      expect(currentRound()).toBe(round);
+      expect(sentenceCard()).not.toBeNull();
+      expect(engine.cancel).not.toHaveBeenCalled();
+      expect(engine.speak).not.toHaveBeenCalled();
+      act(() => reading.onend?.());
+      expect(currentRound()).toBe(round + 1);
+      expect(sentenceCard()).toBeNull();
+    } finally { view.unmount(); vi.unstubAllGlobals(); }
+  });
+
+  it("releases a failed sentence reading at exactly four seconds", () => {
     vi.useFakeTimers();
     class Utterance {
       lang = ""; rate = 1; onend: (() => void) | null = null; onerror: (() => void) | null = null;
       constructor(public text: string) {}
     }
-    const engine = { speak: vi.fn(), cancel: vi.fn(), getVoices: () => [] };
+    const engine = { speak: vi.fn(), cancel: vi.fn(), getVoices: () => [], speaking: false };
     vi.stubGlobal("SpeechSynthesisUtterance", Utterance);
     vi.stubGlobal("speechSynthesis", engine);
     const view = render(<WordRain standalone muted={false} onExit={() => {}} />);
     try {
-      playToIntroduction();
-      finishIntroduction();
+      const round = playToIntroduction(); finishIntroduction();
       const target = wordfallTarget();
-      if (!target) throw new Error("Missing introduced target");
+      if (!target) throw new Error("Missing target");
       fireEvent.click(screen.getByRole("button", { name: target.hebrew }));
-      const sentenceUtterance = engine.speak.mock.calls.at(-1)?.[0] as Utterance;
-      expect(sentenceUtterance.lang).toBe("he-IL");
-      engine.speak.mockClear(); engine.cancel.mockClear();
-      settleNextRound();
-      for (let i = 0; i < 10; i++) {
-        if (screen.queryByText("טיפה חדשה!")) {
-          expect(engine.speak).not.toHaveBeenCalled();
-          expect(engine.cancel).not.toHaveBeenCalled();
-          sentenceUtterance.onend?.();
-          expect(engine.speak.mock.calls.at(-1)?.[0].lang).toBe("en-US");
-          return;
-        }
-        const familiar = wordfallTarget();
-        if (!familiar) throw new Error("Missing familiar target");
-        expect(EVERYDAY_WORDS.some(word => word.hebrew === familiar.hebrew)).toBe(true);
-        fireEvent.click(screen.getByRole("button", { name: familiar.hebrew }));
-        expect(engine.speak).not.toHaveBeenCalled();
-        expect(engine.cancel).not.toHaveBeenCalled();
-        settleNextRound();
-      }
-      throw new Error("No second introduction reached");
+      act(() => vi.advanceTimersByTime(3999));
+      expect(currentRound()).toBe(round);
+      act(() => vi.advanceTimersByTime(1));
+      expect(currentRound()).toBe(round + 1);
     } finally { view.unmount(); vi.unstubAllGlobals(); }
   });
 
@@ -169,7 +182,7 @@ describe("Wordfall", () => {
         const target = wordfallTarget();
         if (!target) throw new Error("No target rendered");
         fireEvent.click(screen.getByRole("button", { name: target.hebrew }));
-        act(() => vi.advanceTimersByTime(3450));
+        act(() => vi.advanceTimersByTime(4050));
       } else act(() => vi.advanceTimersByTime(ROUND_MS + 100));
     }
     expect(complete).toHaveBeenCalledExactlyOnceWith(8);
@@ -189,7 +202,7 @@ describe("Wordfall", () => {
       const target = wordfallTarget();
       if (!target) throw new Error("Missing target");
       fireEvent.click(screen.getByRole("button", { name: target.hebrew }));
-      act(() => vi.advanceTimersByTime(3450));
+      act(() => vi.advanceTimersByTime(4050));
     }
     fireEvent.click(screen.getByRole("button", { name: "לשלב 2" }));
     expect(screen.queryByText(/שלב 2 · סיבוב 1\/10/)).not.toBeNull();
@@ -261,7 +274,7 @@ describe("Wordfall", () => {
         const target = wordfallTarget();
         if (!target) throw new Error("Missing target before introduction");
         fireEvent.click(screen.getByRole("button", { name: target.hebrew }));
-        act(() => vi.advanceTimersByTime(3450));
+        act(() => vi.advanceTimersByTime(4050));
       }
     }
     expect(seen).toBe(true);
@@ -296,7 +309,7 @@ describe("Wordfall", () => {
     const correct = screen.getByRole("button", { name: target.hebrew });
     fireEvent.click(correct);
     fireEvent.click(correct);
-    act(() => vi.advanceTimersByTime(3450));
+    act(() => vi.advanceTimersByTime(4050));
     for (let i = 0; i < 9; i++) { finishIntroduction(); act(() => vi.advanceTimersByTime(ROUND_MS + 100)); }
     expect(complete).toHaveBeenCalledExactlyOnceWith(1);
     view.unmount();
@@ -310,7 +323,7 @@ describe("Wordfall", () => {
       const target = wordfallTarget();
       if (!target) throw new Error("No target rendered");
       fireEvent.click(screen.getByRole("button", { name: target.hebrew }));
-      act(() => vi.advanceTimersByTime(3450));
+      act(() => vi.advanceTimersByTime(4050));
     }
     expect(screen.queryByText("מגבירים קצב!")).toBeNull();
     expect(screen.queryByText(/סיבוב 4\/10/)).not.toBeNull();

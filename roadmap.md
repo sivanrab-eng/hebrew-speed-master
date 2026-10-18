@@ -1,8 +1,12 @@
 # Roadmap
 
+## Wordfall sentence freeze (preview only)
+- [x] Freeze new-word catches until Hebrew sentence completion; use a four-second audio-failure watchdog without cutting healthy longer speech. Familiar catches and arcade unchanged.
+- [x] 68 tests passed; two full preview games verified six frozen sentence readings beyond four seconds, continuation on speech end, 10/10 results and no runtime errors. Browser speech was instrumented, not audibly verified. Build OK; no upload.
+
 ## Wordfall replay variety (preview only)
-- [ ] Replace four everyday and one rich target on every tier-1 replay; replace three everyday and two rich targets on higher-tier replays, preserving mix and difficulty.
-- [ ] Verify consecutive replay batches and the complete replay flow; do not publish or change the arcade.
+- [x] Replace four everyday and one rich target on every tier-1 replay; replace three everyday and two rich targets on higher-tier replays, preserving mix and difficulty.
+- [x] Tests verify six consecutive refreshes in all five tiers; two full preview games confirmed exactly four new everyday targets and one rich target on Play Again. No publication or arcade changes.
 
 ## Wordfall mixed rounds and reliable Hebrew audio (preview only)
 - [x] Interleave rich/new targets naturally with everyday targets while preserving the repeated ten-word batch and arcade behavior.

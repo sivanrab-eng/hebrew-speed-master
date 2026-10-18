@@ -81,7 +81,7 @@ describe("hard word mix", () => {
       expect(next.filter(word => EVERYDAY_WORDS.includes(word))).toHaveLength(level === 0 ? 7 : 3);
       expect(new Set(next.map(word => word.hebrew)).size).toBe(10);
       const later = new Set(P.slice(level + 1).flat());
-      expect(next.filter(word => later.has(word))).toHaveLength([0, 3, 4, 6, 0][level]);
+      expect(next.filter(word => later.has(word))).toHaveLength([0, 3, 4, 6, 0][level] ?? 0);
       previous = next;
     }
   });
