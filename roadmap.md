@@ -1,5 +1,9 @@
 # Roadmap
 
+## Wordfall neon catch trial
+- [ ] Add standalone catch effects, no-pressure points and combos, sentence pauses and end review; preserve arcade behavior and fixed pace.
+- [ ] Add complete standalone sentence data, test scoring/pause rules, and verify a complete game plus mobile layout. Preview only; do not publish.
+
 ## Publish complete approved Wordfall trial
 - [x] Uploaded the standalone dependency subset to sivanrab-eng/Wordfall (1d93a211); configured WORDFALL_GA_MEASUREMENT_ID = G-8W3MVMWVQW. GitHub tests, build and Pages deployment run 39057344984 succeeded. Three full live games confirmed seven everyday targets, three six-second introductions, identical targets across three games, optional tier advancement and fresh-visit reset; speech engine calls confirmed 150ms sequencing, analytics script loaded, manifest scope resolves to /Wordfall/, no runtime errors. No arcade application code changed.
 
