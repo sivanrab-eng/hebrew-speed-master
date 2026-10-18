@@ -119,6 +119,46 @@ describe("Wordfall", () => {
     throw new Error("No familiar word appeared as a target");
   });
 
+  it("protects Hebrew sentence audio from familiar catches, SFX and the next introduction", () => {
+    vi.useFakeTimers();
+    class Utterance {
+      lang = ""; rate = 1; onend: (() => void) | null = null; onerror: (() => void) | null = null;
+      constructor(public text: string) {}
+    }
+    const engine = { speak: vi.fn(), cancel: vi.fn(), getVoices: () => [] };
+    vi.stubGlobal("SpeechSynthesisUtterance", Utterance);
+    vi.stubGlobal("speechSynthesis", engine);
+    const view = render(<WordRain standalone muted={false} onExit={() => {}} />);
+    try {
+      playToIntroduction();
+      finishIntroduction();
+      const target = wordfallTarget();
+      if (!target) throw new Error("Missing introduced target");
+      fireEvent.click(screen.getByRole("button", { name: target.hebrew }));
+      const sentenceUtterance = engine.speak.mock.calls.at(-1)?.[0] as Utterance;
+      expect(sentenceUtterance.lang).toBe("he-IL");
+      engine.speak.mockClear(); engine.cancel.mockClear();
+      settleNextRound();
+      for (let i = 0; i < 10; i++) {
+        if (screen.queryByText("טיפה חדשה!")) {
+          expect(engine.speak).not.toHaveBeenCalled();
+          expect(engine.cancel).not.toHaveBeenCalled();
+          sentenceUtterance.onend?.();
+          expect(engine.speak.mock.calls.at(-1)?.[0].lang).toBe("en-US");
+          return;
+        }
+        const familiar = wordfallTarget();
+        if (!familiar) throw new Error("Missing familiar target");
+        expect(EVERYDAY_WORDS.some(word => word.hebrew === familiar.hebrew)).toBe(true);
+        fireEvent.click(screen.getByRole("button", { name: familiar.hebrew }));
+        expect(engine.speak).not.toHaveBeenCalled();
+        expect(engine.cancel).not.toHaveBeenCalled();
+        settleNextRound();
+      }
+      throw new Error("No second introduction reached");
+    } finally { view.unmount(); vi.unstubAllGlobals(); }
+  });
+
   it("offers a next tier at eight catches but repeats the current tier unless chosen", () => {
     vi.useFakeTimers();
     const complete = vi.fn();

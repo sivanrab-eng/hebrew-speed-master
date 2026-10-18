@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { Confetti } from "./Confetti";
 import { Button } from "@/components/ui/button";
 import { advanceRainProgress, ARCADE_PACE, ARCADE_RULES, initialRainProgress, rainTiming, STANDALONE_PACE, STANDALONE_RULES } from "@/lib/word-rain-speed";
-import { completeDifficulty, initialDifficulty, repeatedGameWords, needsIntroduction, INTRODUCTION_MS } from "@/lib/wordfall-difficulty";
+import { completeDifficulty, initialDifficulty, repeatedGameWords, interleavedGameWords, needsIntroduction, INTRODUCTION_MS } from "@/lib/wordfall-difficulty";
 import { advanceCatchProgress, initialCatchProgress, SENTENCE_SHOW_MS } from "@/lib/wordfall-score";
 import { getWordfallSentence, type WordfallSentence as Sentence } from "@/lib/wordfall-sentences";
 import { WordfallSentence, SentenceText } from "./WordfallSentence";
@@ -30,7 +30,11 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
   const catchRef = useRef(initialCatchProgress());
   const [catchProgress, setCatchProgress] = useState(initialCatchProgress);
   const [sentence, setSentence] = useState<Sentence | null>(null);
+  const [sentenceLabel, setSentenceLabel] = useState("");
   const sentenceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const sentenceAudioRef = useRef(false);
+  const audioGenerationRef = useRef(0);
+  const pendingIntroductionRef = useRef<Word | null>(null);
   const [burst, setBurst] = useState<{ x: number; y: number } | null>(null);
   const [review, setReview] = useState<Word[]>([]);
   const fieldRef = useRef<HTMLDivElement | null>(null);
@@ -54,7 +58,12 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
   const completeCallback = useRef(onGameComplete);
   startCallback.current = onGameStart;
   completeCallback.current = onGameComplete;
-  const play = (k: keyof typeof sfx) => { if (!muted) sfx[k](); };
+  const play = (k: keyof typeof sfx) => { if (!muted && !(standalone && sentenceAudioRef.current)) sfx[k](); };
+  const readIntroduction = (word: Word) => {
+    if (muted) return;
+    if (sentenceAudioRef.current) pendingIntroductionRef.current = word;
+    else speakPair(word.hebrew, word.english);
+  };
   // Wordfall falls slower and keeps one steady pace; the arcade game keeps its own
   const pace = standalone ? STANDALONE_PACE : ARCADE_PACE;
   const rules = standalone ? STANDALONE_RULES : ARCADE_RULES;
@@ -69,6 +78,7 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
 
   const nextRound = (r: number) => {
     // A sentence already on screen keeps showing and reading across the round change.
+    pendingIntroductionRef.current = null;
     setBurst(null);
     setRound(r);
     lockedRef.current = false;
@@ -91,6 +101,7 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
     setHits(new Set()); setMisses(new Set());
     if (timerRef.current) clearTimeout(timerRef.current);
     const beginFall = () => {
+      pendingIntroductionRef.current = null;
       setIntroducing(false);
       lockedRef.current = false;
       setDrops(lanes.map((w, i) => ({ word: w, lane: i, key: `${r}-${w.hebrew}` })));
@@ -109,8 +120,8 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
       lockedRef.current = true;
       setIntroducing(true);
       setDrops([]);
-      // Read the new word aloud: Hebrew first, then the simple English meaning.
-      if (!muted) speakPair(word.hebrew, word.english);
+      // Sentence audio wins; an overlapping introduction may read after it ends.
+      readIntroduction(word);
       timerRef.current = setTimeout(beginFall, INTRODUCTION_MS);
     } else beginFall();
   };
@@ -118,7 +129,7 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
   const startGame = () => {
     if (standalone) {
       batchRef.current = repeatedGameWords(difficultyRef.current, batchRef.current, completedGamesRef.current, ROUNDS, shuffle);
-      gameWordsRef.current = shuffle(batchRef.current);
+      gameWordsRef.current = interleavedGameWords(batchRef.current, shuffle);
       // Keep distractors familiar too, rather than importing the entire rich tier.
       poolRef.current = gameWordsRef.current;
     } else {
@@ -133,19 +144,21 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
   useEffect(() => {
     difficultyRef.current = initialDifficulty();
     startGame();
-    return () => { if (timerRef.current) clearTimeout(timerRef.current); if (speedTimerRef.current) clearTimeout(speedTimerRef.current); if (sentenceTimerRef.current) clearTimeout(sentenceTimerRef.current); if (standalone) cancelSpeech(); };
+    return () => { audioGenerationRef.current += 1; pendingIntroductionRef.current = null; if (timerRef.current) clearTimeout(timerRef.current); if (speedTimerRef.current) clearTimeout(speedTimerRef.current); if (sentenceTimerRef.current) clearTimeout(sentenceTimerRef.current); if (standalone) cancelSpeech(); };
   }, []);
 
   const pick = (d: Drop, element: HTMLButtonElement) => {
     if (!target || lockedRef.current || done) return;
     if (d.word === target) {
+      const isNew = standalone && introducedRef.current.has(d.word.hebrew);
+      const example = isNew ? getWordfallSentence(d.word.hebrew) : undefined;
       lockedRef.current = true;
       const speedBefore = progressRef.current.speed;
       progressRef.current = advanceRainProgress(progressRef.current, true, rules);
       if (standalone) {
         catchRef.current = advanceCatchProgress(catchRef.current, true);
         setCatchProgress(catchRef.current);
-        if (!muted) sfx.catchNeon?.(catchRef.current.streak);
+        if (!muted && !example && !sentenceAudioRef.current) sfx.catchNeon?.(catchRef.current.streak);
         const field = fieldRef.current?.getBoundingClientRect();
         const rect = element.getBoundingClientRect();
         if (field && field.width > 0 && field.height > 0) setBurst({ x: (rect.left + rect.width / 2 - field.left) / field.width * 100, y: (rect.top + rect.height / 2 - field.top) / field.height * 100 });
@@ -153,9 +166,7 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
       if (progressRef.current.speed > speedBefore) flashSpeedUp();
       // Only a word the player met on the "טיפה חדשה!" card gets the example sentence;
       // a familiar word is simply heard once and the rain keeps falling.
-      const isNew = standalone && introducedRef.current.has(d.word.hebrew);
-      const example = isNew ? getWordfallSentence(d.word.hebrew) : undefined;
-      if (!muted && !example) speak(d.word.hebrew);
+      if (!muted && !example && !(standalone && sentenceAudioRef.current)) speak(d.word.hebrew);
       scoreRef.current += 1;
       setScore(scoreRef.current);
       setHits(new Set([d.key]));
@@ -163,9 +174,20 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
       if (sentenceTimerRef.current) clearTimeout(sentenceTimerRef.current);
       // The strip always shows the latest catch, never a stale one.
       setSentence(example ?? null);
+      setSentenceLabel(example ? d.word.hebrew : "");
       if (example) {
         setReview(words => [...words.filter(word => word.hebrew !== d.word.hebrew), d.word]);
-        if (!muted) speakHebrew(example.hebrew.replace(/[[\]]/g, ""));
+        if (!muted) {
+          sentenceAudioRef.current = true;
+          const generation = ++audioGenerationRef.current;
+          speakHebrew(example.hebrew.replace(/[[\]]/g, ""), () => {
+            if (generation !== audioGenerationRef.current) return;
+            sentenceAudioRef.current = false;
+            const pending = pendingIntroductionRef.current;
+            pendingIntroductionRef.current = null;
+            if (pending) readIntroduction(pending);
+          });
+        }
         sentenceTimerRef.current = setTimeout(() => setSentence(null), SENTENCE_SHOW_MS);
       }
       timerRef.current = setTimeout(() => nextRound(round + 1), 650);
@@ -182,6 +204,12 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
 
 
   const restart = (advance = false) => {
+    if (standalone) {
+      audioGenerationRef.current += 1;
+      sentenceAudioRef.current = false;
+      pendingIntroductionRef.current = null;
+      cancelSpeech();
+    }
     if (advance && standalone && levelUnlocked) {
       difficultyRef.current = completeDifficulty(difficultyRef.current, scoreRef.current);
       batchRef.current = [];
@@ -233,7 +261,7 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
                 <p className="font-display text-lg text-secondary">טיפה חדשה!</p>
                 <p className="break-words font-hebrew text-4xl font-bold text-foreground">{target.hebrew}</p>
                 <p dir="ltr" className="text-xl text-primary">{target.english}</p>
-                <Button variant="ghost" onClick={() => !muted && speakPair(target.hebrew, target.english)} className="gap-2 text-sm text-muted-foreground">
+                <Button variant="ghost" onClick={() => readIntroduction(target)} className="gap-2 text-sm text-muted-foreground">
                   <Volume2 className="h-4 w-4" /> שמיעה חוזרת
                 </Button>
               </div>
@@ -255,7 +283,7 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
               </Button>
             ))}
           </div>
-          {standalone && sentence && target && <WordfallSentence label={target.hebrew} sentence={sentence} points={catchProgress.awarded} streak={catchProgress.streak} />}
+          {standalone && sentence && <WordfallSentence label={sentenceLabel} sentence={sentence} points={catchProgress.awarded} streak={catchProgress.streak} />}
           {!standalone && <p className="text-center text-xs text-muted-foreground">אין עונש על טעות — פשוט ממשיכים 😊</p>}
         </>
       ) : done ? (
