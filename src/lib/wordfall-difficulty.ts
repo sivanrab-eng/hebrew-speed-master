@@ -64,6 +64,31 @@ export function repeatedGameWords(progress: DifficultyProgress, previous: Word[]
     : mixedGameWords(progress, rounds, shuffle);
 }
 
+// Randomize each category, then scatter the smaller category between the larger
+// one. Replays retain the same batch, not the same order or a rich-word cluster.
+export function interleavedGameWords(words: Word[], shuffle: <T>(items: T[]) => T[]): Word[] {
+  const everyday = new Set(EVERYDAY_WORDS.map(word => word.hebrew));
+  const easy = shuffle(words.filter(word => everyday.has(word.hebrew)));
+  const rich = shuffle(words.filter(word => !everyday.has(word.hebrew)));
+  const minority = easy.length < rich.length ? easy : rich;
+  const majority = easy.length < rich.length ? rich : easy;
+  if (!minority.length) return majority;
+  const gaps = Array.from({ length: minority.length + 1 }, (_, i) => i > 0 && i < minority.length ? 1 : 0);
+  const remaining = majority.length - minority.length + 1;
+  const gapOrder = shuffle(gaps.map((_, i) => i));
+  for (let i = 0; i < remaining; i++) {
+    const gap = gapOrder[i % gapOrder.length];
+    if (gap !== undefined) gaps[gap] = (gaps[gap] ?? 0) + 1;
+  }
+  let cursor = 0;
+  return gaps.flatMap((size, i) => {
+    const group = majority.slice(cursor, cursor + size);
+    cursor += size;
+    const word = minority[i];
+    return word ? [...group, word] : group;
+  });
+}
+
 export const needsIntroduction = (word: Word, introduced: Set<string>) =>
   !EVERYDAY_WORDS.some(easy => easy.hebrew === word.hebrew) && !introduced.has(word.hebrew);
 

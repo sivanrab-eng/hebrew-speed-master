@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { completeDifficulty, difficultyPool, EVERYDAY_WORDS, initialDifficulty, INTRODUCTION_MS, normalizeDifficulty, WORDFALL_POOLS, repeatedGameWords, needsIntroduction } from "@/lib/wordfall-difficulty";
+import { completeDifficulty, difficultyPool, EVERYDAY_WORDS, initialDifficulty, INTRODUCTION_MS, normalizeDifficulty, WORDFALL_POOLS, repeatedGameWords, interleavedGameWords, needsIntroduction } from "@/lib/wordfall-difficulty";
 import { VOCAB } from "@/lib/vocab";
 
 describe("Wordfall vocabulary difficulty", () => {
@@ -45,6 +45,15 @@ describe("Wordfall vocabulary difficulty", () => {
 import { mixedGameWords as mix, WORDFALL_POOLS as P } from "@/lib/wordfall-difficulty";
 describe("hard word mix", () => {
   const id = <T,>(a: T[]) => a;
+  it.each([0, 1, 2, 3, 4])("interleaves rich and familiar targets without changing the batch at tier %i", level => {
+    const batch = mix({ level, wins: 0 }, 10, id);
+    const ordered = interleavedGameWords(batch, id);
+    expect(ordered.map(word => word.hebrew).sort()).toEqual(batch.map(word => word.hebrew).sort());
+    const minority = ordered.map((word, i) => ({ word, i })).filter(({ word }) => level === 0 ? !EVERYDAY_WORDS.includes(word) : EVERYDAY_WORDS.includes(word));
+    expect(minority).toHaveLength(3);
+    for (let i = 1; i < minority.length; i++) expect((minority[i]?.i ?? 0) - (minority[i - 1]?.i ?? 0)).toBeGreaterThan(1);
+    expect(minority[2]?.i).toBeGreaterThanOrEqual(6);
+  });
   it.each([0, 1, 2, 3, 4])("keeps a confidence mix at level %i", level => {
     const words = mix({ level, wins: 0 }, 10, id);
     expect(words).toHaveLength(10);
