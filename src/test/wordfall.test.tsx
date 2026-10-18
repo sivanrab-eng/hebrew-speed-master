@@ -4,6 +4,8 @@ import { WordRain } from "@/components/WordRain";
 import { VOCAB } from "@/lib/vocab";
 import { DIFFICULTY_STORAGE_KEY, WORDFALL_WORDS, INTRODUCTION_MS } from "@/lib/wordfall-difficulty";
 import { STANDALONE_PACE } from "@/lib/word-rain-speed";
+import { SENTENCE_SPEAK_BUFFER_MS } from "@/lib/wordfall-score";
+import { getWordfallSentence } from "@/lib/wordfall-sentences";
 
 vi.mock("@/lib/sfx", () => ({ sfx: { correct: vi.fn(), tick: vi.fn(), end: vi.fn(), speedUp: vi.fn() } }));
 vi.mock("@/components/Confetti", () => ({ Confetti: () => null }));
@@ -33,6 +35,34 @@ describe("Wordfall", () => {
     act(() => vi.advanceTimersByTime(1));
     expect(screen.queryByText(/סיבוב 2\/10/)).not.toBeNull();
     view.unmount();
+  });
+  it("holds the sentence card until its Hebrew reading ends", () => {
+    vi.useFakeTimers();
+    class Utterance {
+      lang = ""; rate = 1; onend: (() => void) | null = null; onerror: (() => void) | null = null;
+      constructor(public text: string) {}
+    }
+    const engine = { speak: vi.fn(), cancel: vi.fn(), getVoices: () => [] };
+    vi.stubGlobal("SpeechSynthesisUtterance", Utterance);
+    vi.stubGlobal("speechSynthesis", engine);
+    const view = render(<WordRain standalone muted={false} onExit={() => {}} />);
+    finishIntroduction();
+    const target = wordfallTarget();
+    if (!target) throw new Error("Missing target");
+    const caughtSentence = getWordfallSentence(target.hebrew);
+    if (!caughtSentence) throw new Error("Missing sentence");
+    fireEvent.click(screen.getByRole("button", { name: target.hebrew }));
+    act(() => vi.advanceTimersByTime(450));
+    expect(engine.speak.mock.calls.at(-1)?.[0]).toMatchObject({ text: caughtSentence.hebrew.replace(/[[\]]/g, ""), lang: "he-IL" });
+    // The reading keeps the card open well past the silent auto-advance time.
+    act(() => vi.advanceTimersByTime(6000));
+    expect(screen.queryByText(/סיבוב 1\/10/)).not.toBeNull();
+    expect(fallingWords()).toHaveLength(0);
+    engine.speak.mock.calls.at(-1)?.[0].onend?.();
+    act(() => vi.advanceTimersByTime(SENTENCE_SPEAK_BUFFER_MS));
+    expect(screen.queryByText(/סיבוב 2\/10/)).not.toBeNull();
+    view.unmount();
+    vi.unstubAllGlobals();
   });
   it("pauses falling for a sentence and lets the reader hold and continue", () => {
     vi.useFakeTimers();

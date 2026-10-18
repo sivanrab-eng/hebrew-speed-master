@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { cancelSpeech, speak, speakPair } from "@/lib/vocab";
+import { cancelSpeech, speak, speakHebrew, speakPair } from "@/lib/vocab";
 
 class MockUtterance {
   lang = "";
@@ -81,6 +81,60 @@ describe("Wordfall speech sequencing", () => {
     speak("כלב");
     vi.advanceTimersByTime(3000);
     expect(engine.speak.mock.calls.map(([utterance]) => utterance.text)).toEqual(["בית", "כלב"]);
+    expect(vi.getTimerCount()).toBe(0);
+  });
+});
+
+describe("Wordfall Hebrew sentence reading", () => {
+  const engine = { speak: vi.fn(), cancel: vi.fn(), getVoices: () => [] };
+
+  beforeEach(() => {
+    vi.useFakeTimers();
+    vi.stubGlobal("SpeechSynthesisUtterance", MockUtterance);
+    vi.stubGlobal("speechSynthesis", engine);
+    cancelSpeech();
+    vi.clearAllMocks();
+  });
+
+  afterEach(() => {
+    cancelSpeech();
+    vi.useRealTimers();
+    vi.unstubAllGlobals();
+  });
+
+  it("reads Hebrew text and reports completion on end", () => {
+    const done = vi.fn();
+    speakHebrew("הבית גדול", done);
+    expect(engine.speak).toHaveBeenCalledTimes(1);
+    expect(engine.speak.mock.calls[0]?.[0]).toMatchObject({ text: "הבית גדול", lang: "he-IL", rate: 0.85 });
+    engine.speak.mock.calls[0]?.[0].onend?.();
+    expect(done).toHaveBeenCalledTimes(1);
+    expect(vi.getTimerCount()).toBe(0);
+  });
+
+  it("reports completion on a Hebrew error", () => {
+    const done = vi.fn();
+    speakHebrew("הבית גדול", done);
+    engine.speak.mock.calls[0]?.[0].onerror?.();
+    expect(done).toHaveBeenCalledTimes(1);
+    expect(vi.getTimerCount()).toBe(0);
+  });
+
+  it("reports completion at the fallback when the engine never fires", () => {
+    const done = vi.fn();
+    speakHebrew("הבית גדול", done, 12000);
+    vi.advanceTimersByTime(11999);
+    expect(done).not.toHaveBeenCalled();
+    vi.advanceTimersByTime(1);
+    expect(done).toHaveBeenCalledTimes(1);
+  });
+
+  it("cancellation prevents a stale completion", () => {
+    const done = vi.fn();
+    speakHebrew("הבית גדול", done);
+    cancelSpeech();
+    engine.speak.mock.calls[0]?.[0].onend?.();
+    expect(done).not.toHaveBeenCalled();
     expect(vi.getTimerCount()).toBe(0);
   });
 });
