@@ -23,6 +23,13 @@ function tone(freq: number, start: number, dur: number, type: OscillatorType = "
 export const sfx = {
   unlock: () => ac(),
   correct: () => { tone(660, 0, 0.12, "triangle"); tone(990, 0.07, 0.18, "triangle"); },
+  catchNeon: (streak = 1) => {
+    const lift = Math.min(Math.floor(streak / 3), 3) * 80;
+    tone(580 + lift, 0, 0.09, "sine", 0.11);
+    tone(870 + lift, 0.045, 0.14, "triangle", 0.09);
+    tone(1160 + lift, 0.10, 0.19, "sine", 0.08);
+    if ([3, 5, 8].includes(streak)) tone(1450, 0.18, 0.22, "triangle", 0.07);
+  },
   speedUp: () => { tone(520, 0, 0.08, "triangle", 0.1); tone(780, 0.06, 0.09, "triangle", 0.1); tone(1040, 0.12, 0.14, "triangle", 0.1); },
   wrong: () => { tone(220, 0, 0.18, "square", 0.08); tone(160, 0.1, 0.22, "square", 0.08); },
   tick: () => tone(1400, 0, 0.04, "sine", 0.07),
