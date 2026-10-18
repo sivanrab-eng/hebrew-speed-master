@@ -49,7 +49,7 @@ describe("hard word mix", () => {
     const batch = mix({ level, wins: 0 }, 10, id);
     const ordered = interleavedGameWords(batch, id);
     expect(ordered.map(word => word.hebrew).sort()).toEqual(batch.map(word => word.hebrew).sort());
-    const minority = ordered.map((word, i) => ({ word, i })).filter(({ word }) => level === 0 ? !EVERYDAY_WORDS.includes(word) : EVERYDAY_WORDS.includes(word));
+    const minority = ordered.map((word, i) => ({ word, i })).filter(({ word }) => !EVERYDAY_WORDS.includes(word));
     expect(minority).toHaveLength(3);
     for (let i = 1; i < minority.length; i++) expect((minority[i]?.i ?? 0) - (minority[i - 1]?.i ?? 0)).toBeGreaterThan(1);
     expect(minority[2]?.i).toBeGreaterThanOrEqual(6);
@@ -57,12 +57,12 @@ describe("hard word mix", () => {
   it.each([0, 1, 2, 3, 4])("keeps a confidence mix at level %i", level => {
     const words = mix({ level, wins: 0 }, 10, id);
     expect(words).toHaveLength(10);
-    expect(words.filter(word => EVERYDAY_WORDS.includes(word))).toHaveLength(level === 0 ? 7 : 3);
-    expect(words.filter(word => P.flat().includes(word))).toHaveLength(level === 0 ? 3 : 7);
+    expect(words.filter(word => EVERYDAY_WORDS.includes(word))).toHaveLength(7);
+    expect(words.filter(word => P.flat().includes(word))).toHaveLength(3);
     expect(new Set(words.map(word => word.hebrew)).size).toBe(10);
     expect(words.every(word => word.english.trim().split(/\s+/).length <= 12)).toBe(true);
   });
-  it.each([[0, 0], [1, 3], [2, 4], [3, 6]])("level %i has %i harder words in 10", (level, hard) => {
+  it.each([[0, 0], [1, 3], [2, 3], [3, 3]])("level %i has %i harder words in 10", (level, hard) => {
     const words = mix({ level, wins: 0 }, 10, id);
     const later = new Set(P.slice(level + 1).flat());
     expect(words).toHaveLength(10);
@@ -78,10 +78,10 @@ describe("hard word mix", () => {
       expect(changed).toHaveLength(5);
       expect(changed.filter(word => EVERYDAY_WORDS.includes(word))).toHaveLength(level === 0 ? 4 : 3);
       expect(changed.filter(word => !EVERYDAY_WORDS.includes(word))).toHaveLength(level === 0 ? 1 : 2);
-      expect(next.filter(word => EVERYDAY_WORDS.includes(word))).toHaveLength(level === 0 ? 7 : 3);
+       expect(next.filter(word => EVERYDAY_WORDS.includes(word))).toHaveLength(7);
       expect(new Set(next.map(word => word.hebrew)).size).toBe(10);
       const later = new Set(P.slice(level + 1).flat());
-      expect(next.filter(word => later.has(word))).toHaveLength([0, 3, 4, 6, 0][level] ?? 0);
+       expect(next.filter(word => later.has(word))).toHaveLength([0, 3, 3, 3, 0][level] ?? 0);
       previous = next;
     }
   });

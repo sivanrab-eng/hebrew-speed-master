@@ -6,6 +6,7 @@ import { DIFFICULTY_STORAGE_KEY, EVERYDAY_WORDS, WORDFALL_WORDS, INTRODUCTION_MS
 import { STANDALONE_PACE } from "@/lib/word-rain-speed";
 import { SENTENCE_FALLBACK_MS } from "@/lib/wordfall-score";
 import { getWordfallSentence } from "@/lib/wordfall-sentences";
+import { wordfallSpokenSentence, wordfallSpokenWord } from "@/lib/wordfall-pronunciation";
 
 vi.mock("@/lib/sfx", () => ({ sfx: { correct: vi.fn(), tick: vi.fn(), end: vi.fn(), speedUp: vi.fn() } }));
 vi.mock("@/components/Confetti", () => ({ Confetti: () => null }));
@@ -44,6 +45,34 @@ const playToIntroduction = () => {
 afterEach(() => { vi.useRealTimers(); localStorage.removeItem(DIFFICULTY_STORAGE_KEY); });
 
 describe("Wordfall", () => {
+  it.each([true, false])("vocalizes standalone catches only (standalone: %s)", standalone => {
+    vi.useFakeTimers();
+    class Utterance {
+      lang = ""; rate = 1;
+      constructor(public text: string) {}
+    }
+    const engine = { speak: vi.fn(), cancel: vi.fn(), getVoices: () => [] };
+    vi.stubGlobal("SpeechSynthesisUtterance", Utterance);
+    vi.stubGlobal("speechSynthesis", engine);
+    const view = render(<WordRain standalone={standalone} muted={false} onExit={() => {}} />);
+    try {
+      for (let i = 0; i < 10; i++) {
+        finishIntroduction();
+        const target = standalone ? wordfallTarget() : arcadeTarget();
+        if (!target) throw new Error("Missing target");
+        const familiar = !standalone || EVERYDAY_WORDS.some(word => word.hebrew === target.hebrew);
+        engine.speak.mockClear();
+        fireEvent.click(screen.getByRole("button", { name: target.hebrew }));
+        if (familiar) {
+          expect(engine.speak.mock.calls.at(-1)?.[0]).toMatchObject({ text: standalone ? wordfallSpokenWord(target.hebrew) : target.hebrew, lang: "he-IL" });
+          return;
+        }
+        settleNextRound();
+      }
+      throw new Error("No familiar target found");
+    } finally { view.unmount(); vi.unstubAllGlobals(); }
+  });
+
   it("holds a muted new-word sentence for the four-second fallback", () => {
     vi.useFakeTimers();
     const view = render(<WordRain standalone muted onExit={() => {}} />);
@@ -84,7 +113,7 @@ describe("Wordfall", () => {
     if (!caughtSentence) throw new Error("Missing sentence");
     engine.speak.mockClear();
     fireEvent.click(screen.getByRole("button", { name: target.hebrew }));
-    expect(engine.speak.mock.calls.at(-1)?.[0]).toMatchObject({ text: caughtSentence.hebrew.replace(/[[\]]/g, ""), lang: "he-IL" });
+    expect(engine.speak.mock.calls.at(-1)?.[0]).toMatchObject({ text: wordfallSpokenSentence(target.hebrew, caughtSentence.hebrew), lang: "he-IL" });
     const reading = engine.speak.mock.calls.at(-1)?.[0];
     act(() => vi.advanceTimersByTime(650));
     expect(currentRound()).toBe(round);

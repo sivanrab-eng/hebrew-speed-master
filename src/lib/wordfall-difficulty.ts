@@ -44,11 +44,11 @@ export function difficultyPool(progress: DifficultyProgress): Word[] {
   return WORDFALL_POOLS[progress.level] ?? WORDFALL_POOLS[0] ?? [];
 }
 
-// Harder words borrowed from later tiers per game, growing by tier (2 → 3 → 4 → 6; last tier is all hard).
-export const HARD_MIX = [0, 3, 4, 6, 0] as const;
+// Later-tier borrowing stays within the three rich slots; the last tier uses its own pool.
+export const HARD_MIX = [0, 3, 3, 3, 0] as const;
 
 export function mixedGameWords(progress: DifficultyProgress, rounds: number, shuffle: <T>(items: T[]) => T[]): Word[] {
-  const easy = shuffle([...EVERYDAY_WORDS]).slice(0, Math.min(progress.level === 0 ? 7 : 3, rounds));
+  const easy = shuffle([...EVERYDAY_WORDS]).slice(0, Math.min(7, rounds));
   const richRounds = rounds - easy.length;
   const easyLabels = new Set(EVERYDAY_WORDS.map(word => word.hebrew));
   const hardCount = Math.min(HARD_MIX[progress.level] ?? 0, richRounds);
