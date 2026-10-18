@@ -11,7 +11,7 @@ vi.mock("@/components/Confetti", () => ({ Confetti: () => null }));
 const ROUND_MS = STANDALONE_PACE.roundMs;
 const arcadeTarget = () => VOCAB.find(word => screen.queryByText(word.english) && screen.queryByRole("button", { name: word.hebrew }));
 const wordfallTarget = () => WORDFALL_WORDS.find(word => screen.queryByText(word.english) && screen.queryByRole("button", { name: word.hebrew }));
-const fallingWords = () => screen.getAllByRole("button").filter(button => button.getAttribute("aria-label"));
+const fallingWords = () => screen.getAllByRole("button").filter(button => button.classList.contains("animate-word-fall"));
 const finishIntroduction = () => {
   if (screen.queryByText("טיפה חדשה!")) act(() => vi.advanceTimersByTime(INTRODUCTION_MS));
 };
