@@ -14,3 +14,18 @@ describe("Wordfall no-pressure scoring", () => {
   });
   it("offers a three-second sentence pause", () => { expect(SENTENCE_MS).toBe(3000); });
 });
+import vocabulary from "@/lib/wordfall-vocabulary.json";
+import { EVERYDAY_WORDS } from "@/lib/wordfall-difficulty";
+import { getWordfallSentence, splitHighlightedSentence } from "@/lib/wordfall-sentences";
+describe("Wordfall sentence examples", () => {
+  it("has one highlighted sentence and translation for every standalone word", () => {
+    for (const label of [...Object.keys(vocabulary), ...EVERYDAY_WORDS.map(word => word.hebrew)]) {
+      const sentence = getWordfallSentence(label);
+      expect(sentence?.english, label).toBeTruthy();
+      expect(splitHighlightedSentence(sentence?.hebrew ?? "").target, label).not.toBe("");
+    }
+  });
+  it("uses the requested house example", () => {
+    expect(getWordfallSentence("בית")).toEqual({ hebrew: "אני גר ב[בית] גדול.", english: "I live in a big house." });
+  });
+});
