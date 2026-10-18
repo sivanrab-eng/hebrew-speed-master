@@ -1,8 +1,8 @@
 # Roadmap
 
 ## Wordfall neon catch trial
-- [ ] Add standalone catch effects, no-pressure points and combos, sentence pauses and end review; preserve arcade behavior and fixed pace.
-- [ ] Add complete standalone sentence data, test scoring/pause rules, and verify a complete game plus mobile layout. Preview only; do not publish.
+- [x] Add standalone neon catch particles/flash/trails and layered sound, no-pressure points and streaks, three-second sentence pauses with hold/continue/audio, and end review prioritizing rich caught words; preserve arcade behavior and fixed pace.
+- [x] Add 407 label-keyed Hebrew sentence/English translation examples without nikud. All 51 tests passed; full browser game confirmed 10/10, 1750 points, held reading without falling words, optional tier advancement, fresh-visit reset, mobile no overflow and no runtime errors. Build OK. Preview only; not published. Actual audible output remains device-dependent.
 
 ## Publish complete approved Wordfall trial
 - [x] Uploaded the standalone dependency subset to sivanrab-eng/Wordfall (1d93a211); configured WORDFALL_GA_MEASUREMENT_ID = G-8W3MVMWVQW. GitHub tests, build and Pages deployment run 39057344984 succeeded. Three full live games confirmed seven everyday targets, three six-second introductions, identical targets across three games, optional tier advancement and fresh-visit reset; speech engine calls confirmed 150ms sequencing, analytics script loaded, manifest scope resolves to /Wordfall/, no runtime errors. No arcade application code changed.
