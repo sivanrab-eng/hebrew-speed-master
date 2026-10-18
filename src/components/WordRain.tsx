@@ -7,7 +7,7 @@ import { Confetti } from "./Confetti";
 import { Button } from "@/components/ui/button";
 import { advanceRainProgress, ARCADE_PACE, ARCADE_RULES, initialRainProgress, rainTiming, STANDALONE_PACE, STANDALONE_RULES } from "@/lib/word-rain-speed";
 import { completeDifficulty, initialDifficulty, repeatedGameWords, needsIntroduction, INTRODUCTION_MS } from "@/lib/wordfall-difficulty";
-import { advanceCatchProgress, initialCatchProgress, SENTENCE_MS, SENTENCE_SPEAK_BUFFER_MS, SENTENCE_SPEAK_FALLBACK_MS } from "@/lib/wordfall-score";
+import { advanceCatchProgress, initialCatchProgress, SENTENCE_SHOW_MS } from "@/lib/wordfall-score";
 import { getWordfallSentence, type WordfallSentence as Sentence } from "@/lib/wordfall-sentences";
 import { WordfallSentence, SentenceText } from "./WordfallSentence";
 import { WordfallCatch } from "./WordfallCatch";
@@ -30,7 +30,7 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
   const catchRef = useRef(initialCatchProgress());
   const [catchProgress, setCatchProgress] = useState(initialCatchProgress);
   const [sentence, setSentence] = useState<Sentence | null>(null);
-  const [readingHeld, setReadingHeld] = useState(false);
+  const sentenceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [burst, setBurst] = useState<{ x: number; y: number } | null>(null);
   const [review, setReview] = useState<Word[]>([]);
   const fieldRef = useRef<HTMLDivElement | null>(null);
@@ -68,8 +68,8 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
   };
 
   const nextRound = (r: number) => {
-    if (standalone) cancelSpeech();
-    setSentence(null); setReadingHeld(false); setBurst(null);
+    // A sentence already on screen keeps showing and reading across the round change.
+    setBurst(null);
     setRound(r);
     lockedRef.current = false;
     setIntroducing(false);
@@ -133,7 +133,7 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
   useEffect(() => {
     difficultyRef.current = initialDifficulty();
     startGame();
-    return () => { if (timerRef.current) clearTimeout(timerRef.current); if (speedTimerRef.current) clearTimeout(speedTimerRef.current); if (standalone) cancelSpeech(); };
+    return () => { if (timerRef.current) clearTimeout(timerRef.current); if (speedTimerRef.current) clearTimeout(speedTimerRef.current); if (sentenceTimerRef.current) clearTimeout(sentenceTimerRef.current); if (standalone) cancelSpeech(); };
   }, []);
 
   const pick = (d: Drop, element: HTMLButtonElement) => {
@@ -151,7 +151,7 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
         if (field && field.width > 0 && field.height > 0) setBurst({ x: (rect.left + rect.width / 2 - field.left) / field.width * 100, y: (rect.top + rect.height / 2 - field.top) / field.height * 100 });
       } else play("correct");
       if (progressRef.current.speed > speedBefore) flashSpeedUp();
-      // Only a word the player met on the "טיפה חדשה!" card gets the sentence stop;
+      // Only a word the player met on the "טיפה חדשה!" card gets the example sentence;
       // a familiar word is simply heard once and the rain keeps falling.
       const isNew = standalone && introducedRef.current.has(d.word.hebrew);
       const example = isNew ? getWordfallSentence(d.word.hebrew) : undefined;
@@ -160,13 +160,15 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
       setScore(scoreRef.current);
       setHits(new Set([d.key]));
       if (timerRef.current) clearTimeout(timerRef.current);
+      if (sentenceTimerRef.current) clearTimeout(sentenceTimerRef.current);
+      // The strip always shows the latest catch, never a stale one.
+      setSentence(example ?? null);
       if (example) {
         setReview(words => [...words.filter(word => word.hebrew !== d.word.hebrew), d.word]);
-        timerRef.current = setTimeout(() => {
-          setDrops([]); setSentence(example); setReadingHeld(false);
-          holdSentenceReading(example, () => nextRound(round + 1));
-        }, 450);
-      } else timerRef.current = setTimeout(() => nextRound(round + 1), 650);
+        if (!muted) speakHebrew(example.hebrew.replace(/[[\]]/g, ""));
+        sentenceTimerRef.current = setTimeout(() => setSentence(null), SENTENCE_SHOW_MS);
+      }
+      timerRef.current = setTimeout(() => nextRound(round + 1), 650);
     } else {
       if (standalone) {
         catchRef.current = advanceCatchProgress(catchRef.current, false);
@@ -178,29 +180,6 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
     }
   };
 
-  // Holds the sentence card until its Hebrew reading ends (or a fallback cap),
-  // so the auto-advance never cuts the reading mid-way.
-  const holdSentenceReading = (example: Sentence, goNext: () => void) => {
-    if (muted) {
-      timerRef.current = setTimeout(goNext, SENTENCE_MS);
-      return;
-    }
-    speakHebrew(example.hebrew.replace(/[[\]]/g, ""), () => {
-      if (timerRef.current) clearTimeout(timerRef.current);
-      timerRef.current = setTimeout(goNext, SENTENCE_SPEAK_BUFFER_MS);
-    }, SENTENCE_SPEAK_FALLBACK_MS);
-  };
-
-  const continueReading = () => {
-    if (timerRef.current) clearTimeout(timerRef.current);
-    nextRound(round + 1);
-  };
-  const toggleReadingHold = () => {
-    if (timerRef.current) clearTimeout(timerRef.current);
-    if (readingHeld) timerRef.current = setTimeout(() => nextRound(round + 1), SENTENCE_MS);
-    else cancelSpeech();
-    setReadingHeld(!readingHeld);
-  };
 
   const restart = (advance = false) => {
     if (advance && standalone && levelUnlocked) {
@@ -209,6 +188,7 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
       completedGamesRef.current = 0;
     }
     progressRef.current = initialRainProgress(); scoreRef.current = 0; setScore(0); setRound(0); setDone(false);
+    setSentence(null); if (sentenceTimerRef.current) clearTimeout(sentenceTimerRef.current);
     catchRef.current = initialCatchProgress(); setCatchProgress(catchRef.current); setReview([]);
     if (speedTimerRef.current) clearTimeout(speedTimerRef.current);
     setSpeedFlash(0); startGame();
@@ -247,7 +227,6 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
           )}
           <div ref={fieldRef} className={cn("relative h-80 overflow-hidden rounded-3xl border border-border bg-muted/50", standalone && "wordfall-field", standalone && burst && "wordfall-field-caught")}>
             {standalone && burst && <WordfallCatch x={burst.x} y={burst.y} />}
-            {standalone && sentence && target && <WordfallSentence label={target.hebrew} sentence={sentence} points={catchProgress.awarded} streak={catchProgress.streak} held={readingHeld} muted={muted} onHold={toggleReadingHold} onNext={continueReading} />}
             {introducing && target && (
               <div role="status" aria-live="polite" className="absolute inset-0 flex flex-col items-center justify-center gap-4 px-6 text-center">
                 <CloudRain className="h-9 w-9 text-secondary" />
@@ -276,6 +255,7 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
               </Button>
             ))}
           </div>
+          {standalone && sentence && target && <WordfallSentence label={target.hebrew} sentence={sentence} points={catchProgress.awarded} streak={catchProgress.streak} />}
           {!standalone && <p className="text-center text-xs text-muted-foreground">אין עונש על טעות — פשוט ממשיכים 😊</p>}
         </>
       ) : done ? (

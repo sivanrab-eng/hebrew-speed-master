@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { advanceCatchProgress, initialCatchProgress, SENTENCE_MS } from "@/lib/wordfall-score";
+import { advanceCatchProgress, initialCatchProgress, SENTENCE_SHOW_MS } from "@/lib/wordfall-score";
 describe("Wordfall no-pressure scoring", () => {
   it("awards 100 for the first catch with no speed dependency", () => {
     expect(advanceCatchProgress(initialCatchProgress(), true)).toEqual({ points: 100, awarded: 100, streak: 1, bestStreak: 1 });
@@ -12,7 +12,7 @@ describe("Wordfall no-pressure scoring", () => {
   it("resets streak on a miss without removing points or best streak", () => {
     expect(advanceCatchProgress({ points: 225, streak: 2, bestStreak: 2, awarded: 125 }, false)).toEqual({ points: 225, streak: 0, bestStreak: 2, awarded: 0 });
   });
-  it("offers a three-second sentence pause", () => { expect(SENTENCE_MS).toBe(3000); });
+  it("shows a caught sentence for 4.5 seconds without holding the round", () => { expect(SENTENCE_SHOW_MS).toBe(4500); });
 });
 import vocabulary from "@/lib/wordfall-vocabulary.json";
 import { EVERYDAY_WORDS } from "@/lib/wordfall-difficulty";

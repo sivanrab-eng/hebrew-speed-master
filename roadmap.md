@@ -1,5 +1,14 @@
 # Roadmap
 
+## Wordfall sentence strip
+- [x] The new-word card reads English first, then the Hebrew word 150ms after English ends or errors, with the two-second fallback and stale-timer cancellation kept. 12 speech tests pass; a live recording showed en-US at 783ms then he-IL at 967ms, and en-US at 16785ms then he-IL at 16944ms.
+- [x] Every standalone word already has a simple Hebrew example sentence (407 label-keyed entries in wordfall-sentences.json, coverage asserted by a test).
+- [x] Catching a word the player was introduced to shows a simple Hebrew-only example sentence in a strip under the falling field and reads it in Hebrew only, immediately, without stopping the rain or the round; it stays 4.5 seconds and always shows the latest catch, and a familiar everyday word shows no strip at all. 57 tests pass; a live game confirmed hebrew-only strips for 'התבדה', 'הפציר' and 'קצר רוח' with the round advancing, and zero strip sightings for four everyday catches. Preview only — ניאונית untouched, nothing uploaded.
+
+## Wordfall new-word only sentence
+- [x] Show the sentence card only for words the player met on the "טיפה חדשה!" introduction; familiar words are heard once and the rain keeps falling. 58 tests pass; a live game confirmed the strip for 'רהוט' and no strip for five everyday catches. Preview only, not uploaded.
+
+
 ## Wordfall sentence reading
 - [x] Read the caught word's sentence aloud in Hebrew when the review card opens, and keep the card on screen until the reading ends (with a fallback cap); arcade catches unchanged, preview only until asked. 56 tests pass; browser run confirmed the automatic he-IL sentence utterance, the card held past the old 3s window and continuation into round 2.
 
