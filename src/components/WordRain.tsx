@@ -250,12 +250,13 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
                 aria-label={d.word.hebrew}
                 className={cn("absolute top-0 h-auto min-h-16 w-[31%] animate-word-fall whitespace-normal break-words rounded-2xl border-2 border-border bg-card px-1 py-3 font-hebrew text-2xl font-bold text-foreground shadow-sm transition active:scale-90",
                   standalone && "wordfall-drop",
+                  standalone && burst && "wordfall-drop-paused",
                   hits.has(d.key) && "border-success bg-success text-success-foreground",
                   standalone && hits.has(d.key) && "wordfall-drop-caught",
                   misses.has(d.key) && (standalone ? "border-secondary opacity-70" : "animate-shake border-destructive/50 opacity-60"))}
                 style={{ right: `${d.lane * 34 + 1.5}%`, animationDelay: `${i * rainTiming(roundSpeed, pace).delaySeconds}s`, animationDuration: `${rainTiming(roundSpeed, pace).fallSeconds}s` }}
               >
-                {d.word.hebrew}
+                <span className={standalone ? "wordfall-word-label" : undefined}>{d.word.hebrew}</span>
               </Button>
             ))}
           </div>
@@ -267,7 +268,7 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
           <h2 className="mt-2 font-display text-3xl font-black">כל הכבוד!</h2>
           <p className="mt-1 text-muted-foreground">תפסת {score} מתוך {ROUNDS} מילים</p>
           {standalone && <div className="my-5 grid grid-cols-2 divide-x divide-x-reverse divide-border"><div><p className="font-display text-3xl tabular-nums text-accent-foreground">{catchProgress.points}</p><p className="text-xs text-muted-foreground">נקודות</p></div><div><p className="font-display text-3xl tabular-nums text-secondary">{catchProgress.bestStreak}</p><p className="text-xs text-muted-foreground">הרצף הכי טוב</p></div></div>}
-          {standalone && levelUnlocked && <p role="status" className="mt-3 font-display text-lg text-secondary">שלב {level + 2} זמין!</p>}
+          {standalone && levelUnlocked && <p role="status" className="wordfall-score-pop mt-3 font-display text-lg text-secondary">שלב {level + 2} זמין!</p>}
           <div className="mt-3 flex justify-center gap-1">
             {Array.from({ length: ROUNDS }, (_, i) => (
               <Heart key={i} className={cn("h-6 w-6", i < score ? "fill-primary text-primary" : "text-border")} />
@@ -277,7 +278,7 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
           {standalone && levelUnlocked && <Button variant="outline" onClick={() => restart(true)} className="mt-3 h-12 w-full text-lg"><Zap className="h-5 w-5" /> לשלב {level + 2}</Button>}
         </div>
       ) : null}
-      {standalone && done && review.length > 0 && <div className="space-y-5 border-t border-border pt-5"><h3 className="font-display text-lg text-secondary">טיפות שאספת</h3>{review.slice(-3).map(word => {
+      {standalone && done && review.length > 0 && <div className="space-y-5 border-t border-border pt-5"><h3 className="font-display text-lg text-secondary">טיפות שאספת</h3>{[...review.filter(word => needsIntroduction(word, new Set<string>())), ...review.filter(word => !needsIntroduction(word, new Set<string>()))].slice(0, 3).map(word => {
         const example = getWordfallSentence(word.hebrew);
         return example ? <div key={word.hebrew} className="border-b border-border/50 pb-5"><p className="mb-2 font-bold text-primary">{word.hebrew}</p><SentenceText sentence={example} /></div> : null;
       })}</div>}

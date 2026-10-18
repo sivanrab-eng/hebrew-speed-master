@@ -19,6 +19,21 @@ const finishIntroduction = () => {
 afterEach(() => { vi.useRealTimers(); localStorage.removeItem(DIFFICULTY_STORAGE_KEY); });
 
 describe("Wordfall", () => {
+  it("keeps a caught sentence for three seconds before the next round", () => {
+    vi.useFakeTimers();
+    const view = render(<WordRain standalone muted onExit={() => {}} />);
+    finishIntroduction();
+    const target = wordfallTarget();
+    if (!target) throw new Error("Missing target");
+    fireEvent.click(screen.getByRole("button", { name: target.hebrew }));
+    act(() => vi.advanceTimersByTime(450));
+    act(() => vi.advanceTimersByTime(2999));
+    expect(screen.queryByText(/סיבוב 1\/10/)).not.toBeNull();
+    expect(fallingWords()).toHaveLength(0);
+    act(() => vi.advanceTimersByTime(1));
+    expect(screen.queryByText(/סיבוב 2\/10/)).not.toBeNull();
+    view.unmount();
+  });
   it("pauses falling for a sentence and lets the reader hold and continue", () => {
     vi.useFakeTimers();
     const view = render(<WordRain standalone muted onExit={() => {}} />);

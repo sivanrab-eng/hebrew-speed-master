@@ -179,6 +179,8 @@
 .wordfall-drop { box-shadow: 0 0 18px -5px var(--secondary), 0 -10px 25px -14px var(--primary); overflow: visible; }
 .wordfall-drop::before { content: ""; position: absolute; bottom: 100%; left: 45%; width: 10%; height: 28px; pointer-events: none; background: linear-gradient(transparent, var(--secondary)); opacity: .35; }
 .wordfall-drop-caught { animation-play-state: paused; box-shadow: 0 0 32px var(--secondary); }
+.wordfall-drop-paused { animation-play-state: paused; }
+.wordfall-word-label { display: inline-block; animation: wordfall-breathe 1.8s ease-in-out infinite; }
 .wordfall-drop-caught::after { content: "✦"; position: absolute; inset: -12px; color: var(--accent-foreground); font-size: 52px; animation: wordfall-pop .45s ease-out forwards; pointer-events: none; }
 .wordfall-field-caught { animation: wordfall-flash .45s ease-out; }
 .wordfall-score-pop { animation: wordfall-pop .3s ease-out; }
@@ -192,10 +194,12 @@
 @keyframes wordfall-read { from { transform: scaleX(1); } to { transform: scaleX(0); } }
 @keyframes wordfall-ring { from { scale: .3; opacity: 1; } to { scale: 2.5; opacity: 0; } }
 @keyframes wordfall-particle { from { translate: 0 0; opacity: 1; } to { translate: 0 -65px; opacity: 0; } }
+@keyframes wordfall-breathe { 0%, 100% { translate: 0 0; text-shadow: 0 0 5px var(--secondary); } 50% { translate: 0 -2px; text-shadow: 0 0 12px var(--secondary); } }
 @media (prefers-reduced-motion: reduce) {
   .wordfall-burst { display: none; }
   .wordfall-field-caught, .wordfall-score-pop, .wordfall-sentence, .wordfall-drop-caught::after { animation: none; }
   .wordfall-drop::before { display: none; }
+  .wordfall-word-label { animation: none; }
   .wordfall .animate-word-fall { animation: none; transform: translateY(110px); opacity: 1; }
   .wordfall .animate-confetti-fall { display: none; }
   .wordfall .animate-speed-up { animation: none; opacity: 1; }
