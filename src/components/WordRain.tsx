@@ -160,12 +160,12 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
       setScore(scoreRef.current);
       setHits(new Set([d.key]));
       if (timerRef.current) clearTimeout(timerRef.current);
+      if (sentenceTimerRef.current) clearTimeout(sentenceTimerRef.current);
+      // The strip always shows the latest catch, never a stale one.
+      setSentence(example ?? null);
       if (example) {
         setReview(words => [...words.filter(word => word.hebrew !== d.word.hebrew), d.word]);
-        // Shown and read right away; the round keeps its own schedule underneath.
-        setSentence(example);
         if (!muted) speakHebrew(example.hebrew.replace(/[[\]]/g, ""));
-        if (sentenceTimerRef.current) clearTimeout(sentenceTimerRef.current);
         sentenceTimerRef.current = setTimeout(() => setSentence(null), SENTENCE_SHOW_MS);
       }
       timerRef.current = setTimeout(() => nextRound(round + 1), 650);

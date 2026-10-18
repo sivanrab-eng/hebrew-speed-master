@@ -4,7 +4,7 @@ import { WordRain } from "@/components/WordRain";
 import { VOCAB } from "@/lib/vocab";
 import { DIFFICULTY_STORAGE_KEY, EVERYDAY_WORDS, WORDFALL_WORDS, INTRODUCTION_MS } from "@/lib/wordfall-difficulty";
 import { STANDALONE_PACE } from "@/lib/word-rain-speed";
-import { SENTENCE_SPEAK_BUFFER_MS } from "@/lib/wordfall-score";
+import { SENTENCE_SHOW_MS } from "@/lib/wordfall-score";
 import { getWordfallSentence } from "@/lib/wordfall-sentences";
 
 vi.mock("@/lib/sfx", () => ({ sfx: { correct: vi.fn(), tick: vi.fn(), end: vi.fn(), speedUp: vi.fn() } }));
