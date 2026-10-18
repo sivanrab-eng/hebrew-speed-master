@@ -66,50 +66,50 @@ export function speak(text: string) {
   window.speechSynthesis.speak(u);
 }
 
-// Reads a word aloud in Hebrew and then its everyday English meaning,
+// Reads a word's everyday English meaning aloud and then the Hebrew word,
 // used on the Wordfall "new word" introduction card.
 export function speakPair(hebrew: string, english: string) {
   if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
   cancelSpeech();
   const generation = speechGeneration;
-  const h = new SpeechSynthesisUtterance(hebrew);
-  h.lang = "he-IL";
-  h.rate = 0.85;
-  const hv = window.speechSynthesis.getVoices().find((x) => x.lang.startsWith("he"));
-  if (hv) h.voice = hv;
   const e = new SpeechSynthesisUtterance(english);
   e.lang = "en-US";
   e.rate = 0.9;
   const ev = window.speechSynthesis.getVoices().find((x) => x.lang.startsWith("en"));
   if (ev) e.voice = ev;
+  const h = new SpeechSynthesisUtterance(hebrew);
+  h.lang = "he-IL";
+  h.rate = 0.85;
+  const hv = window.speechSynthesis.getVoices().find((x) => x.lang.startsWith("he"));
+  if (hv) h.voice = hv;
   let transitioned = false;
-  const playEnglish = (fallback = false) => {
+  const playHebrew = (fallback = false) => {
     if (generation !== speechGeneration) return;
-    h.onend = null;
-    h.onerror = null;
-    // A stuck Hebrew utterance must not keep English trapped in its queue.
+    e.onend = null;
+    e.onerror = null;
+    // A stuck English utterance must not keep Hebrew trapped in its queue.
     if (fallback) window.speechSynthesis.cancel();
-    window.speechSynthesis.speak(e);
+    window.speechSynthesis.speak(h);
   };
-  const afterHebrew = () => {
+  const afterEnglish = () => {
     if (generation !== speechGeneration || transitioned) return;
     transitioned = true;
     clearTimeout(fallbackTimer);
     fallbackTimer = undefined;
     transitionTimer = setTimeout(() => {
       transitionTimer = undefined;
-      playEnglish();
+      playHebrew();
     }, 150);
   };
-  h.onend = afterHebrew;
-  h.onerror = afterHebrew;
+  e.onend = afterEnglish;
+  e.onerror = afterEnglish;
   fallbackTimer = setTimeout(() => {
     fallbackTimer = undefined;
     if (generation !== speechGeneration || transitioned) return;
     transitioned = true;
-    playEnglish(true);
+    playHebrew(true);
   }, 2000);
-  window.speechSynthesis.speak(h);
+  window.speechSynthesis.speak(e);
 }
 
 // Reads Hebrew text aloud (used for Wordfall sentence readings) and reports
