@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, CloudRain, Flame, Heart, RotateCcw, Trophy, Volume2, Zap } from "lucide-react";
-import { VOCAB, cancelSpeech, speak, speakPair, type Word } from "@/lib/vocab";
+import { VOCAB, cancelSpeech, speak, speakHebrew, speakPair, type Word } from "@/lib/vocab";
 import { sfx } from "@/lib/sfx";
 import { cn } from "@/lib/utils";
 import { Confetti } from "./Confetti";
 import { Button } from "@/components/ui/button";
 import { advanceRainProgress, ARCADE_PACE, ARCADE_RULES, initialRainProgress, rainTiming, STANDALONE_PACE, STANDALONE_RULES } from "@/lib/word-rain-speed";
 import { completeDifficulty, initialDifficulty, repeatedGameWords, needsIntroduction, INTRODUCTION_MS } from "@/lib/wordfall-difficulty";
-import { advanceCatchProgress, initialCatchProgress, SENTENCE_MS } from "@/lib/wordfall-score";
+import { advanceCatchProgress, initialCatchProgress, SENTENCE_MS, SENTENCE_SPEAK_BUFFER_MS, SENTENCE_SPEAK_FALLBACK_MS } from "@/lib/wordfall-score";
 import { getWordfallSentence, type WordfallSentence as Sentence } from "@/lib/wordfall-sentences";
 import { WordfallSentence, SentenceText } from "./WordfallSentence";
 import { WordfallCatch } from "./WordfallCatch";
@@ -151,17 +151,18 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
         if (field && field.width > 0 && field.height > 0) setBurst({ x: (rect.left + rect.width / 2 - field.left) / field.width * 100, y: (rect.top + rect.height / 2 - field.top) / field.height * 100 });
       } else play("correct");
       if (progressRef.current.speed > speedBefore) flashSpeedUp();
-      if (!muted) speak(d.word.hebrew);
+      const example = standalone ? getWordfallSentence(d.word.hebrew) : undefined;
+      // A caught word with a sentence is heard inside the sentence reading instead.
+      if (!muted && !example) speak(d.word.hebrew);
       scoreRef.current += 1;
       setScore(scoreRef.current);
       setHits(new Set([d.key]));
       if (timerRef.current) clearTimeout(timerRef.current);
-      const example = standalone ? getWordfallSentence(d.word.hebrew) : undefined;
       if (example) {
         setReview(words => [...words.filter(word => word.hebrew !== d.word.hebrew), d.word]);
         timerRef.current = setTimeout(() => {
           setDrops([]); setSentence(example); setReadingHeld(false);
-          timerRef.current = setTimeout(() => nextRound(round + 1), SENTENCE_MS);
+          holdSentenceReading(example, () => nextRound(round + 1));
         }, 450);
       } else timerRef.current = setTimeout(() => nextRound(round + 1), 650);
     } else {
@@ -173,6 +174,19 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
       play("tick"); // gentle sound only, no penalty
       setMisses((m) => new Set(m).add(d.key));
     }
+  };
+
+  // Holds the sentence card until its Hebrew reading ends (or a fallback cap),
+  // so the auto-advance never cuts the reading mid-way.
+  const holdSentenceReading = (example: Sentence, goNext: () => void) => {
+    if (muted) {
+      timerRef.current = setTimeout(goNext, SENTENCE_MS);
+      return;
+    }
+    speakHebrew(example.hebrew.replace(/[[\]]/g, ""), () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+      timerRef.current = setTimeout(goNext, SENTENCE_SPEAK_BUFFER_MS);
+    }, SENTENCE_SPEAK_FALLBACK_MS);
   };
 
   const continueReading = () => {

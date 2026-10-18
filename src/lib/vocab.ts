@@ -111,3 +111,32 @@ export function speakPair(hebrew: string, english: string) {
   }, 2000);
   window.speechSynthesis.speak(h);
 }
+
+// Reads Hebrew text aloud (used for Wordfall sentence readings) and reports
+// when playback is truly finished — on end, on error, or after a fallback
+// timeout for engines that never fire onend.
+export function speakHebrew(text: string, onDone?: () => void, fallbackMs = 12000) {
+  if (typeof window === "undefined" || !("speechSynthesis" in window)) {
+    onDone?.();
+    return;
+  }
+  cancelSpeech();
+  const generation = speechGeneration;
+  let done = false;
+  const finish = () => {
+    if (generation !== speechGeneration || done) return;
+    done = true;
+    clearTimeout(fallbackTimer);
+    fallbackTimer = undefined;
+    onDone?.();
+  };
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "he-IL";
+  u.rate = 0.85;
+  const v = window.speechSynthesis.getVoices().find((x) => x.lang.startsWith("he"));
+  if (v) u.voice = v;
+  u.onend = finish;
+  u.onerror = finish;
+  fallbackTimer = setTimeout(finish, fallbackMs);
+  window.speechSynthesis.speak(u);
+}
