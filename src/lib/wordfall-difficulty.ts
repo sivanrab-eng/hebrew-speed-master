@@ -73,7 +73,7 @@ export function interleavedGameWords(words: Word[], shuffle: <T>(items: T[]) => 
   const minority = easy.length < rich.length ? easy : rich;
   const majority = easy.length < rich.length ? rich : easy;
   if (!minority.length) return majority;
-  const gaps = Array.from({ length: minority.length + 1 }, (_, i) => i > 0 && i < minority.length ? 1 : 0);
+  const gaps: number[] = Array.from({ length: minority.length + 1 }, (_, i) => i > 0 && i < minority.length ? 1 : 0);
   const remaining = majority.length - minority.length + 1;
   const gapOrder = shuffle(gaps.map((_, i) => i));
   for (let i = 0; i < remaining; i++) {
