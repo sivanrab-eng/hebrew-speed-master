@@ -1,5 +1,9 @@
 export type CatchProgress = { points: number; streak: number; bestStreak: number; awarded: number };
 export const SENTENCE_MS = 3000;
+// Sentence readings hold the card until speech ends: a short beat after the
+// reading finishes, or a fallback cap for engines that never report the end.
+export const SENTENCE_SPEAK_BUFFER_MS = 400;
+export const SENTENCE_SPEAK_FALLBACK_MS = 12000;
 export const initialCatchProgress = (): CatchProgress => ({ points: 0, streak: 0, bestStreak: 0, awarded: 0 });
 
 export function advanceCatchProgress(progress: CatchProgress, caught: boolean): CatchProgress {
