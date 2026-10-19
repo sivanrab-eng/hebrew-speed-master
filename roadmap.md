@@ -1,5 +1,10 @@
 # Roadmap
 
+## Wordfall continuous rich-only regular mode (preview only)
+- [ ] Use only current-tier rich words in regular play, with no introductions or example sentences; preserve timed catch feedback and optional advancement.
+- [ ] Preserve practice vocabulary, introductions, examples and untimed choices; keep ניאונית unchanged and do not upload to GitHub.
+- [ ] Verify targeted tests and full regular/practice preview games.
+
 ## Wordfall regular and practice modes (preview only)
 - [x] Add selectable regular and untimed practice modes; retain gentle mix, optional advancement and independent arcade behavior.
 - [x] Add regular streak celebrations and collectible stars; practice waits for explicit choices and offers repeated word/sentence speech without streak loss on wrong choices.

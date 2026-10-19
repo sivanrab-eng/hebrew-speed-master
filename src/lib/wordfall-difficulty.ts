@@ -44,6 +44,17 @@ export function difficultyPool(progress: DifficultyProgress): Word[] {
   return WORDFALL_POOLS[progress.level] ?? WORDFALL_POOLS[0] ?? [];
 }
 
+// Regular play is rich-only; practice retains its own confidence mix and replay rules.
+export function regularGameWords(progress: DifficultyProgress, previous: Word[], rounds: number, shuffle: <T>(items: T[]) => T[]): Word[] {
+  const everydayLabels = new Set(EVERYDAY_WORDS.map(word => word.hebrew));
+  const pool = difficultyPool(progress).filter(word => !everydayLabels.has(word.hebrew));
+  const poolLabels = new Set(pool.map(word => word.hebrew));
+  if (previous.length !== rounds || previous.some(word => !poolLabels.has(word.hebrew))) return shuffle([...pool]).slice(0, rounds);
+  const previousLabels = new Set(previous.map(word => word.hebrew));
+  const replacements = shuffle(pool.filter(word => !previousLabels.has(word.hebrew))).slice(0, Math.min(5, rounds));
+  return shuffle([...shuffle([...previous]).slice(0, rounds - replacements.length), ...replacements]);
+}
+
 // Later-tier borrowing stays within the three rich slots; the last tier uses its own pool.
 export const HARD_MIX = [0, 3, 3, 3, 0] as const;
 
