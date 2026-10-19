@@ -1,9 +1,9 @@
 # Roadmap
 
 ## Wordfall continuous rich-only regular mode (preview only)
-- [ ] Use only current-tier rich words in regular play, with no introductions or example sentences; preserve timed catch feedback and optional advancement.
-- [ ] Preserve practice vocabulary, introductions, examples and untimed choices; keep ניאונית unchanged and do not upload to GitHub.
-- [ ] Verify targeted tests and full regular/practice preview games.
+- [x] Use only current-tier rich words in regular play, with no introductions or example sentences; preserve timed catch feedback and optional advancement. Regular replay refreshes five rich targets.
+- [x] Preserve practice vocabulary, introductions, examples and untimed choices; keep ניאונית unchanged and do not upload to GitHub.
+- [x] 75 targeted tests passed and build OK. Browser completed ten-catch regular and practice games: regular had rich-only targets/distractors with no cards or sentence pauses; practice retained seven everyday targets, three introductions, sentence cards and a 60-second untimed wait. ניאונית opening verified, no runtime errors. Regular moving-word clicks used DOM interaction with virtual timing; practice used pointer clicks.
 
 ## Wordfall regular and practice modes (preview only)
 - [x] Add selectable regular and untimed practice modes; retain gentle mix, optional advancement and independent arcade behavior.
