@@ -256,7 +256,7 @@ export function WordRain({ onExit, muted, standalone = false, mode = "regular", 
       </div>
       {standalone && !done && <>
         <p className="text-center text-xs font-bold text-secondary">{practice ? "תרגול · בקצב שלך" : "רגיל"}</p>
-        <div className="flex items-center justify-between border-y border-border/60 py-3">
+        <div className="flex items-center justify-between border-y border-border/60 py-2">
           <div className="flex items-center gap-2"><Trophy className="h-5 w-5 text-accent-foreground" /><span key={catchProgress.points} className="wordfall-score-pop font-display text-2xl tabular-nums text-accent-foreground">{catchProgress.points}</span><span className="text-xs text-muted-foreground">נקודות</span></div>
           <div className={cn("flex items-center gap-2 text-muted-foreground", catchProgress.streak >= 3 && "text-secondary")}><Flame className="h-5 w-5" /><span className="text-sm font-bold">רצף {catchProgress.streak}</span></div>
         </div>
@@ -266,7 +266,7 @@ export function WordRain({ onExit, muted, standalone = false, mode = "regular", 
 
       {!done && target ? (
         <>
-          <div className="rounded-3xl border border-border bg-card p-5 text-center shadow-[var(--shadow-card)]">
+          <div className={cn("rounded-3xl border border-border bg-card text-center shadow-[var(--shadow-card)]", standalone ? "p-3" : "p-5")}>
             <p className="text-sm font-semibold text-muted-foreground">{standalone ? "לתפוס את" : "תפסי את המילה בעברית שמתאימה ל־"}</p>
             <p dir="ltr" className="mt-1 font-display text-3xl font-black text-primary">{target.english}</p>
           </div>
@@ -280,7 +280,7 @@ export function WordRain({ onExit, muted, standalone = false, mode = "regular", 
               )}
             </div>
           )}
-          <div ref={fieldRef} className={cn("relative h-80 overflow-hidden rounded-3xl border border-border bg-muted/50", standalone && "wordfall-field", standalone && burst && "wordfall-field-caught")}>
+          <div ref={fieldRef} className={cn("relative overflow-hidden", standalone ? "h-64" : "h-80", " rounded-3xl border border-border bg-muted/50", standalone && "wordfall-field", standalone && burst && "wordfall-field-caught")}>
             {standalone && burst && <WordfallCatch x={burst.x} y={burst.y} />}
             {introducing && target && (
               <div role="status" aria-live="polite" className="absolute inset-0 flex flex-col items-center justify-center gap-4 px-6 text-center">
