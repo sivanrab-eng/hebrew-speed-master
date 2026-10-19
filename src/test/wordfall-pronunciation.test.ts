@@ -23,7 +23,8 @@ describe("Wordfall speech-only vocalization", () => {
     expect(wordfallSpokenWord("בור")).toBe("בּוּר");
     expect(wordfallSpokenWord("סבא")).toBe("סָבָא");
     expect(wordfallSpokenWord("הפציר")).toBe("הִפְצִיר");
-    expect(wordfallSpokenWord("אמתלה")).toBe("אַמַתְלָה");
+    expect(wordfallSpokenWord("אמתלה")).toBe("אֲמַתְלָה");
+    expect(wordfallSpokenSentence("אמתלה", "")).toBe("הוּא מָצָא אֲמַתְלָה לְהִישָּׁאֵר בַּבַּיִת.");
   });
 
   it("keeps unknown speech usable without inventing a pronunciation", () => {

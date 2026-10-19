@@ -176,8 +176,7 @@ export function WordRain({ onExit, muted, standalone = false, mode = "regular", 
         if (field && field.width > 0 && field.height > 0) setBurst({ x: (rect.left + rect.width / 2 - field.left) / field.width * 100, y: (rect.top + rect.height / 2 - field.top) / field.height * 100 });
       } else play("correct");
       if (progressRef.current.speed > speedBefore) flashSpeedUp();
-      // Only a word the player met on the "טיפה חדשה!" card gets the example sentence;
-      // a familiar word is simply heard once and the rain keeps falling.
+      // Regular mode reads introduced rich targets; practice offers every example.
       if (!muted && !example && !(standalone && sentenceAudioRef.current)) speak(standalone ? wordfallSpokenWord(d.word.hebrew) : d.word.hebrew);
       scoreRef.current += 1;
       setScore(scoreRef.current);
@@ -300,7 +299,7 @@ export function WordRain({ onExit, muted, standalone = false, mode = "regular", 
                 key={d.key}
                 onClick={(event) => pick(d, event.currentTarget)}
                 aria-label={d.word.hebrew}
-                className={cn("absolute top-0 h-auto min-h-16 w-[31%] animate-word-fall whitespace-normal break-words rounded-2xl border-2 border-border bg-card px-1 py-3 font-hebrew text-2xl font-bold text-foreground shadow-sm transition active:scale-90",
+                className={cn("absolute top-0 h-auto min-h-16 w-[31%] whitespace-normal break-words rounded-2xl border-2 border-border bg-card px-1 py-3 font-hebrew text-2xl font-bold text-foreground shadow-sm transition active:scale-90", !practice && "animate-word-fall",
                   standalone && "wordfall-drop",
                   practice && "wordfall-practice-drop",
                   standalone && burst && "wordfall-drop-paused",
@@ -326,6 +325,7 @@ export function WordRain({ onExit, muted, standalone = false, mode = "regular", 
           {standalone ? <CloudRain className="mx-auto h-16 w-16 text-secondary" /> : <p className="text-6xl">🌧️✨</p>}
           <h2 className="mt-2 font-display text-3xl font-black">כל הכבוד!</h2>
           <p className="mt-1 text-muted-foreground">תפסת {score} מתוך {ROUNDS} מילים</p>
+          {standalone && !practice && <WordfallRewards catches={score} streak={catchProgress.bestStreak} />}
           {standalone && <div className="my-5 grid grid-cols-2 divide-x divide-x-reverse divide-border"><div><p className="font-display text-3xl tabular-nums text-accent-foreground">{catchProgress.points}</p><p className="text-xs text-muted-foreground">נקודות</p></div><div><p className="font-display text-3xl tabular-nums text-secondary">{catchProgress.bestStreak}</p><p className="text-xs text-muted-foreground">הרצף הכי טוב</p></div></div>}
           {standalone && levelUnlocked && <p role="status" className="wordfall-score-pop mt-3 font-display text-lg text-secondary">שלב {level + 2} זמין!</p>}
           <div className="mt-3 flex justify-center gap-1">

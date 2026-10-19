@@ -45,6 +45,77 @@ const playToIntroduction = () => {
 afterEach(() => { vi.useRealTimers(); localStorage.removeItem(DIFFICULTY_STORAGE_KEY); });
 
 describe("Wordfall", () => {
+  it("keeps practice choices still without a round deadline and waits for explicit next", () => {
+    vi.useFakeTimers();
+    const view = render(<WordRain standalone mode="practice" muted onExit={() => {}} />);
+    if (screen.queryByText("טיפה חדשה!")) {
+      act(() => vi.advanceTimersByTime(60000));
+      expect(currentRound()).toBe(1);
+      fireEvent.click(screen.getByRole("button", { name: "מוכנים" }));
+    }
+    const target = wordfallTarget();
+    if (!target) throw new Error("Missing practice target");
+    expect(fallingWords()).toHaveLength(0);
+    act(() => vi.advanceTimersByTime(60000));
+    expect(currentRound()).toBe(1);
+    fireEvent.click(screen.getByRole("button", { name: target.hebrew }));
+    act(() => vi.advanceTimersByTime(60000));
+    expect(currentRound()).toBe(1);
+    expect(sentenceCard()).not.toBeNull();
+    fireEvent.click(screen.getByRole("button", { name: "המילה הבאה" }));
+    expect(currentRound()).toBe(2);
+    view.unmount();
+  });
+
+  it("does not remove practice streak or points after a wrong choice", () => {
+    vi.useFakeTimers();
+    const view = render(<WordRain standalone mode="practice" muted onExit={() => {}} />);
+    if (screen.queryByText("טיפה חדשה!")) fireEvent.click(screen.getByRole("button", { name: "מוכנים" }));
+    const first = wordfallTarget();
+    if (!first) throw new Error("Missing practice target");
+    fireEvent.click(screen.getByRole("button", { name: first.hebrew }));
+    fireEvent.click(screen.getByRole("button", { name: "המילה הבאה" }));
+    if (screen.queryByText("טיפה חדשה!")) fireEvent.click(screen.getByRole("button", { name: "מוכנים" }));
+    const target = wordfallTarget();
+    if (!target) throw new Error("Missing second target");
+    const wrong = screen.getAllByRole("button").find(button => WORDFALL_WORDS.some(word => word.hebrew === button.getAttribute("aria-label") && word !== target));
+    if (!wrong) throw new Error("Missing distractor");
+    fireEvent.click(wrong);
+    expect(screen.getByText("רצף 1")).toBeTruthy();
+    expect(screen.getByText("100")).toBeTruthy();
+    expect(currentRound()).toBe(2);
+    view.unmount();
+  });
+
+  it("repeats vocalized practice sentences and holds next until speech ends", () => {
+    vi.useFakeTimers();
+    class Utterance { lang = ""; rate = 1; onend: (() => void) | null = null; constructor(public text: string) {} }
+    const engine = { speak: vi.fn(), cancel: vi.fn(), getVoices: () => [] };
+    vi.stubGlobal("SpeechSynthesisUtterance", Utterance);
+    vi.stubGlobal("speechSynthesis", engine);
+    const view = render(<WordRain standalone mode="practice" muted={false} onExit={() => {}} />);
+    try {
+      if (screen.queryByText("טיפה חדשה!")) fireEvent.click(screen.getByRole("button", { name: "מוכנים" }));
+      const target = wordfallTarget();
+      if (!target) throw new Error("Missing practice target");
+      fireEvent.click(screen.getByRole("button", { name: "שמיעת המילה" }));
+      expect(engine.speak.mock.calls.at(-1)?.[0]).toMatchObject({ text: target.english, lang: "en-US" });
+      fireEvent.click(screen.getByRole("button", { name: target.hebrew }));
+      const next = screen.getByRole("button", { name: "המילה הבאה" });
+      expect(next).toBeDisabled();
+      act(() => engine.speak.mock.calls.at(-1)?.[0].onend?.());
+      expect(next).not.toBeDisabled();
+      engine.speak.mockClear();
+      fireEvent.click(screen.getByRole("button", { name: "שמיעת המשפט" }));
+      expect(engine.speak).toHaveBeenCalledOnce();
+      expect(engine.speak.mock.calls[0]?.[0]).toMatchObject({ text: wordfallSpokenSentence(target.hebrew, ""), lang: "he-IL" });
+      expect(next).toBeDisabled();
+      act(() => engine.speak.mock.calls.at(-1)?.[0].onend?.());
+      expect(currentRound()).toBe(1);
+      expect(next).not.toBeDisabled();
+    } finally { view.unmount(); vi.unstubAllGlobals(); }
+  });
+
   it.each([true, false])("vocalizes standalone catches only (standalone: %s)", standalone => {
     vi.useFakeTimers();
     class Utterance {
