@@ -1,8 +1,23 @@
 import { describe, expect, it } from "vitest";
-import { completeDifficulty, difficultyPool, EVERYDAY_WORDS, initialDifficulty, INTRODUCTION_MS, normalizeDifficulty, WORDFALL_POOLS, repeatedGameWords, interleavedGameWords, needsIntroduction } from "@/lib/wordfall-difficulty";
+import { completeDifficulty, difficultyPool, EVERYDAY_WORDS, initialDifficulty, INTRODUCTION_MS, normalizeDifficulty, WORDFALL_POOLS, regularGameWords, repeatedGameWords, interleavedGameWords, needsIntroduction } from "@/lib/wordfall-difficulty";
 import { VOCAB } from "@/lib/vocab";
 
 describe("Wordfall vocabulary difficulty", () => {
+  it.each([0, 1, 2, 3, 4])("uses ten current-tier rich targets and refreshes five on regular replay at tier %i", level => {
+    const id = <T,>(items: T[]) => items;
+    const progress = { level, wins: 0 };
+    const pool = difficultyPool(progress);
+    let previous = regularGameWords(progress, [], 10, id);
+    expect(previous).toHaveLength(10);
+    for (let game = 0; game < 6; game++) {
+      expect(previous.every(word => pool.includes(word) && !EVERYDAY_WORDS.some(easy => easy.hebrew === word.hebrew))).toBe(true);
+      const next = regularGameWords(progress, previous, 10, id);
+      expect(next).toHaveLength(10);
+      expect(new Set(next.map(word => word.hebrew)).size).toBe(10);
+      expect(next.filter(word => !previous.some(old => old.hebrew === word.hebrew))).toHaveLength(5);
+      previous = next;
+    }
+  });
   it("starts with rich source Hebrew and simple English", () => {
     const pool = difficultyPool(initialDifficulty());
     expect(pool.find(word => word.hebrew === "אמתלה")?.english).toBe("an excuse");

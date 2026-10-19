@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { Confetti } from "./Confetti";
 import { Button } from "@/components/ui/button";
 import { advanceRainProgress, ARCADE_PACE, ARCADE_RULES, initialRainProgress, rainTiming, STANDALONE_PACE, STANDALONE_RULES } from "@/lib/word-rain-speed";
-import { completeDifficulty, initialDifficulty, repeatedGameWords, interleavedGameWords, needsIntroduction, INTRODUCTION_MS } from "@/lib/wordfall-difficulty";
+import { completeDifficulty, initialDifficulty, regularGameWords, repeatedGameWords, interleavedGameWords, needsIntroduction } from "@/lib/wordfall-difficulty";
 import { advanceCatchProgress, initialCatchProgress, SENTENCE_FALLBACK_MS } from "@/lib/wordfall-score";
 import { getWordfallSentence, type WordfallSentence as Sentence } from "@/lib/wordfall-sentences";
 import { WordfallSentence, SentenceText } from "./WordfallSentence";
@@ -126,22 +126,23 @@ export function WordRain({ onExit, muted, standalone = false, mode = "regular", 
         nextRound(r + 1);
       }, rainTiming(speed, pace).roundMs);
     };
-    if (standalone && needsIntroduction(word, introducedRef.current)) {
+    if (practice && needsIntroduction(word, introducedRef.current)) {
       introducedRef.current.add(word.hebrew);
       lockedRef.current = true;
       setIntroducing(true);
       setDrops([]);
       // Sentence audio wins; an overlapping introduction may read after it ends.
       readIntroduction(word);
-      if (practice) beginPracticeRef.current = beginFall;
-      else timerRef.current = setTimeout(beginFall, INTRODUCTION_MS);
+      beginPracticeRef.current = beginFall;
     } else beginFall();
   };
 
   const startGame = () => {
     if (standalone) {
-      batchRef.current = repeatedGameWords(difficultyRef.current, batchRef.current, completedGamesRef.current, ROUNDS, shuffle);
-      gameWordsRef.current = interleavedGameWords(batchRef.current, shuffle);
+      batchRef.current = practice
+        ? repeatedGameWords(difficultyRef.current, batchRef.current, completedGamesRef.current, ROUNDS, shuffle)
+        : regularGameWords(difficultyRef.current, batchRef.current, ROUNDS, shuffle);
+      gameWordsRef.current = practice ? interleavedGameWords(batchRef.current, shuffle) : batchRef.current;
       // Keep distractors familiar too, rather than importing the entire rich tier.
       poolRef.current = gameWordsRef.current;
     } else {
@@ -162,8 +163,7 @@ export function WordRain({ onExit, muted, standalone = false, mode = "regular", 
   const pick = (d: Drop, element: HTMLButtonElement) => {
     if (!target || lockedRef.current || done) return;
     if (d.word === target) {
-      const isNew = standalone && introducedRef.current.has(d.word.hebrew);
-      const example = isNew || practice ? getWordfallSentence(d.word.hebrew) : undefined;
+      const example = practice ? getWordfallSentence(d.word.hebrew) : undefined;
       lockedRef.current = true;
       const speedBefore = progressRef.current.speed;
       progressRef.current = advanceRainProgress(progressRef.current, true, rules);
@@ -176,7 +176,7 @@ export function WordRain({ onExit, muted, standalone = false, mode = "regular", 
         if (field && field.width > 0 && field.height > 0) setBurst({ x: (rect.left + rect.width / 2 - field.left) / field.width * 100, y: (rect.top + rect.height / 2 - field.top) / field.height * 100 });
       } else play("correct");
       if (progressRef.current.speed > speedBefore) flashSpeedUp();
-      // Regular mode reads introduced rich targets; practice offers every example.
+      // Regular catches read only the word; practice offers every example.
       if (!muted && !example && !(standalone && sentenceAudioRef.current)) speak(standalone ? wordfallSpokenWord(d.word.hebrew) : d.word.hebrew);
       scoreRef.current += 1;
       setScore(scoreRef.current);
