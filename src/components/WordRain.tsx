@@ -12,6 +12,8 @@ import { getWordfallSentence, type WordfallSentence as Sentence } from "@/lib/wo
 import { WordfallSentence, SentenceText } from "./WordfallSentence";
 import { WordfallCatch } from "./WordfallCatch";
 import { wordfallSpokenSentence, wordfallSpokenWord } from "@/lib/wordfall-pronunciation";
+import { type WordfallMode } from "@/lib/wordfall-modes";
+import { WordfallRewards } from "./WordfallRewards";
 
 const ROUNDS = 10;
 const LANES = 3;
@@ -20,7 +22,11 @@ const shuffle = <T,>(a: T[]) => { const b = [...a]; for (let i = b.length - 1; i
 
 type Drop = { word: Word; lane: number; key: string };
 
-export function WordRain({ onExit, muted, standalone = false, onGameStart, onGameComplete }: { onExit: () => void; muted: boolean; standalone?: boolean; onGameStart?: () => void; onGameComplete?: (score: number) => void }) {
+export function WordRain({ onExit, muted, standalone = false, mode = "regular", onGameStart, onGameComplete }: { onExit: () => void; muted: boolean; standalone?: boolean; mode?: WordfallMode; onGameStart?: () => void; onGameComplete?: (score: number) => void }) {
+  const practice = standalone && mode === "practice";
+  const beginPracticeRef = useRef<(() => void) | null>(null);
+  const [practiceCaught, setPracticeCaught] = useState(false);
+  const [practiceReading, setPracticeReading] = useState(false);
   const [round, setRound] = useState(0);
   const [score, setScore] = useState(0);
   const [target, setTarget] = useState<Word | null>(null);
@@ -81,6 +87,9 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
     // Sentence catches release this transition only once reading has finished.
     pendingIntroductionRef.current = null;
     setBurst(null);
+    setPracticeCaught(false);
+    setPracticeReading(false);
+    beginPracticeRef.current = null;
     setRound(r);
     lockedRef.current = false;
     setIntroducing(false);
@@ -106,6 +115,7 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
       setIntroducing(false);
       lockedRef.current = false;
       setDrops(lanes.map((w, i) => ({ word: w, lane: i, key: `${r}-${w.hebrew}` })));
+      if (practice) return;
       // The full catch window starts only after the new-word introduction.
       timerRef.current = setTimeout(() => {
         if (standalone) {
@@ -123,7 +133,8 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
       setDrops([]);
       // Sentence audio wins; an overlapping introduction may read after it ends.
       readIntroduction(word);
-      timerRef.current = setTimeout(beginFall, INTRODUCTION_MS);
+      if (practice) beginPracticeRef.current = beginFall;
+      else timerRef.current = setTimeout(beginFall, INTRODUCTION_MS);
     } else beginFall();
   };
 
@@ -152,7 +163,7 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
     if (!target || lockedRef.current || done) return;
     if (d.word === target) {
       const isNew = standalone && introducedRef.current.has(d.word.hebrew);
-      const example = isNew ? getWordfallSentence(d.word.hebrew) : undefined;
+      const example = isNew || practice ? getWordfallSentence(d.word.hebrew) : undefined;
       lockedRef.current = true;
       const speedBefore = progressRef.current.speed;
       progressRef.current = advanceRainProgress(progressRef.current, true, rules);
@@ -165,12 +176,12 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
         if (field && field.width > 0 && field.height > 0) setBurst({ x: (rect.left + rect.width / 2 - field.left) / field.width * 100, y: (rect.top + rect.height / 2 - field.top) / field.height * 100 });
       } else play("correct");
       if (progressRef.current.speed > speedBefore) flashSpeedUp();
-      // Only a word the player met on the "טיפה חדשה!" card gets the example sentence;
-      // a familiar word is simply heard once and the rain keeps falling.
+      // Regular mode reads introduced rich targets; practice offers every example.
       if (!muted && !example && !(standalone && sentenceAudioRef.current)) speak(standalone ? wordfallSpokenWord(d.word.hebrew) : d.word.hebrew);
       scoreRef.current += 1;
       setScore(scoreRef.current);
       setHits(new Set([d.key]));
+      if (practice) setPracticeCaught(true);
       if (timerRef.current) clearTimeout(timerRef.current);
       if (sentenceTimerRef.current) clearTimeout(sentenceTimerRef.current);
       // The strip always shows the latest catch, never a stale one.
@@ -179,26 +190,41 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
       if (example) {
         setReview(words => [...words.filter(word => word.hebrew !== d.word.hebrew), d.word]);
         sentenceAudioRef.current = true;
+        if (practice) setPracticeReading(!muted);
         const generation = ++audioGenerationRef.current;
         const resume = () => {
           if (generation !== audioGenerationRef.current) return;
           sentenceAudioRef.current = false;
+          if (practice) { setPracticeReading(false); return; }
           setSentence(null);
           nextRound(round + 1);
         };
         if (!muted) {
           speakHebrew(wordfallSpokenSentence(d.word.hebrew, example.hebrew), resume, SENTENCE_FALLBACK_MS, true);
-        } else sentenceTimerRef.current = setTimeout(resume, SENTENCE_FALLBACK_MS);
-      } else timerRef.current = setTimeout(() => nextRound(round + 1), 650);
+        } else if (practice) resume();
+        else sentenceTimerRef.current = setTimeout(resume, SENTENCE_FALLBACK_MS);
+      } else if (!practice) timerRef.current = setTimeout(() => nextRound(round + 1), 650);
     } else {
-      if (standalone) {
+      if (standalone && !practice) {
         catchRef.current = advanceCatchProgress(catchRef.current, false);
         setCatchProgress(catchRef.current);
       }
-      progressRef.current = advanceRainProgress(progressRef.current, false, rules);
+      if (!practice) progressRef.current = advanceRainProgress(progressRef.current, false, rules);
       play("tick"); // gentle sound only, no penalty
       setMisses((m) => new Set(m).add(d.key));
     }
+  };
+
+  const repeatPracticeSentence = () => {
+    if (!sentence || muted) return;
+    sentenceAudioRef.current = true;
+    setPracticeReading(true);
+    const generation = ++audioGenerationRef.current;
+    speakHebrew(wordfallSpokenSentence(sentenceLabel, sentence.hebrew), () => {
+      if (generation !== audioGenerationRef.current) return;
+      sentenceAudioRef.current = false;
+      setPracticeReading(false);
+    }, SENTENCE_FALLBACK_MS, true);
   };
 
 
@@ -229,11 +255,13 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
         <p className="text-sm font-semibold text-muted-foreground">{standalone && `שלב ${level + 1} · `}סיבוב {Math.min(round + 1, ROUNDS)}/{ROUNDS} · תפסת {score}</p>
       </div>
       {standalone && !done && <>
+        <p className="text-center text-xs font-bold text-secondary">{practice ? "תרגול · בקצב שלך" : "רגיל"}</p>
         <div className="flex items-center justify-between border-y border-border/60 py-3">
           <div className="flex items-center gap-2"><Trophy className="h-5 w-5 text-accent-foreground" /><span key={catchProgress.points} className="wordfall-score-pop font-display text-2xl tabular-nums text-accent-foreground">{catchProgress.points}</span><span className="text-xs text-muted-foreground">נקודות</span></div>
           <div className={cn("flex items-center gap-2 text-muted-foreground", catchProgress.streak >= 3 && "text-secondary")}><Flame className="h-5 w-5" /><span className="text-sm font-bold">רצף {catchProgress.streak}</span></div>
         </div>
         <div className="flex h-1.5 gap-1" aria-hidden="true">{Array.from({ length: ROUNDS }, (_, i) => <span key={i} className={cn("flex-1 rounded-sm bg-muted", i < round && "bg-secondary", i === round && "bg-primary")} />)}</div>
+        {!practice && <WordfallRewards catches={score} streak={catchProgress.streak} />}
       </>}
 
       {!done && target ? (
@@ -263,6 +291,7 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
                 <Button variant="ghost" onClick={() => readIntroduction(target)} className="gap-2 text-sm text-muted-foreground">
                   <Volume2 className="h-4 w-4" /> שמיעה חוזרת
                 </Button>
+                {practice && <Button onClick={() => beginPracticeRef.current?.()}><CloudRain className="h-4 w-4" /> מוכנים</Button>}
               </div>
             )}
             {drops.map((d, i) => (
@@ -270,8 +299,9 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
                 key={d.key}
                 onClick={(event) => pick(d, event.currentTarget)}
                 aria-label={d.word.hebrew}
-                className={cn("absolute top-0 h-auto min-h-16 w-[31%] animate-word-fall whitespace-normal break-words rounded-2xl border-2 border-border bg-card px-1 py-3 font-hebrew text-2xl font-bold text-foreground shadow-sm transition active:scale-90",
+                className={cn("absolute top-0 h-auto min-h-16 w-[31%] whitespace-normal break-words rounded-2xl border-2 border-border bg-card px-1 py-3 font-hebrew text-2xl font-bold text-foreground shadow-sm transition active:scale-90", !practice && "animate-word-fall",
                   standalone && "wordfall-drop",
+                  practice && "wordfall-practice-drop",
                   standalone && burst && "wordfall-drop-paused",
                   hits.has(d.key) && "border-success bg-success text-success-foreground",
                   standalone && hits.has(d.key) && "wordfall-drop-caught",
@@ -283,6 +313,11 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
             ))}
           </div>
           {standalone && sentence && <WordfallSentence label={sentenceLabel} sentence={sentence} points={catchProgress.awarded} streak={catchProgress.streak} />}
+          {practice && !introducing && <div className="flex flex-wrap justify-center gap-3">
+            <Button variant="outline" disabled={muted || practiceReading} onClick={() => readIntroduction(target)}><Volume2 className="h-4 w-4" /> שמיעת המילה</Button>
+            {practiceCaught && sentence && <Button variant="outline" disabled={muted} onClick={repeatPracticeSentence}><Volume2 className="h-4 w-4" /> שמיעת המשפט</Button>}
+            {practiceCaught && <Button disabled={practiceReading} onClick={() => { audioGenerationRef.current += 1; cancelSpeech(); setSentence(null); nextRound(round + 1); }}><ArrowRight className="h-4 w-4" />{round === ROUNDS - 1 ? "סיום" : "המילה הבאה"}</Button>}
+          </div>}
           {!standalone && <p className="text-center text-xs text-muted-foreground">אין עונש על טעות — פשוט ממשיכים 😊</p>}
         </>
       ) : done ? (
@@ -290,6 +325,7 @@ export function WordRain({ onExit, muted, standalone = false, onGameStart, onGam
           {standalone ? <CloudRain className="mx-auto h-16 w-16 text-secondary" /> : <p className="text-6xl">🌧️✨</p>}
           <h2 className="mt-2 font-display text-3xl font-black">כל הכבוד!</h2>
           <p className="mt-1 text-muted-foreground">תפסת {score} מתוך {ROUNDS} מילים</p>
+          {standalone && !practice && <WordfallRewards catches={score} streak={catchProgress.bestStreak} />}
           {standalone && <div className="my-5 grid grid-cols-2 divide-x divide-x-reverse divide-border"><div><p className="font-display text-3xl tabular-nums text-accent-foreground">{catchProgress.points}</p><p className="text-xs text-muted-foreground">נקודות</p></div><div><p className="font-display text-3xl tabular-nums text-secondary">{catchProgress.bestStreak}</p><p className="text-xs text-muted-foreground">הרצף הכי טוב</p></div></div>}
           {standalone && levelUnlocked && <p role="status" className="wordfall-score-pop mt-3 font-display text-lg text-secondary">שלב {level + 2} זמין!</p>}
           <div className="mt-3 flex justify-center gap-1">

@@ -1,5 +1,11 @@
 # Roadmap
 
+## Wordfall regular and practice modes (preview only)
+- [x] Add selectable regular and untimed practice modes; retain gentle mix, optional advancement and independent arcade behavior.
+- [x] Add regular streak celebrations and collectible stars; practice waits for explicit choices and offers repeated word/sentence speech without streak loss on wrong choices.
+- [x] Correct spoken אמתלה to אֲמַתְלָה in word and sentence without altering visible text.
+- [x] 76 targeted tests passed and build OK. Browser completed both ten-catch games, verified a 60-second practice wait, repeat sentence speech, three regular stars, narrow-screen layout and original ניאונית opening with no runtime errors. Regular catches used DOM clicks with a virtual clock; practice used pointer clicks. Speech engine inputs verified, audible quality requires a real device. No GitHub upload.
+
 ## Wordfall consistent gentle mix and pronunciation (preview only)
 - [x] Guarantee seven everyday and three rich targets at every tier, including replays; preserve the approved five-target replacement split. All five tiers and six replays per tier pass the concrete mix assertions.
 - [x] Add standalone-only vocalized speech text for all 407 words and sentences, drafted offline with Dicta and curated ambiguous word readings; visible vocabulary and arcade audio are unchanged. No runtime service or extra app dependency.

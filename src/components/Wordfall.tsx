@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { Download, Share2, Volume2, VolumeX, X, Play, CloudRain } from "lucide-react";
+import { Download, Share2, Volume2, VolumeX, X, Play, CloudRain, Infinity, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { WordRain } from "@/components/WordRain";
 import { sfx } from "@/lib/sfx";
 import { initWordfallAnalytics, trackWordfall } from "@/lib/wordfall-analytics";
 import { WORDFALL_URL } from "@/lib/wordfall-config";
 import icon from "@/assets/wordfall-icon.jpg";
+import { type WordfallMode } from "@/lib/wordfall-modes";
 
 interface InstallPrompt extends Event {
   prompt: () => Promise<void>;
@@ -14,6 +15,7 @@ interface InstallPrompt extends Event {
 
 export function Wordfall() {
   const [playing, setPlaying] = useState(false);
+  const [mode, setMode] = useState<WordfallMode>("regular");
   const [muted, setMuted] = useState(false);
   const [prompt, setPrompt] = useState<InstallPrompt | null>(null);
   const [installed, setInstalled] = useState(false);
@@ -62,12 +64,16 @@ export function Wordfall() {
         <div className="flex items-center gap-3"><img src={icon} width={48} height={48} alt="" className="h-12 w-12 rounded-lg" /><h1 dir="ltr" className="font-display text-3xl text-secondary">Wordfall</h1></div>
         <Button variant="ghost" size="icon" title={muted ? "הפעלת צלילים" : "השתקת צלילים"} aria-label={muted ? "הפעלת צלילים" : "השתקת צלילים"} onClick={() => setMuted(value => { localStorage.setItem("wordfall-muted", value ? "0" : "1"); return !value; })}>{muted ? <VolumeX /> : <Volume2 />}</Button>
       </header>
-      {playing ? <WordRain standalone muted={muted} onExit={() => setPlaying(false)} onGameStart={() => trackWordfall("game_start")} onGameComplete={score => trackWordfall("game_complete", { score, rounds: 10 })} /> : (
+      {playing ? <WordRain standalone mode={mode} muted={muted} onExit={() => setPlaying(false)} onGameStart={() => trackWordfall("game_start", { mode })} onGameComplete={score => trackWordfall("game_complete", { score, rounds: 10, mode })} /> : (
         <section className="flex flex-col items-center gap-5 py-8 text-center">
           <img src={icon} alt="טיפת Wordfall זוהרת" width={192} height={192} className="h-48 w-48 rounded-lg" />
           <CloudRain className="h-8 w-8 text-secondary" />
           <p className="font-display text-3xl">לתפוס את הגשם</p>
-          <Button size="lg" className="h-16 w-full text-xl font-bold shadow-[var(--shadow-pop)]" onClick={() => { sfx.unlock(); setPlaying(true); }}><Play /> מתחילים</Button>
+          <div role="group" aria-label="מצב משחק" className="grid w-full grid-cols-2 gap-3">
+            <Button variant={mode === "regular" ? "default" : "outline"} aria-pressed={mode === "regular"} onClick={() => setMode("regular")} className="h-14 gap-2 text-lg"><Zap /> רגיל</Button>
+            <Button variant={mode === "practice" ? "default" : "outline"} aria-pressed={mode === "practice"} onClick={() => setMode("practice")} className="h-14 gap-2 text-lg"><Infinity /> תרגול</Button>
+          </div>
+          <Button size="lg" className="h-16 w-full text-xl font-bold shadow-[var(--shadow-pop)]" onClick={() => { sfx.unlock(); setPlaying(true); }}><Play />{mode === "regular" ? "מתחילים" : "מתחילים לתרגל"}</Button>
         </section>
       )}
       <footer className="mt-6 flex justify-center gap-3 border-t border-border pt-4">

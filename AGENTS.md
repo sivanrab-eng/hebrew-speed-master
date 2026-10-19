@@ -22,3 +22,4 @@
 - Keep standalone sentence examples in a complete label-keyed overlay and catch/score visuals in focused modules; freeze standalone sentence catches until speech completion with an audio-failure watchdog, preserving independent arcade timing and audio.
 - Refresh standalone replay targets within everyday/base/later-tier categories in the pure difficulty helper, then interleave them; this preserves difficulty counts and introduction history while providing variety.
 - Keep Wordfall vocalized word and sentence speech in a static label-keyed overlay consumed only by standalone call sites; visible vocabulary and shared arcade speech must remain independent, with no runtime vocalization service.
+- Gate untimed practice with a standalone-only mode in WordRain; explicit introduction and next choices replace falling timers, while a pure reward helper keeps regular celebrations separate from scoring and arcade behavior.
