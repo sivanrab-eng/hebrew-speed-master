@@ -183,7 +183,6 @@
 .wordfall-word-label { display: inline-block; animation: wordfall-breathe 1.8s ease-in-out infinite; }
 .wordfall-game .wordfall-practice-drop { animation: none; top: 38%; transform: none; opacity: 1; }
 .wordfall-practice-drop::before { display: none; }
-.wordfall-rewards { background: linear-gradient(90deg, transparent, var(--secondary) / 10%, transparent); }
 .wordfall-rewards .fill-accent-foreground { filter: drop-shadow(0 0 6px var(--accent-foreground)); }
 .wordfall-drop-caught::after { content: "✦"; position: absolute; inset: -12px; color: var(--accent-foreground); font-size: 52px; animation: wordfall-pop .45s ease-out forwards; pointer-events: none; }
 .wordfall-field-caught { animation: wordfall-flash .45s ease-out; }
