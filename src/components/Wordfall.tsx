@@ -76,10 +76,10 @@ export function Wordfall() {
           <Button size="lg" className="h-14 w-full text-xl font-bold shadow-[var(--shadow-pop)]" onClick={() => { sfx.unlock(); setPlaying(true); }}><Play />{mode === "regular" ? "מתחילים" : "מתחילים לתרגל"}</Button>
         </section>
       )}
-      <footer className="mt-3 flex justify-center gap-3 border-t border-border pt-3">
+      {!playing && <footer className="mt-3 flex justify-center gap-3 border-t border-border pt-3">
         <Button variant="outline" size="sm" onClick={() => void share()}><Share2 /> שיתוף</Button>
         <Button variant="outline" size="sm" disabled={installed} onClick={() => void install()}><Download />{installed ? "מותקן" : "התקנה"}</Button>
-      </footer>
+      </footer>}
       {notice && <p role="status" className="mt-4 break-words text-center text-sm text-secondary">{notice}</p>}
       {instructions && <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/95 px-5" role="dialog" aria-modal="true" aria-labelledby="install-title">
         <div className="relative w-full max-w-sm rounded-lg border border-border bg-card p-6">
